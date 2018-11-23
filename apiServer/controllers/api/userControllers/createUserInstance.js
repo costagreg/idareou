@@ -6,9 +6,6 @@ export const createUserInstance = ({ username, password }) => {
   }
   return User({
     username,
-    password,
-    laspost: new Date(),
-    numpostperday: 0,
-    numtotalpost: 0
+    password
   })
 }

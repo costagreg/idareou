@@ -3,7 +3,7 @@ import { createUserInstance } from './createUserInstance'
 export const createNewUser = async (_, res) => {
   try {
       const userInstance = createUserInstance({
-        password: 'test1',
+        password: 'test1'
       })
 
       return res.send(await userInstance.save())
