@@ -10,7 +10,8 @@ if(process.browser) {
 const AppRouter = () => {
   return (
     <Fragment>
-      <div className='app-container'>
+      <div className='container'>
+      <i class="fa fa-address-book"></i>
         <Switch>
             {
               routes.map(({ Component, path }, index) =>
