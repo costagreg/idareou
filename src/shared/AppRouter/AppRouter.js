@@ -11,7 +11,6 @@ const AppRouter = () => {
   return (
     <Fragment>
       <div className='container'>
-      <i class="fa fa-address-book"></i>
         <Switch>
             {
               routes.map(({ Component, path }, index) =>
