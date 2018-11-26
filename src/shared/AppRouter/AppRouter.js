@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
-
+import { TextInput } from '../Components/Common/TextInput'
 import routes from './routes'
 
 if(process.browser) {
@@ -11,7 +11,7 @@ const AppRouter = () => {
   return (
     <Fragment>
       <div className='container'>
-      <i class="fa fa-address-book"></i>
+        <TextInput type='text' />
         <Switch>
             {
               routes.map(({ Component, path }, index) =>
