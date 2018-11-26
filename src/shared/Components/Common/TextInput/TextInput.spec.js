@@ -24,14 +24,22 @@ describe('@TextInput', () => {
   })
   describe('passing an icon as parameter', () => {
     it('renders a fontawesome icon ', () => {
-      const component = shallow(<TextInput type='text' icon='arrow'/>)
-      expect(component.find('.fa-arrow').exists()).toBe(true)
+      const mockicon = 'mockicon'
+      const component = shallow(<TextInput type='text' icon={mockicon}/>)
+      expect(component.find(`.fa-${mockicon}`).exists()).toBe(true)
     })
   })
   describe('passing error as parameter', () => {
     it('adds the error class to the element', () => {
-      const component = shallow(<TextInput type='text' error='Invalid input'/>)
+      const component = shallow(<TextInput type='text' error='mockerror'/>)
       expect(component.find('.error').exists()).toBe(true)
+    })
+  })
+  describe('passing placeholder as parameter', () => {
+    it('renders a placeholder', () => {
+      const mockplaceholder = 'mockplaceholder'
+      const component = shallow(<TextInput placeholder={mockplaceholder}/>)
+      expect(component.find('input').prop('placeholder')).toBe(mockplaceholder)
     })
   })
 })

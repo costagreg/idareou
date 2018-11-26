@@ -6,10 +6,10 @@ if(process.browser){
   require('./TextInput.scss')
 }
 
-const TextInput = ({ type = 'text', icon, error }) => (
+const TextInput = ({ type = 'text', icon, error, placeholder }) => (
   <div className='TextInput'>
     {icon ? <i className={classNames('TextInput__Icon','fa', `fa-${icon}`)}></i> : null}
-    <input className={classNames('TextInput__Input', { 'error': error })} type={type} />
+    <input type={type} className={classNames('TextInput__Input', { 'error': error })} placeholder={placeholder}  />
   </div>
 )
 

@@ -11,7 +11,6 @@ const AppRouter = () => {
   return (
     <Fragment>
       <div className='container'>
-        <TextInput type='text' icon="bath" />
         <Switch>
             {
               routes.map(({ Component, path }, index) =>
