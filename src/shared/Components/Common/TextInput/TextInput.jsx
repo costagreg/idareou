@@ -8,7 +8,7 @@ if(process.browser){
 
 const TextInput = ({ type = 'text', icon, error }) => (
   <div className='TextInput'>
-    {icon ? <i className={classNames('fa', `fa-${icon}`)}></i> : null}
+    {icon ? <i className={classNames('TextInput__Icon','fa', `fa-${icon}`)}></i> : null}
     <input className={classNames('TextInput__Input', { 'error': error })} type={type} />
   </div>
 )

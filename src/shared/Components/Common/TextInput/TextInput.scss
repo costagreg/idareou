@@ -1,6 +1,19 @@
 .TextInput {
-  width: 80%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
   height: 40px;
   border-radius: 3px;
   border: 1px solid $grey;
+  padding: 5px;
+  &__Icon{
+    margin:0 10px;
+  }
+  &__Input{
+    flex: 1;
+    border:0;
+    height: 100%;
+    outline: 0;
+    font-size: 1rem;
+  }
 }
