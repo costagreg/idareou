@@ -11,6 +11,8 @@ export class HeaderContainer extends Component {
     showSideBar: false,
   }
 
+  static displayName = 'HeaderContainer'
+
   setShowSideBar = () => {
     this.setState({
       showSideBar: !this.state.showSideBar

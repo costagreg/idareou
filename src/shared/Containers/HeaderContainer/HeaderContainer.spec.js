@@ -1,9 +1,22 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { HeaderContainer } from './HeaderContainer'
+import Container, { HeaderContainer } from './HeaderContainer'
+
+const mockContext = 'mockContext'
+
+jest.mock('../ContextContainer', () => ({ children }) => children(mockContext))
 
 describe('HeaderContainer', () => {
+  describe('when trying to render the HeaderContainer with the consumer', () => {
+    it('should render the HeaderContainer with the props and context', () => {
+      const props = { prop: 'prop'}
+      const component = shallow(<Container {...props} />)
+  
+      expect(component.dive().type().displayName).toBe('HeaderContainer')
+      expect(component.dive().props()).toEqual({...props, context: mockContext})
+    })
+  })
   describe('given HeaderContainer component',() => {
     describe('when trying to render the component', () => {
       it('should render the component', () => {
