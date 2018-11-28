@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { Button } from '../Components/Common/Button'
 import routes from './routes'
 
 if (process.browser) {
@@ -10,6 +11,7 @@ const AppRouter = () => {
   return (
     <Fragment>
       <div className='container'>
+        <Button text={'test'} disabled={true} />
         <Switch>
           {
             routes.map(({ Component, path }, index) =>
