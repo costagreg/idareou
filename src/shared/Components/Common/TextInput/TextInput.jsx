@@ -18,4 +18,3 @@ TextInput.propTypes = {
 }
 
 export default TextInput
-

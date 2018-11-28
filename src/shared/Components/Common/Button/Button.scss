@@ -1,0 +1,12 @@
+.Button {
+  background: $blue;
+  border:0;
+  color:$white;
+  padding: 5px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: 0;
+  &:hover{
+    background: $blueLight;
+  }
+}
