@@ -22,7 +22,7 @@
     }
   }
 
-  &__panel {
+  .sidepanel {
     position: absolute;
     z-index: 4;
     width: 200px;
@@ -31,13 +31,18 @@
     font-size: $textParagraphSize;
     transform: translate(-240px);
     transition: transform 0.5s ease-in-out;
+    &__userprofile {
+      width: 100%;
+      height: 180px;
+      border-bottom: solid 2px $blueDark;
+    }
     a {
       color: $blueDark;
       display: block;
       list-style: none;
       text-decoration: none;
       padding: 10px 0;
-      border-bottom: solid 2px;
+      border-bottom: solid 2px $blueDark;
       text-align: center;
 
       &.active {
