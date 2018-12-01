@@ -14,14 +14,6 @@ describe('Button', () => {
       component.simulate('click')
       expect(f1Mock.mock.calls.length).toBe(1)
     })
-    it('triggers all the functions passed in onClick', () => {
-      const f1Mock = jest.fn()
-      const f2Mock = jest.fn()
-      const component = shallow(<Button onClick={[f1Mock, f2Mock]} />)
-      component.simulate('click')
-      expect(f1Mock.mock.calls.length).toBe(1)
-      expect(f2Mock.mock.calls.length).toBe(1)
-    })
   })
   describe('when disabled is true', () => {
     it('adds the disabled classname', () => {

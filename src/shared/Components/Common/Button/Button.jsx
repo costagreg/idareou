@@ -8,11 +8,7 @@ if (process.browser) {
 const Button = ({ onClick = () => {}, disabled = false, text }) => (
   <button
     className={classNames('Button', {disabled})}
-    onClick={
-          onClick.constructor === Array 
-          ? () => { onClick.forEach((fn) => { fn() }) } 
-          : onClick
-    }
+    onClick={onClick}
     disabled={disabled}
   >{text}</button>
 )
