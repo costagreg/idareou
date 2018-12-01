@@ -5,7 +5,7 @@ if (process.browser) {
 }
 
 const FormContainer = ({children}) => (
-  <form className={'FormContainer'}>
+  <form className='FormContainer'>
     {children}
   </form>
 )

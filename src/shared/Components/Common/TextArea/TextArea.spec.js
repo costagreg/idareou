@@ -4,13 +4,13 @@ import { shallow } from 'enzyme'
 
 describe('@TextArea', () => {
   it('renders a text area as default', () => {
-    const component = shallow(<TextArea type='text' />)
+    const component = shallow(<TextArea />)
 
     expect(component.find('textarea').exists()).toBe(true)
   })
   describe('passing error as parameter', () => {
     it('adds the error class to the element', () => {
-      const component = shallow(<TextArea type='text' error='mockerror'/>)
+      const component = shallow(<TextArea error='mockerror'/>)
 
       expect(component.find('.error').exists()).toBe(true)
     })
