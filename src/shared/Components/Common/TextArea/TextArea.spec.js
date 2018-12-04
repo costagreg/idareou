@@ -23,4 +23,12 @@ describe('@TextArea', () => {
       expect(component.find('textarea').prop('placeholder')).toBe(mockplaceholder)
     })
   })
+  describe('passing name as parameter', () => {
+    it('adds the name parameter to the element', () => {
+      const mockname = 'mockname'
+      const component = shallow(<TextArea name={mockname}/>)
+
+      expect(component.find('textarea').prop('name')).toBe(mockname)
+    })
+  })
 })

@@ -15,11 +15,11 @@ const AppRouter = () => {
   return (
     <Fragment>
       <div className='container'>
-        <FormContainer>
+        <FormContainer onSubmit={({ content }) => { return false; console.log(content)}}>
           <PageTitle title='Create a bet' />
           <TextInput placeholder='Title' />
           <TextArea placeholder='Description' />
-          <Button text={'test'} disabled={true} />
+          <Button type="submit" text={'test'} />
         </FormContainer>
         <Switch>
           {
