@@ -16,13 +16,6 @@ const AppRouter = () => {
   return (
     <Fragment>
       <div className='container'>
-        <FormContainer onSubmit={({ content }) => { return false; console.log(content)}}>
-          <PageTitle title='Create a bet' />
-          <TextInput placeholder='Title' />
-          <TextArea placeholder='Description' />
-          <CheckBox name='test' text='sdasd'/>
-          <Button type="submit" text={'test'} />
-        </FormContainer>
         <Switch>
           {
             routes.map(({ Component, path }, index) =>
