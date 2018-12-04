@@ -4,8 +4,8 @@ if (process.browser) {
   require('./FormContainer.scss')
 }
 
-const FormContainer = ({children}) => (
-  <form className='FormContainer'>
+const FormContainer = ({children, onSubmit}) => (
+  <form className='FormContainer' onSubmit={onSubmit}>
     {children}
   </form>
 )
