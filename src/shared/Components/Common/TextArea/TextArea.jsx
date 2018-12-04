@@ -5,9 +5,13 @@ if(process.browser){
   require('./TextArea.scss')
 }
 
-const TextArea = ({ error, placeholder }) => (
+const TextArea = ({ name, error, placeholder }) => (
   <div className='TextArea'>
-    <textarea className={classNames('TextArea__Input', { error })} placeholder={placeholder}  />
+    <textarea 
+      name={name}
+      className={classNames('TextArea__Input', { error })}
+      placeholder={placeholder}
+    />
   </div>
 )
 

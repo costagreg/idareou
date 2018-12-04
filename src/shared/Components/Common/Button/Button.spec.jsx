@@ -33,4 +33,11 @@ describe('Button', () => {
       expect(component.find('button').text()).toBe(mockText)
     })
   })
+  describe('when type is submit', () => {
+    it('sets the type to submit', () => {
+      const component = shallow(<Button type='submit' />)
+
+      expect(component.find('button').prop('type')).toBe('submit')
+    })
+  })
 })

@@ -5,8 +5,9 @@ if (process.browser) {
   require('./Button.scss')
 }
 
-const Button = ({ onClick = () => {}, disabled = false, text }) => (
+const Button = ({ type = '', onClick = () => {}, disabled = false, text }) => (
   <button
+    type={type}
     className={classNames('Button', {disabled})}
     onClick={onClick}
     disabled={disabled}
