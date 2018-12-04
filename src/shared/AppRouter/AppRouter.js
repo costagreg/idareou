@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { Button } from '../Components/Common/Button'
 import { TextArea } from '../Components/Common/TextArea'
 import { TextInput } from '../Components/Common/TextInput'
+import { CheckBox } from '../Components/Common/CheckBox'
 import { FormContainer } from '../Containers/FormContainer'
 import { PageTitle } from '../Components/Common/PageTitle'
 import routes from './routes'
@@ -19,6 +20,7 @@ const AppRouter = () => {
           <PageTitle title='Create a bet' />
           <TextInput placeholder='Title' />
           <TextArea placeholder='Description' />
+          <CheckBox name='test' text='sdasd'/>
           <Button type="submit" text={'test'} />
         </FormContainer>
         <Switch>
