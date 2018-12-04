@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 if (process.browser) {
@@ -13,5 +14,12 @@ const Button = ({ type = '', onClick = () => {}, disabled = false, text }) => (
     disabled={disabled}
   >{text}</button>
 )
+
+Button.propTypes = {
+  type: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  text: PropTypes.string
+}
 
 export default Button
