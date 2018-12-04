@@ -6,7 +6,7 @@ if (process.browser) {
 }
 
 const PageTitle = ({ title }) => (
-  <h2 className={'PageTitle'}>{title}</h2>
+  <h2 className='PageTitle'>{title}</h2>
 )
 
 PageTitle.propTypes = {

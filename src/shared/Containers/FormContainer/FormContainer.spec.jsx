@@ -17,7 +17,9 @@ describe('FormContainer', () => {
     it('triggers the callback passed', () => {
       const mockCall = jest.fn()
       const component = shallow(<FormContainer onSubmit={mockCall} />)
+
       component.simulate('submit')
+
       expect(mockCall.mock.calls.length).toBe(1)
     })
   })
