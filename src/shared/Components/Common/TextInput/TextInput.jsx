@@ -19,7 +19,11 @@ const TextInput = ({name, type = 'text', icon, error, placeholder }) => (
 )
 
 TextInput.propTypes = {
-  type: PropTypes.oneOf(['email', 'password', 'text'])
+  name: PropTypes.string,
+  type: PropTypes.oneOf(['email', 'password', 'text']),
+  icon: PropTypes.string,
+  error: PropTypes.string,
+  placeholder: PropTypes.string
 }
 
 export default TextInput
