@@ -1,6 +1,7 @@
-import PageTitle from './PageTitle'
 import { shallow } from 'enzyme'
 import React from 'react'
+
+import PageTitle from './PageTitle'
 
 describe('PageTitle', () => {
   it('renders a h2 title', () => {

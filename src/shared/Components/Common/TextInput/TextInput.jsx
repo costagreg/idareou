@@ -8,11 +8,11 @@ if(process.browser){
 
 const TextInput = ({name, type = 'text', icon, error, placeholder }) => (
   <div className='TextInput'>
-    {icon ? <i className={classNames('TextInput__Icon','fa', `fa-${icon}`)}></i> : null}
+    {icon && <i className={classNames('TextInput__Icon','fa', `fa-${icon}`)}></i>}
     <input
       name={name}
       type={type}
-      className={classNames('TextInput__Input', { 'error': error })}
+      className={classNames('TextInput__Input', { error })}
       placeholder={placeholder}
     />
   </div>

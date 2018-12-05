@@ -1,6 +1,7 @@
 import React from 'react'
-import TextInput from './TextInput'
 import { shallow } from 'enzyme'
+
+import TextInput from './TextInput'
 
 describe('@TextInput', () => {
   it('renders a text input as default', () => {

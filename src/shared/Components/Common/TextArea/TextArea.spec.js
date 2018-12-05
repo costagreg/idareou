@@ -1,6 +1,7 @@
 import React from 'react'
-import TextArea from './TextArea'
 import { shallow } from 'enzyme'
+
+import TextArea from './TextArea'
 
 describe('@TextArea', () => {
   it('renders a text area as default', () => {
