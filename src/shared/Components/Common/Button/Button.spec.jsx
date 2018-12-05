@@ -5,9 +5,9 @@ import Button from './Button'
 
 describe('Button', () => {
   it('renders a button', () => {
-      const component = shallow(<Button />)
+    const component = shallow(<Button />)
 
-      expect(component.find('button').exists()).toBe(true)
+    expect(component.find('button').exists()).toBe(true)
   })
   describe('when it is clicked', () => {
     it('triggers the function passed in onClick', () => {
@@ -21,7 +21,7 @@ describe('Button', () => {
   })
   describe('when disabled is true', () => {
     it('adds the disabled classname', () => {
-      const component = shallow(<Button disabled={true} />)     
+      const component = shallow(<Button disabled={true} />)
 
       expect(component.find('button').hasClass('disabled')).toBe(true)
     })

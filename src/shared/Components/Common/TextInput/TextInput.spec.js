@@ -10,10 +10,6 @@ describe('@TextInput', () => {
     expect(component.find('input').exists()).toBe(true)
     expect(component.find('input').prop('type')).toBe('text')
   })
-  it('renders state.value as value of the input', () => {
-    const component = shallow(<TextInput type='text' />)
-  
-  })
   describe('passing type as password', () => {
     it('renders a password input', () => {
       const component = shallow(<TextInput type='password'/>)
@@ -49,7 +45,7 @@ describe('@TextInput', () => {
     it('renders a placeholder', () => {
       const mockplaceholder = 'mockplaceholder'
       const component = shallow(<TextInput placeholder={mockplaceholder}/>)
-      
+
       expect(component.find('input').prop('placeholder')).toBe(mockplaceholder)
     })
   })

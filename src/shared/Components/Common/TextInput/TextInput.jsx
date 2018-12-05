@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-if(process.browser){
+if(process.browser) {
   require('./TextInput.scss')
 }
 
-const TextInput = ({name, type = 'text', icon, error, placeholder }) => (
+const TextInput = ({ name, type = 'text', icon, error, placeholder }) => (
   <div className='TextInput'>
-    {icon && <i className={classNames('TextInput__Icon','fa', `fa-${icon}`)}></i>}
+    {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`)}></i>}
     <input
       name={name}
       type={type}

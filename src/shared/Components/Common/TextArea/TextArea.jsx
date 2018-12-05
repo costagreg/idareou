@@ -2,13 +2,13 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-if(process.browser){
+if(process.browser) {
   require('./TextArea.scss')
 }
 
 const TextArea = ({ name, error, placeholder }) => (
   <div className='TextArea'>
-    <textarea 
+    <textarea
       name={name}
       className={classNames('TextArea__Input', { error })}
       placeholder={placeholder}
