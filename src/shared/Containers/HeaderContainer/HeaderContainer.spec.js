@@ -10,14 +10,14 @@ jest.mock('../ContextContainer', () => ({ children }) => children(mockContext))
 describe('HeaderContainer', () => {
   describe('when trying to render the HeaderContainer with the consumer', () => {
     it('should render the HeaderContainer with the props and context', () => {
-      const props = { prop: 'prop'}
+      const props = { prop: 'prop' }
       const component = shallow(<Container {...props} />)
-  
+
       expect(component.dive().type().displayName).toBe('HeaderContainer')
-      expect(component.dive().props()).toEqual({...props, context: mockContext})
+      expect(component.dive().props()).toEqual({ ...props, context: mockContext })
     })
   })
-  describe('given HeaderContainer component',() => {
+  describe('given HeaderContainer component', () => {
     describe('when trying to render the component', () => {
       it('should render the component', () => {
         const component = shallow(<HeaderContainer />)
@@ -42,19 +42,19 @@ describe('HeaderContainer', () => {
       describe('when trying to render the markup for links', () => {
         const mockRouters = [
           {
-          path: '/1',
-          name: 'mock1',
-          exact: false
-        },{
-          path: '/2',
-          name: 'mock2',
-          exact: false
-        }]
+            path: '/1',
+            name: 'mock1',
+            exact: false
+          }, {
+            path: '/2',
+            name: 'mock2',
+            exact: false
+          }]
         it('should render as links as the routes passed', () => {
           const compInstance = shallow(<HeaderContainer />).instance()
           const links = compInstance.getLinkMarkUp(mockRouters)
 
-          links.forEach((link,index) => {
+          links.forEach((link, index) => {
             expect(link.key).toBe(mockRouters[index].name)
             expect(link.props.to).toBe(mockRouters[index].path)
             expect(link.props.onClick).toBe(compInstance.setShowSideBar)

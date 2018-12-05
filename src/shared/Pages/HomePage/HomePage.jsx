@@ -1,6 +1,6 @@
 import React from 'react'
 
-if(process.browser){
+if(process.browser) {
   require('./HomePage.scss')
 }
 

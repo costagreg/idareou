@@ -23,7 +23,7 @@ export class ContextContainer extends Component {
           isDesktop: this.desktopViews.includes(device)
         })
       }
-     }
+    }
   }
 
   componentDidMount() {

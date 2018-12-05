@@ -42,7 +42,7 @@ describe('SideBar', () => {
         it('should render the userprofilecard', () => {
           const newProps = {
             ...props,
-            userProfile: { exist: true}
+            userProfile: { exist: true }
           }
           const newComponent = shallow(<Sidebar {...newProps}/>)
           const userProfile = newComponent.find('UserProfileCard')

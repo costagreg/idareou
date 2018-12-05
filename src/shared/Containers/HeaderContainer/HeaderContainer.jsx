@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import Consumer from '../ContextContainer'
@@ -8,7 +8,7 @@ import routes from '../../AppRouter/routes'
 
 export class HeaderContainer extends Component {
   state = {
-    showSideBar: false,
+    showSideBar: false
   }
 
   static displayName = 'HeaderContainer'
@@ -18,6 +18,7 @@ export class HeaderContainer extends Component {
       showSideBar: !this.state.showSideBar
     })
   }
+
   getLinkMarkUp(links) {
     return links.map(({ path, name, exact = false }) =>
       <NavLink
@@ -27,9 +28,9 @@ export class HeaderContainer extends Component {
         onClick={this.setShowSideBar}
         >
         {name}
-      </NavLink>
-    )
+      </NavLink>)
   }
+
   render() {
     return (
       <Header

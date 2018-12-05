@@ -7,7 +7,7 @@ const linkCreator = (num) =>
   Array(num).fill('link').map((link, index) => <li key={index}>{link}</li>)
 
 describe('Header', () => {
-  describe('given Header component',() => {
+  describe('given Header component', () => {
     const props = {
       linskMarkUp: linkCreator(3),
       showSideBar: false,
