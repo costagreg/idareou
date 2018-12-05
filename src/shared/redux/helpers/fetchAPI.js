@@ -9,4 +9,3 @@ export const fetchAPI = cookie => relativePath => {
     .then(res => res.json())
     .catch(e => console.log('Error in Fetch: ', e))
 }
-
