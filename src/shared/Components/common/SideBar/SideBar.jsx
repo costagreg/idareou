@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
 import UserProfileCard from '../../UserProfileCard'
 
@@ -28,6 +29,13 @@ const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, userProfile }) => {
       </div>
     </div>
   )
+}
+
+SideBar.propTypes = {
+  userProfile: PropTypes.object,
+  linskMarkUp: PropTypes.array,
+  showSideBar: PropTypes.bool,
+  setShowSideBar: PropTypes.func
 }
 
 export default SideBar

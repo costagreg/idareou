@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 if(process.browser) {
   require('./UserProfileCard.scss')
@@ -21,6 +22,11 @@ const UserProfileCard = ({ profileImage, userName }) => {
       }
     </div>
   )
+}
+
+UserProfileCard.propTypes = {
+  profileImage: PropTypes.string,
+  userName: PropTypes.string
 }
 
 export default UserProfileCard

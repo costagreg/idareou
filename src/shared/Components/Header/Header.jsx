@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
 import SideBar from '../common/SideBar'
 
@@ -28,5 +29,12 @@ const Header = ({ context = {}, linskMarkUp, showSideBar, setShowSideBar } = {})
       }
     </div>
   </header>
+
+Header.propTypes = {
+  context: PropTypes.object,
+  linskMarkUp: PropTypes.array,
+  showSideBar: PropTypes.bool,
+  setShowSideBar: PropTypes.func
+}
 
 export default Header

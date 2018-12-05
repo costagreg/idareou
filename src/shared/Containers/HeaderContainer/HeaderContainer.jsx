@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import Consumer from '../ContextContainer'
 import Header from '../../Components/Header'
@@ -41,6 +42,10 @@ export class HeaderContainer extends Component {
       />
     )
   }
+}
+
+HeaderContainer.propTypes = {
+  context: PropTypes.object
 }
 
 export default props =>
