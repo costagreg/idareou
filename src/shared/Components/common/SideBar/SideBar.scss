@@ -1,0 +1,56 @@
+@import '../../../../styles/variables.scss';
+
+.sidebar {
+  position: absolute;
+  top: 50px;
+  z-index: 2;
+  height: 100%;
+
+  &__overlay {
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    z-index: 3;
+    opacity: 0;
+    visibility: hidden;
+    background: linear-gradient(rgba(27, 27, 27, 0.45), rgba(27, 27, 27, 0.45));
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .sidepanel {
+    position: absolute;
+    z-index: 4;
+    width: 200px;
+    height: 100%;
+    background: $white;
+    font-size: $textParagraphSize;
+    transform: translate(-240px);
+    transition: transform 0.5s ease-in-out;
+    &__userprofile {
+      width: 100%;
+      height: 180px;
+      border-bottom: solid 2px $blueDark;
+    }
+    a {
+      color: $blueDark;
+      display: block;
+      list-style: none;
+      text-decoration: none;
+      padding: 10px 0;
+      text-align: center;
+
+      &.active {
+        background: $lightgrey;
+      }
+    }
+    &.show {
+      transform: translate(0);
+    }
+  }
+}
+

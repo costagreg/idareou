@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import deviceTypes from '../../helpers/deviceTypes'
 import debouncer from '../../helpers/debouncer'
@@ -23,7 +24,7 @@ export class ContextContainer extends Component {
           isDesktop: this.desktopViews.includes(device)
         })
       }
-     }
+    }
   }
 
   componentDidMount() {
@@ -45,6 +46,11 @@ export class ContextContainer extends Component {
       </Provider>
     )
   }
+}
+
+ContextContainer.propTypes = {
+  isDesktop: PropTypes.bool,
+  children: PropTypes.node
 }
 
 export default Consumer

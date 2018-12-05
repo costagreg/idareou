@@ -11,12 +11,10 @@ export default (url) => {
   })
 
   mongoose.connection.on('error', err =>
-    console.log('DB: Connection Error ', err)
-  )
+    console.log('DB: Connection Error ', err))
 
   mongoose.connection.on('disconnected', err =>
-    console.log('DB: Default connection disconnected ', err)
-  )
+    console.log('DB: Default connection disconnected ', err))
 
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {

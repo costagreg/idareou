@@ -12,6 +12,6 @@ module.exports = {
   plugins: [
     new MiniCssExtraPlugin({
       filename: '[name][hash].css'
-    }),
+    })
   ]
 }

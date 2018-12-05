@@ -32,7 +32,7 @@ render(AppRouter)
 // Enable HMR
 if(module.hot) {
   module.hot.accept('./shared/AppRouter', () => {
-    const AppRouter = require('./shared/AppRouter').default;
+    const AppRouter = require('./shared/AppRouter').default
     render(AppRouter)
   })
 }

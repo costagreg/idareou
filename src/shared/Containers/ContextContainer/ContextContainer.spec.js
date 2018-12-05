@@ -53,7 +53,7 @@ describe('ContextContainer', () => {
       describe('and the window is a desktop view', () => {
         it('should render a desktop view', () => {
           const deviceTypeDesktop = deviceTypes.breakpoints.laptop.min
-          const mockTarget = { target: { innerWidth: deviceTypeDesktop }}
+          const mockTarget = { target: { innerWidth: deviceTypeDesktop } }
           const props = { isDesktop: false }
 
           const wrapper = shallow(<ContextContainer {...props}><MockChild/></ContextContainer>)
@@ -68,7 +68,7 @@ describe('ContextContainer', () => {
       describe('and the window is a not a desktop view', () => {
         it('should render a mobile view', () => {
           const deviceTypeDesktop = deviceTypes.breakpoints.tablet.max
-          const mockTarget = { target: { innerWidth: deviceTypeDesktop }}
+          const mockTarget = { target: { innerWidth: deviceTypeDesktop } }
           const props = { isDesktop: true }
 
           const wrapper = shallow(<ContextContainer {...props}><MockChild/></ContextContainer>)

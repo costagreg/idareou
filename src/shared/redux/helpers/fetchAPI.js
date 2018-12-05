@@ -5,7 +5,8 @@ export const fetchAPI = cookie => relativePath => {
     (process.env.API_URL || '') + relativePath,
     {
       headers: { cookie }
-    })
+    }
+  )
     .then(res => res.json())
-    .catch(e => console.log('Error in Fetch: ', e))
+    .catch(e => { throw new Error(e) })
 }
