@@ -22,7 +22,14 @@ module.exports = {
           'extracted-loader',
           MiniCssExtraPlugin.loader,
           'css-loader',
-          'sass-loader?sourceMap'
+          'sass-loader?sourceMap',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [path.resolve(__dirname, 'src/styles/mixin.scss'),
+                          path.resolve(__dirname, '../src/styles/variables.scss')]
+            },
+          }
         ]
       },
       {
