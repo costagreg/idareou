@@ -42,15 +42,10 @@
       list-style: none;
       text-decoration: none;
       padding: 10px 0;
-      border-bottom: solid 2px $blueDark;
       text-align: center;
 
       &.active {
-        color: $yellow;
-      }
-
-      &:hover {
-        color: $yellow;
+        background: $lightgrey;
       }
     }
     &.show {
