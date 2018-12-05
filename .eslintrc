@@ -64,7 +64,6 @@
       "no-useless-return": 0,
       "object-property-newline": 0,
       "object-curly-newline": 0,
-      "eol-last": ["error", "always"],
       "import/first": 0,
       "import/no-duplicates": 0,
       "import/no-dynamic-require": 0,
