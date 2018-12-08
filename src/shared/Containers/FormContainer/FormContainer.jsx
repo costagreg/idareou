@@ -16,10 +16,16 @@ class FormContainer extends Component {
     this.setState({ [name]: value })
   }
 
-  render() {
-    const { children, onSubmit } = this.props
+  onSubmit = () => {
+    if (this.props.onSubmit) {
+      this.props.onSubmit(this.state)
+    }
+  }
 
-    return <form className='FormContainer' onSubmit={onSubmit}>
+  render() {
+    const { children } = this.props
+
+    return <form className='FormContainer' onSubmit={this.onSubmit}>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           onChange: this.onChange,
