@@ -25,7 +25,9 @@ TextInput.propTypes = {
   type: PropTypes.oneOf(['email', 'password', 'text']),
   icon: PropTypes.string,
   error: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default TextInput

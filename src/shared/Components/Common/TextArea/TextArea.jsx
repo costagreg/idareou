@@ -21,7 +21,9 @@ const TextArea = ({ name, error, value, placeholder, onChange }) => (
 TextArea.propTypes = {
   name: PropTypes.string,
   error: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default TextArea
