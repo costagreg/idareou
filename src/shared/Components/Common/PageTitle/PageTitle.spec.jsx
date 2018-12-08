@@ -11,7 +11,7 @@ describe('PageTitle', () => {
   })
   it('renders title passed', () => {
     const mockTitle = 'mocktitle'
-    const component = shallow(<PageTitle title={mockTitle} />)
+    const component = shallow(<PageTitle>{mockTitle}</PageTitle>)
 
     expect(component.find('h2').text()).toBe(mockTitle)
   })

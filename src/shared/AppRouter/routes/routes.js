@@ -1,4 +1,5 @@
 import HomePage from '../../Pages/HomePage'
+import BetPage from '../../Pages/BetPage'
 
 const routes = [
   {
@@ -6,6 +7,11 @@ const routes = [
     path: '/',
     exact: true,
     name: 'Home'
+  }, {
+    Component: BetPage,
+    path: '/bet',
+    exact: true,
+    name: 'BetPage'
   }
 ]
 
