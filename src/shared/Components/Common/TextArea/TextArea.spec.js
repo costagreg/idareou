@@ -40,12 +40,14 @@ describe('@TextArea', () => {
       expect(component.find('textarea').prop('value')).toBe(valueMock)
     })
   })
-  describe('passing onchange as parameter', () => {
-    it('adds the onchange parameter to the element', () => {
-      const funcMock = () => {}
-      const component = shallow(<TextArea onChange={funcMock}/>)
+  describe('onChange', () => {
+    it('triggers the updateValue passed', () => {
+      const funcMock = jest.fn()
+      const component = shallow(<TextArea updateValue={funcMock} />)
 
-      expect(component.find('textarea').prop('onChange')).toBe(funcMock)
+      component.find('textarea').simulate('change', { target: { value: '' } })
+
+      expect(funcMock).toHaveBeenCalled()
     })
   })
 })

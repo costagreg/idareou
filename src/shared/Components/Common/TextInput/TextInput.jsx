@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-if(process.browser) {
+if (process.browser) {
   require('./TextInput.scss')
 }
 
-const TextInput = ({ name, type = 'text', icon, error, placeholder, value, onChange }) => (
+const TextInput = ({ name, type = 'text', icon, error, placeholder, value, updateValue }) => (
   <div className='TextInput'>
     {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`)}></i>}
     <input
@@ -15,7 +15,7 @@ const TextInput = ({ name, type = 'text', icon, error, placeholder, value, onCha
       className={classNames('TextInput__Input', { error })}
       placeholder={placeholder}
       value={value}
-      onChange={onChange}
+      onChange={(e) => { updateValue(name, e.target.value)}}
     />
   </div>
 )
@@ -27,7 +27,7 @@ TextInput.propTypes = {
   error: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  updateValue: PropTypes.func
 }
 
 export default TextInput

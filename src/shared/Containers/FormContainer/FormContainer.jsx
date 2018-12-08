@@ -11,8 +11,7 @@ class FormContainer extends Component {
     this.state = {}
   }
 
-  onChange = (e) => {
-    const { name, value } = e.target
+  updateValue = (name, value) => {
     this.setState({ [name]: value })
   }
 
@@ -28,8 +27,8 @@ class FormContainer extends Component {
     return <form className='FormContainer' onSubmit={this.onSubmit}>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
-          onChange: this.onChange,
-          value: this.state[child.props.name] || ''
+          updateValue: this.updateValue,
+          value: this.state[child.props.name] || child.props.value
         })
       })}
     </form>
