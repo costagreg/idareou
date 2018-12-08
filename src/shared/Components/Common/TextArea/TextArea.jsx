@@ -6,12 +6,14 @@ if(process.browser) {
   require('./TextArea.scss')
 }
 
-const TextArea = ({ name, error, placeholder }) => (
+const TextArea = ({ name, error, value, placeholder, onChange }) => (
   <div className='TextArea'>
     <textarea
       name={name}
       className={classNames('TextArea__Input', { error })}
       placeholder={placeholder}
+      value={value}
+      onChange={onChange}
     />
   </div>
 )

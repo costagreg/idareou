@@ -10,9 +10,9 @@ describe('PageTitle', () => {
     expect(component.find('h2').exists()).toBe(true)
   })
   it('renders title passed', () => {
-    const mockTitle = 'mocktitle'
-    const component = shallow(<PageTitle>{mockTitle}</PageTitle>)
+    const titleMock = 'titleMock'
+    const component = shallow(<PageTitle>{titleMock}</PageTitle>)
 
-    expect(component.find('h2').text()).toBe(mockTitle)
+    expect(component.find('h2').text()).toBe(titleMock)
   })
 })

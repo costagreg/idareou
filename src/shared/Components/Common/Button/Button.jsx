@@ -9,7 +9,7 @@ if (process.browser) {
 const Button = ({ type = '', onClick = () => {}, disabled = false, text }) => (
   <button
     type={type}
-    className={classNames('Button', {disabled})}
+    className={classNames('Button', { disabled })}
     onClick={onClick}
     disabled={disabled}
   >{text}</button>

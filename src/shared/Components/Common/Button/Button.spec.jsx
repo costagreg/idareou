@@ -28,10 +28,10 @@ describe('Button', () => {
   })
   describe('when text is passed', () => {
     it('passes the text in button value', () => {
-      const mockText = 'mockText'
-      const component = shallow(<Button disabled={true} text={mockText} />)
+      const textMock = 'textMock'
+      const component = shallow(<Button disabled={true} text={textMock} />)
 
-      expect(component.find('button').text()).toBe(mockText)
+      expect(component.find('button').text()).toBe(textMock)
     })
   })
   describe('when type is submit', () => {

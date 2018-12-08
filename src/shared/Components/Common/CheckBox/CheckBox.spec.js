@@ -11,18 +11,18 @@ describe('@CheckBox', () => {
   })
   describe('passing name as parameter', () => {
     it('adds the name parameter to the element', () => {
-      const mockname = 'mockname'
-      const component = shallow(<CheckBox name={mockname} />)
+      const nameMock = 'nameMock'
+      const component = shallow(<CheckBox name={nameMock} />)
 
-      expect(component.find('input[type=\'checkbox\']').prop('name')).toBe(mockname)
+      expect(component.find('input[type=\'checkbox\']').prop('name')).toBe(nameMock)
     })
   })
   describe('passing text as parameter', () => {
     it('adds a label to the checkbox', () => {
-      const mocktext = 'mocktext'
-      const component = shallow(<CheckBox text={mocktext} />)
+      const textMock = 'textMock'
+      const component = shallow(<CheckBox text={textMock} />)
 
-      expect(component.find('.CheckBox__Label').text()).toBe(mocktext)
+      expect(component.find('.CheckBox__Label').text()).toBe(textMock)
     })
   })
 })
