@@ -41,7 +41,7 @@ describe('@TextArea', () => {
     })
   })
   describe('onChange', () => {
-    it('triggers the updateValue passed', () => {
+    it('triggers the updateValue function passed', () => {
       const funcMock = jest.fn()
       const component = shallow(<TextArea updateValue={funcMock} />)
 

@@ -1,0 +1,23 @@
+.AmountInput {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin: 20px 0;
+  &__Icon{
+    margin:0 10px;
+  }
+  &__Button{
+    flex: 1;
+    font-size: 2rem;
+    outline: 0;
+    background: $blueLight;
+  }
+  &__TextInput{
+    flex: 4;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 0;
+    outline: 0;
+  }
+}
