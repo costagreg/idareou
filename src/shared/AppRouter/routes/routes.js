@@ -1,4 +1,5 @@
 import HomePage from '../../Pages/HomePage'
+import History from '../../Pages/History'
 
 const routes = [
   {
@@ -6,6 +7,11 @@ const routes = [
     path: '/',
     exact: true,
     name: 'Home'
+  },
+  {
+    Component: History,
+    path: '/history',
+    name: 'History'
   }
 ]
 
