@@ -16,7 +16,7 @@ const DUMMYBETS = [
           selected: true
         },
         {
-          opt: 'first',
+          opt: 'second choice',
           selected: false
         }
       ],

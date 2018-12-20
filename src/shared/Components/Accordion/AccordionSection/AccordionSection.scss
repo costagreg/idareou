@@ -37,13 +37,40 @@
     transition: max-height 0.2s ease-in-out;
     background: $blue;
 
-    div {
-      margin: 10px 0;
+    &__section {
+      padding: 10px 0;
+      color: $white;
+    }
+
+    &__amount {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    &__options {
+      &.success {
+        font-weight: bold;
+        color: $green;
+      }
+      &.fail {
+        font-weight: bold;
+        color: $red;
+      }
+    }
+
+    &__participants {
+      font-weight: 100;
+    }
+
+    hr {
+      margin: 0 auto;
+      width: 50%;
       color: $white;
     }
     ul {
-      list-style: none;
+      margin: 0;
       padding: 0;
+      list-style: none;
     }
   }
 

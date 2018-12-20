@@ -23,9 +23,9 @@ const AccordionSection = ({
 }) => {
   let cardRef = undefined
 
-  return <div className="accordionsection" onClick={() => onSelectSection(id, cardRef)}>
-    <div className="accordionsection__header">
-      <div className={`accordionsection__state ${state}`}></div>
+  return <div className="accordionsection">
+    <div className="accordionsection__header" onClick={() => onSelectSection(id, cardRef)}>
+      <span className={`accordionsection__state ${state}`}></span>
       {title}
       <i className={classNames('fa fa-angle-left', 'arrow', { selected: sectionSelected === id })}></i>
     </div>
@@ -34,19 +34,28 @@ const AccordionSection = ({
       className="card"
       style={{ maxHeight: sectionSelected === id ? `${currentHeight}px` : 0 }}
     >
-      <div className="card__description">{description}</div>
-      <div className="card__amount">{currency + amount}</div>
-      <div className="card_options">
+      <div className="card__section">{description}</div>
+      <hr/>
+      <div className="card__section card__amount">{currency + amount}</div>
+      <hr/>
+      <div className="card__section">
         <ul>
         {
-          options.map(({ opt }) => <li>{opt}</li>)
-        }
+          options.map(({ opt, selected }, index) =>
+            <li
+              key={index}
+              className={classNames('card__options', { success: selected && state === 'success', fail: selected && state === 'fail' })}
+            >
+              {opt}
+            </li>)
+          }
         </ul>
       </div>
-      <div className="card__participants">
+      <hr/>
+      <div className="card__section">
         <ul>
           {
-            participants.map(person => <li>{person}</li>)
+            participants.map(person => <li key={person} className="card__participants">{person}</li>)
           }
         </ul>
       </div>
