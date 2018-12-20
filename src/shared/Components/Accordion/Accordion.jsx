@@ -8,16 +8,16 @@ if(process.browser) {
 }
 
 class Accordion extends Component {
-  state = {}
-
-  isSelected(id) {
-    return id === this.state.sectionSelected
+  state = {
+    currentHeight: 0,
+    sectionSelected: null
   }
 
   onSelectSection = (id, cardRef) => {
-    if(this.isSelected(id)) {
+    if(id === this.state.sectionSelected) {
       this.setState({
-        sectionSelected: null
+        sectionSelected: null,
+        currentHeight: 0
       })
     } else {
       this.setState({
@@ -28,7 +28,7 @@ class Accordion extends Component {
   }
 
   render() {
-    const { bets } = this.props
+    const { bets = [] } = this.props
 
     return <div className="accordion">
       {

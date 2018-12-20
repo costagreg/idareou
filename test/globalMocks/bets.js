@@ -1,8 +1,4 @@
-import React from 'react'
-
-import Accodion from '../../Components/Accordion'
-
-const DUMMYBETS = [
+export default () => [
   {
     id: '0',
     title: 'first bet',
@@ -16,11 +12,10 @@ const DUMMYBETS = [
           choosen: true
         },
         {
-          opt: 'second choice',
+          opt: 'second',
           choosen: false
         }
-      ],
-      participants: ['jose', 'greg', 'myfriend']
+      ]
     },
     state: 'fail'
   },
@@ -34,23 +29,14 @@ const DUMMYBETS = [
       options: [
         {
           opt: 'first',
-          choosen: true
+          selected: true
         },
         {
-          opt: 'first',
-          choosen: false
+          opt: 'second',
+          selected: false
         }
-      ],
-      participants: ['jose', 'greg', 'myfriend']
+      ]
     },
     state: 'success'
   }
 ]
-
-const History = () => {
-  return <div>
-    { DUMMYBETS && <Accodion bets={DUMMYBETS}/> }
-  </div>
-}
-
-export default History

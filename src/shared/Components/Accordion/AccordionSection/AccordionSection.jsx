@@ -26,25 +26,25 @@ const AccordionSection = ({
   return <div className="accordionsection">
     <div className="accordionsection__header" onClick={() => onSelectSection(id, cardRef)}>
       <span className={`accordionsection__state ${state}`}></span>
-      {title}
+      <span className="accordionsection__title">{title}</span>
       <i className={classNames('fa fa-angle-left', 'arrow', { selected: sectionSelected === id })}></i>
     </div>
     <div
       ref={ref => cardRef = ref}
       className="card"
-      style={{ maxHeight: sectionSelected === id ? `${currentHeight}px` : 0 }}
+      style={{ maxHeight: sectionSelected === id && currentHeight ? `${currentHeight}px` : 0 }}
     >
-      <div className="card__section">{description}</div>
+      <div className="card__section card_description">{description}</div>
       <hr/>
       <div className="card__section card__amount">{currency + amount}</div>
       <hr/>
       <div className="card__section">
         <ul>
         {
-          options.map(({ opt, selected }, index) =>
+          options.map(({ opt, choosen }, index) =>
             <li
               key={index}
-              className={classNames('card__options', { success: selected && state === 'success', fail: selected && state === 'fail' })}
+              className={classNames('card__options', { success: choosen && state === 'success', fail: choosen && state === 'fail' })}
             >
               {opt}
             </li>)
@@ -52,13 +52,15 @@ const AccordionSection = ({
         </ul>
       </div>
       <hr/>
-      <div className="card__section">
-        <ul>
-          {
-            participants.map(person => <li key={person} className="card__participants">{person}</li>)
-          }
-        </ul>
-      </div>
+      { participants &&
+        <div className="card__section">
+          <ul>
+            {
+              participants.map(person => <li key={person} className="card__participants">{person}</li>)
+            }
+          </ul>
+        </div>
+      }
     </div>
   </div>
 }
@@ -66,7 +68,7 @@ const AccordionSection = ({
 AccordionSection.propTypes = {
   id: Proptypes.string.isRequired,
   title: Proptypes.string.isRequired,
-  state: Proptypes.string,
+  state: Proptypes.string.isRequired,
   body: Proptypes.shape({
     description: Proptypes.string.isRequired,
     amount: Proptypes.number.isRequired,
@@ -75,7 +77,7 @@ AccordionSection.propTypes = {
     participants: Proptypes.array
   }),
   sectionSelected: Proptypes.string,
-  onSelectSection: Proptypes.func,
+  onSelectSection: Proptypes.func.isRequired,
   currentHeight: Proptypes.number
 }
 
