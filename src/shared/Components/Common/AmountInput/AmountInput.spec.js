@@ -28,49 +28,51 @@ describe('@AmountInput', () => {
     })
   })
   describe('instance', () => {
-    describe('incrementAmount', () => {
-      it('increment current value of 0.5', () => {
-        const updateValueMock = jest.fn()
-        const props = {
-          ...initialProps,
-          updateValue: updateValueMock
-        }
-        const component = shallow(<AmountInput {...props} />)
-        const expectedValue = (parseFloat(props.value) + 0.5).toFixed(2)
+    describe('onChangeValue', () => {
+      describe('when increment is passed as action', () => {
+        it('increment current value of 0.5', () => {
+          const updateValueMock = jest.fn()
+          const props = {
+            ...initialProps,
+            updateValue: updateValueMock
+          }
+          const component = shallow(<AmountInput {...props} />)
+          const expectedValue = (parseFloat(props.value) + 0.5).toFixed(2)
 
-        component.instance().incrementAmount()
+          component.instance().onChangeValue('increment')
 
-        expect(updateValueMock).toHaveBeenCalledWith(props.name, expectedValue)
+          expect(updateValueMock).toHaveBeenCalledWith(props.name, expectedValue)
+        })
       })
-    })
-    describe('decrementAmount', () => {
-      it('increment current value of 0.5', () => {
-        const updateValueMock = jest.fn()
-        const props = {
-          ...initialProps,
-          value: '10',
-          updateValue: updateValueMock
-        }
-        const component = shallow(<AmountInput {...props} />)
-        const expectedValue = (parseFloat(props.value) - 0.5).toFixed(2)
+      describe('when decrement is passed as action', () => {
+        it('decrement current value of 0.5', () => {
+          const updateValueMock = jest.fn()
+          const props = {
+            ...initialProps,
+            value: '10',
+            updateValue: updateValueMock
+          }
+          const component = shallow(<AmountInput {...props} />)
+          const expectedValue = (parseFloat(props.value) - 0.5).toFixed(2)
 
-        component.instance().decrementAmount()
+          component.instance().onChangeValue('decrement')
 
-        expect(updateValueMock).toHaveBeenCalledWith(props.name, expectedValue)
-      })
-      it('stops when value is less then 0', () => {
-        const updateValueMock = jest.fn()
-        const props = {
-          ...initialProps,
-          value: '0',
-          updateValue: updateValueMock
-        }
-        const component = shallow(<AmountInput {...props} />)
-        const expectedValue = '0.00'
+          expect(updateValueMock).toHaveBeenCalledWith(props.name, expectedValue)
+        })
+        it('stops when value is less then 0', () => {
+          const updateValueMock = jest.fn()
+          const props = {
+            ...initialProps,
+            value: '0',
+            updateValue: updateValueMock
+          }
+          const component = shallow(<AmountInput {...props} />)
+          const expectedValue = '0.00'
 
-        component.instance().decrementAmount()
+          component.instance().onChangeValue('decrement')
 
-        expect(updateValueMock).toHaveBeenCalledWith(props.name, expectedValue)
+          expect(updateValueMock).toHaveBeenCalledWith(props.name, expectedValue)
+        })
       })
     })
   })

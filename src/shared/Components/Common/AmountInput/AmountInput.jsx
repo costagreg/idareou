@@ -6,15 +6,19 @@ if (process.browser) {
 }
 
 class AmountInput extends Component {
-  incrementAmount = () => {
+  onChangeValue = (action) => {
     const { name, value, updateValue } = this.props
-    const updatedValue = parseFloat(value) + 0.5
-    updateValue(name, updatedValue.toFixed(2))
-  }
+    let updatedValue = parseFloat(value)
 
-  decrementAmount = () => {
-    const { name, value, updateValue } = this.props
-    const updatedValue = parseFloat(value) - 0.5
+    switch (action) {
+      case 'increment':
+        updatedValue += 0.5
+        break
+      case 'decrement':
+        updatedValue -= 0.5
+        break
+      default:
+    }
     updateValue(name, updatedValue > 0 ? updatedValue.toFixed(2) : '0.00')
   }
 
@@ -24,7 +28,7 @@ class AmountInput extends Component {
       <button
         className='AmountInput__Button'
         type='button'
-        onClick={this.decrementAmount}>
+        onClick={() => this.onChangeValue('decrement')}>
         -
       </button>
       <input
@@ -37,7 +41,7 @@ class AmountInput extends Component {
       <button
         className='AmountInput__Button'
         type='button'
-        onClick={this.incrementAmount}>
+        onClick={() => this.onChangeValue('increment')}>
         +
       </button>
     </div>

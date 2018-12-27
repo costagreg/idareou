@@ -6,11 +6,6 @@ if (process.browser) {
 }
 
 class FormContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
   updateValue = (name, value) => {
     this.setState({ [name]: value })
   }
@@ -26,9 +21,10 @@ class FormContainer extends Component {
 
     return <form className='FormContainer' onSubmit={this.onSubmit}>
       {React.Children.map(children, (child) => {
+        const { props: { name: inputName, value: inputValue } } = child
         return React.cloneElement(child, {
           updateValue: this.updateValue,
-          value: this.state[child.props.name] || child.props.value
+          value: inputName && this.state && this.state[inputName] || inputValue
         })
       })}
     </form>

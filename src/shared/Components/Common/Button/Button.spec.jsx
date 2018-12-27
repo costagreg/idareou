@@ -26,10 +26,10 @@ describe('Button', () => {
       expect(component.find('button').hasClass('disabled')).toBe(true)
     })
   })
-  describe('when text is passed', () => {
-    it('passes the text in button value', () => {
+  describe('when children is passed', () => {
+    it('passes the children in button', () => {
       const textMock = 'textMock'
-      const component = shallow(<Button disabled={true} text={textMock} />)
+      const component = shallow(<Button disabled={true}>{textMock}</Button>)
 
       expect(component.find('button').text()).toBe(textMock)
     })
