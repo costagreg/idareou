@@ -6,7 +6,7 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
-const TextInput = ({ name, type = 'text', icon, error, placeholder, value, updateValue }) => (
+const TextInput = ({ name, type, icon, error, placeholder, value, updateValue }) => (
   <div className='TextInput'>
     {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`)}></i>}
     <input
@@ -28,6 +28,11 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func
+}
+
+TextInput.defaultProps = {
+  value: '',
+  type: 'text'
 }
 
 export default TextInput
