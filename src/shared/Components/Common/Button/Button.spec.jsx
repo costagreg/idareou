@@ -5,9 +5,9 @@ import Button from './Button'
 
 describe('Button', () => {
   it('renders a button', () => {
-      const component = shallow(<Button />)
+    const component = shallow(<Button />)
 
-      expect(component.find('button').exists()).toBe(true)
+    expect(component.find('button').exists()).toBe(true)
   })
   describe('when it is clicked', () => {
     it('triggers the function passed in onClick', () => {
@@ -21,17 +21,17 @@ describe('Button', () => {
   })
   describe('when disabled is true', () => {
     it('adds the disabled classname', () => {
-      const component = shallow(<Button disabled={true} />)     
+      const component = shallow(<Button disabled={true} />)
 
       expect(component.find('button').hasClass('disabled')).toBe(true)
     })
   })
-  describe('when text is passed', () => {
-    it('passes the text in button value', () => {
-      const mockText = 'mockText'
-      const component = shallow(<Button disabled={true} text={mockText} />)
+  describe('when children is passed', () => {
+    it('passes the children in button', () => {
+      const textMock = 'textMock'
+      const component = shallow(<Button disabled={true}>{textMock}</Button>)
 
-      expect(component.find('button').text()).toBe(mockText)
+      expect(component.find('button').text()).toBe(textMock)
     })
   })
   describe('when type is submit', () => {

@@ -2,16 +2,18 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-if(process.browser){
+if(process.browser) {
   require('./TextArea.scss')
 }
 
-const TextArea = ({ name, error, placeholder }) => (
+const TextArea = ({ name, error, value, placeholder, updateValue }) => (
   <div className='TextArea'>
-    <textarea 
+    <textarea
       name={name}
       className={classNames('TextArea__Input', { error })}
       placeholder={placeholder}
+      value={value}
+      onChange={(e) => { updateValue(name, e.target.value)}}
     />
   </div>
 )
@@ -19,7 +21,9 @@ const TextArea = ({ name, error, placeholder }) => (
 TextArea.propTypes = {
   name: PropTypes.string,
   error: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default TextArea
