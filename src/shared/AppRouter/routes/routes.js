@@ -1,5 +1,5 @@
 import HomePage from '../../Pages/HomePage'
-import History from '../../Pages/History'
+import HistoryPageContainer from '../../Containers/HistoryPageContainer'
 
 const routes = [
   {
@@ -9,7 +9,7 @@ const routes = [
     name: 'Home'
   },
   {
-    Component: History,
+    Component: HistoryPageContainer,
     path: '/history',
     name: 'History'
   }

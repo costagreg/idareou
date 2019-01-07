@@ -47,10 +47,10 @@ const DUMMYBETS = [
   }
 ]
 
-const History = () => {
+const HistoryPage = () => {
   return <div>
     { DUMMYBETS && <Accodion bets={DUMMYBETS}/> }
   </div>
 }
 
-export default History
+export default HistoryPage

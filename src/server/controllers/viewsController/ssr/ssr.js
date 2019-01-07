@@ -30,7 +30,7 @@ const getDevice = userAgent => {
 export default async req => {
   const isDesktop = req.headers['user-agent'] && getDevice(req.headers['user-agent'])
 
-  const store = configureStore({}, req)
+  const store = configureStore({ bets: [] }, req)
   const promises = getNeedsByMatchedUrl(store, req.url)
 
   await Promise.all(promises)
