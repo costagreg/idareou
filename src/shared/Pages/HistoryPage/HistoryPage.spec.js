@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import History from './History'
+import History from './HistoryPage'
 
 describe('given History component', () => {
   describe('when trying to render the History component', () => {

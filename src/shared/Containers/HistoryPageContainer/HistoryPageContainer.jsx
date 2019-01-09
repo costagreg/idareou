@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import HistoryPage from '../../Pages/HistoryPage'
 
-class HistoryPageContainer extends Component {
+export class HistoryPageContainer extends Component {
   render() {
     return <HistoryPage/>
   }
