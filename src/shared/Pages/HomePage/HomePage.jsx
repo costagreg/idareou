@@ -6,7 +6,7 @@ if(process.browser) {
 
 const HomePage = () =>
   <div className="homepage">
-    <h1 className="homepage__title"> Home Page</h1>
+    <h1 className="homepage__title">Home Page</h1>
   </div>
 
 export default HomePage
