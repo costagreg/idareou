@@ -10,13 +10,9 @@ describe('@TextInput', () => {
     expect(component.find('input').exists()).toBe(true)
     expect(component.find('input').prop('type')).toBe('text')
   })
-  it('renders state.value as value of the input', () => {
-    const component = shallow(<TextInput type='text' />)
-  
-  })
   describe('passing type as password', () => {
     it('renders a password input', () => {
-      const component = shallow(<TextInput type='password'/>)
+      const component = shallow(<TextInput type='password' />)
 
       expect(component.find('input').exists()).toBe(true)
       expect(component.find('input').prop('type')).toBe('password')
@@ -24,7 +20,7 @@ describe('@TextInput', () => {
   })
   describe('passing type as email', () => {
     it('renders a email input', () => {
-      const component = shallow(<TextInput type='email'/>)
+      const component = shallow(<TextInput type='email' />)
 
       expect(component.find('input').exists()).toBe(true)
       expect(component.find('input').prop('type')).toBe('email')
@@ -32,33 +28,51 @@ describe('@TextInput', () => {
   })
   describe('passing an icon as parameter', () => {
     it('renders a fontawesome icon ', () => {
-      const mockicon = 'mockicon'
-      const component = shallow(<TextInput type='text' icon={mockicon}/>)
+      const iconMock = 'iconMock'
+      const component = shallow(<TextInput type='text' icon={iconMock} />)
 
-      expect(component.find(`.fa-${mockicon}`).exists()).toBe(true)
+      expect(component.find(`.fa-${iconMock}`).exists()).toBe(true)
     })
   })
   describe('passing error as parameter', () => {
     it('adds the error class to the element', () => {
-      const component = shallow(<TextInput type='text' error='mockerror'/>)
+      const component = shallow(<TextInput type='text' error='errorMock' />)
 
       expect(component.find('.error').exists()).toBe(true)
     })
   })
   describe('passing placeholder as parameter', () => {
     it('renders a placeholder', () => {
-      const mockplaceholder = 'mockplaceholder'
-      const component = shallow(<TextInput placeholder={mockplaceholder}/>)
-      
-      expect(component.find('input').prop('placeholder')).toBe(mockplaceholder)
+      const placeholderMock = 'placeholderMock'
+      const component = shallow(<TextInput placeholder={placeholderMock} />)
+
+      expect(component.find('input').prop('placeholder')).toBe(placeholderMock)
     })
   })
   describe('passing name as parameter', () => {
     it('adds the name parameter to the element', () => {
-      const mockname = 'mockname'
-      const component = shallow(<TextInput name={mockname}/>)
+      const nameMock = 'nameMock'
+      const component = shallow(<TextInput name={nameMock} />)
 
-      expect(component.find('input').prop('name')).toBe(mockname)
+      expect(component.find('input').prop('name')).toBe(nameMock)
+    })
+  })
+  describe('passing value as parameter', () => {
+    it('adds the value parameter to the element', () => {
+      const valueMock = 'valueMock'
+      const component = shallow(<TextInput value={valueMock} />)
+
+      expect(component.find('input').prop('value')).toBe(valueMock)
+    })
+  })
+  describe('onChange', () => {
+    it('triggers the updateValue function passed', () => {
+      const funcMock = jest.fn()
+      const component = shallow(<TextInput updateValue={funcMock} />)
+
+      component.find('input').simulate('change', { target: { value: '' } })
+
+      expect(funcMock).toHaveBeenCalled()
     })
   })
 })
