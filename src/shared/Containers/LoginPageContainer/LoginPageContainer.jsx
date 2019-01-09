@@ -6,8 +6,8 @@ import { Button } from '../../Components/Common/Button'
 
 export const LoginPageContainer = () =>
   <FormContainer>
-    <TextInput name='Email' placeholder='Email' />
-    <TextInput type='password' name='Password' placeholder='Password' />
+    <TextInput name='email' placeholder='Email' />
+    <TextInput type='password' name='password' placeholder='Password' />
     <Button>Log in</Button>
   </FormContainer>
 
