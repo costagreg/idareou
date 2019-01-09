@@ -1,5 +1,6 @@
 import HomePage from '../../Pages/HomePage'
 import HistoryPageContainer from '../../Containers/HistoryPageContainer'
+import BetPage from '../../Pages/BetPage'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     Component: HistoryPageContainer,
     path: '/history',
     name: 'History'
+  }, {
+    Component: BetPage,
+    path: '/bet',
+    exact: true,
+    name: 'BetPage'
   }
 ]
 

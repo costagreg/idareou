@@ -5,8 +5,8 @@ if (process.browser) {
   require('./PageTitle.scss')
 }
 
-const PageTitle = ({ title }) => (
-  <h2 className='PageTitle'>{title}</h2>
+const PageTitle = ({ children }) => (
+  <h2 className='PageTitle'>{children}</h2>
 )
 
 PageTitle.propTypes = {
