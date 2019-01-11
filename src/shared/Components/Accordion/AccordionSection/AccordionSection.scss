@@ -24,10 +24,10 @@
     width: 15px;
     height: 15px;
     border-radius: 50px;
-    &.success {
+    &--success {
       background: $green;
     }
-    &.fail {
+    &--fail {
       background: $red;
     }
   }
@@ -48,11 +48,11 @@
     }
 
     &__options {
-      &.success {
+      &--success {
         font-weight: bold;
         color: $green;
       }
-      &.fail {
+      &--fail {
         font-weight: bold;
         color: $red;
       }
@@ -78,7 +78,7 @@
     font-size: 20px;
     transition: transform 0.2s ease-in-out;
 
-    &.selected {
+    &--selected {
       transform: rotate(-90deg)
     }
   }

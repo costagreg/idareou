@@ -25,9 +25,9 @@ const AccordionSection = ({
 
   return <div className="accordionsection">
     <div className="accordionsection__header" onClick={() => onSelectSection(id, cardRef)}>
-      <span className={`accordionsection__state ${state}`}></span>
+      <span className={`accordionsection__state accordionsection__state--${state}`}></span>
       <span className="accordionsection__title">{title}</span>
-      <i className={classNames('fa fa-angle-left', 'arrow', { selected: sectionSelected === id })}></i>
+      <i className={classNames('fa fa-angle-left', 'arrow', { 'arrow--selected': sectionSelected === id })}></i>
     </div>
     <div
       ref={ref => cardRef = ref}
@@ -44,7 +44,7 @@ const AccordionSection = ({
           options.map(({ opt, choosen }, index) =>
             <li
               key={index}
-              className={classNames('card__options', { success: choosen && state === 'success', fail: choosen && state === 'fail' })}
+              className={classNames('card__options', { 'card__options--success': choosen && state === 'success', 'card__options--fail': choosen && state === 'fail' })}
             >
               {opt}
             </li>)
