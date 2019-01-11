@@ -10,16 +10,10 @@ const AccordionSection = ({
   id,
   title,
   state,
-  body: {
-    description,
-    amount,
-    currency,
-    options,
-    participants
-  },
   sectionSelected,
   onSelectSection,
-  currentHeight
+  currentHeight,
+  children
 }) => {
   let cardRef = undefined
 
@@ -34,33 +28,7 @@ const AccordionSection = ({
       className="card"
       style={{ maxHeight: sectionSelected === id && currentHeight ? `${currentHeight}px` : 0 }}
     >
-      <div className="card__section card_description">{description}</div>
-      <hr/>
-      <div className="card__section card__amount">{currency + amount}</div>
-      <hr/>
-      <div className="card__section">
-        <ul>
-        {
-          options.map(({ opt, choosen }, index) =>
-            <li
-              key={index}
-              className={classNames('card__options', { 'card__options--success': choosen && state === 'success', 'card__options--fail': choosen && state === 'fail' })}
-            >
-              {opt}
-            </li>)
-          }
-        </ul>
-      </div>
-      <hr/>
-      { participants &&
-        <div className="card__section">
-          <ul>
-            {
-              participants.map(person => <li key={person} className="card__participants">{person}</li>)
-            }
-          </ul>
-        </div>
-      }
+      { children }
     </div>
   </div>
 }
@@ -69,13 +37,7 @@ AccordionSection.propTypes = {
   id: Proptypes.string.isRequired,
   title: Proptypes.string.isRequired,
   state: Proptypes.string.isRequired,
-  body: Proptypes.shape({
-    description: Proptypes.string.isRequired,
-    amount: Proptypes.number.isRequired,
-    currency: Proptypes.string.isRequired,
-    options: Proptypes.array.isRequired,
-    participants: Proptypes.array
-  }),
+  children: Proptypes.node.isRequired,
   sectionSelected: Proptypes.string,
   onSelectSection: Proptypes.func.isRequired,
   currentHeight: Proptypes.number

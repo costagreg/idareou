@@ -28,25 +28,33 @@ class Accordion extends Component {
   }
 
   render() {
-    const { bets = [] } = this.props
+    const { sections = [] } = this.props
 
     return <div className="accordion">
       {
-        bets.map(bet =>
+        sections.map(section =>
           <AccordionSection
-            key={bet.id}
-            {...bet}
+            key={section.id}
+            id={section.id}
+            title={section.title}
+            state={section.state}
             onSelectSection={this.onSelectSection}
             sectionSelected={this.state.sectionSelected}
             currentHeight={this.state.currentHeight}
-            />)
+          >
+            {
+              React.Children.map(this.props.children, child =>
+                React.cloneElement(child, { ...section }))
+            }
+          </AccordionSection>)
       }
     </div>
   }
 }
 
-AccordionSection.propTypes = {
-  bets: Proptypes.array
+Accordion.propTypes = {
+  sections: Proptypes.array,
+  children: Proptypes.node.isRequired
 }
 
 export default Accordion

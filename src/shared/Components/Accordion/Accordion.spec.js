@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import Accordion from './Accordion'
 
-const mockBets = [
+const mockSections = [
   { id: '0' },
   { id: '1' }
 ]
@@ -17,15 +17,15 @@ describe('given Accordion component', () => {
     })
     describe('when bets are passed', () => {
       it('should render an accordionSection per bet', () => {
-        const component = shallow(<Accordion bets={mockBets}/>)
+        const component = shallow(<Accordion sections={mockSections}/>)
         const { onSelectSection } = component.instance()
         const accordionSections = component.find('AccordionSection')
 
-        expect(accordionSections.length).toBe(mockBets.length)
+        expect(accordionSections.length).toBe(mockSections.length)
 
         accordionSections.forEach((section, index) => {
           expect(section.props()).toEqual({
-            id: mockBets[index].id,
+            id: mockSections[index].id,
             onSelectSection,
             sectionSelected: null,
             currentHeight: 0
@@ -43,7 +43,7 @@ describe('given Accordion component', () => {
                 scrollHeight: 10
               }
             }
-            const newInstance = shallow(<Accordion bets={mockBets}/>).instance()
+            const newInstance = shallow(<Accordion sections={mockSections}/>).instance()
             expect(newInstance.state).toEqual({
               currentHeight: 0,
               sectionSelected: null
@@ -65,7 +65,7 @@ describe('given Accordion component', () => {
                 scrollHeight: 10
               }
             }
-            const newInstance = shallow(<Accordion bets={mockBets}/>).instance()
+            const newInstance = shallow(<Accordion sections={mockSections}/>).instance()
             expect(newInstance.state).toEqual({
               currentHeight: 0,
               sectionSelected: null
