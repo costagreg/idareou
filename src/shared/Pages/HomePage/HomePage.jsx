@@ -1,12 +1,14 @@
 import React from 'react'
 
-if(process.browser) {
+import { PageTitle } from '../../Components/Common/PageTitle'
+
+if (process.browser) {
   require('./HomePage.scss')
 }
 
 const HomePage = () =>
-  <div className="homepage">
-    <h1 className="homepage__title">Home Page</h1>
+  <div className="Homepage">
+    <PageTitle className="Homepage__title">HomePage</PageTitle>
   </div>
 
 export default HomePage
