@@ -1,12 +1,12 @@
 import express from 'express'
 import path from 'path'
-import proxy from 'http-proxy-middleware'
+// import proxy from 'http-proxy-middleware'
 
 import routes from './routes'
 
 const app = express()
 
-//Proxy
+// Proxy
 // app.use('/api', proxy(
 //   {
 //     target: process.env.ENV !== 'prod' ? process.env.API_URL : process.env.API_URL,
@@ -26,11 +26,11 @@ app.use('/assets', express.static(path.resolve(__dirname, '../../assets')))
 // User this ./dist because the publicPath is required in expressMiddleware
 app.use('/dist', express.static(path.resolve(__dirname, '../../dist')))
 
-//Routes
+// Routes
 routes(app)
 
 // Catch any error
-app.use((err, req, res, next) => {
+app.use((err, req, res, _) => {
   res.status(500).send('Something broke!')
 })
 
