@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PageTitle } from '../../Components/Common/PageTitle'
+import { PageTitle } from 'Components/Common/PageTitle'
 
 if (process.browser) {
   require('./HomePage.scss')

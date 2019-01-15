@@ -28,6 +28,9 @@ export default {
     new webpack.IgnorePlugin(/\.s?css$/)
   ],
   resolve: {
-    extensions: ['.js', '.json', '.jsx'] //Add this in order to dont indicate the extension when import it
+    extensions: ['.js', '.json', '.jsx'],
+    alias: {
+      styles: path.resolve(__dirname, './src/styles/')
+    }
   }
 }

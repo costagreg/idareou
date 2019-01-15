@@ -4,7 +4,7 @@ import routes from './routes'
 import HeaderContainer from '../Containers/HeaderContainer'
 
 if (process.browser) {
-  require('../../styles/global.scss')
+  require('styles/global.scss')
 }
 
 const AppRouter = () => {

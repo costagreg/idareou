@@ -1,6 +1,6 @@
 import React from 'react'
-import BetPageContainer from '../../Containers/BetPageContainer'
-import { PageTitle } from '../../Components/Common/PageTitle'
+import { PageTitle } from 'Components/Common/PageTitle'
+import BetPageContainer from 'Containers/BetPageContainer'
 
 if(process.browser) {
   require('./BetPage.scss')

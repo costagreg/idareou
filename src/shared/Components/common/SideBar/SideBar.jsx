@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import UserProfileCard from '../../UserProfileCard'
+import UserProfileCard from 'Components/UserProfileCard'
 
 if(process.browser) {
   require('./SideBar.scss')

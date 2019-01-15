@@ -9,6 +9,18 @@
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-destructuring",
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "Components": "./src/shared/Components",
+        "Containers": "./src/shared/Containers",
+        "shared": "./src/shared/",
+        "helpers": "./src/shared/helpers/",
+        "server": "./src/server/",
+        "styles": "./src/styles/",
+        "dist": "./dist/"
+      }
+    }]
   ]
 }
