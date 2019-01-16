@@ -16,7 +16,7 @@ const TextInput = ({ name, type, icon, error, placeholder, value, updateValue, r
       placeholder={placeholder}
       value={value}
       required={required}
-      onChange={(e) => { updateValue(name, e.target.value)}}
+      onChange={e => { updateValue(name, e.target.value, false)}}
     />
   </div>
 )

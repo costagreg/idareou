@@ -2,14 +2,38 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class FormContainer extends Component {
-  updateValue = (name, value) => {
-    this.setState({ [name]: value })
+  state = {}
+
+  updateValue = (name, value, error) => {
+    this.setState({ [name]: {
+      value,
+      error
+    } })
+  }
+
+  isConfirmSuccess({ name, value, type }) {
+    if(name !== 'confirm') return true
+
+    return this.state[type].value === value
+  }
+
+  itHasErrors = listOfElements => {
+    const arrayOfElements = Array.from(listOfElements)
+
+    return !!arrayOfElements.reduce((errors, element) => {
+      if(element.name && element.name.length > 0) {
+        const error = element.checkValidity() && this.isConfirmSuccess(element) ? 0 : 1
+        errors += error
+        this.updateValue(element.name, element.value, !!error)
+      }
+      return errors
+    }, 0)
   }
 
   onSubmit = (event) => {
     event.preventDefault()
 
-    if(this.props.onSubmit) {
+    if(this.props.onSubmit && !this.itHasErrors(event.target.elements)) {
       this.props.onSubmit(this.state)
     }
   }
@@ -17,12 +41,13 @@ class FormContainer extends Component {
   render() {
     const { children } = this.props
 
-    return <form className='FormContainer' onSubmit={this.onSubmit}>
+    return <form className='FormContainer' onSubmit={this.onSubmit} noValidate>
       {React.Children.map(children, (child) => {
         const { props: { name: inputName, value: inputValue } } = child
         return React.cloneElement(child, {
           updateValue: this.updateValue,
-          value: inputName && this.state && this.state[inputName] || inputValue
+          value: inputName && (this.state[inputName] || {}).value || inputValue,
+          error: inputName && (this.state[inputName] || {}).error
         })
       })}
     </form>

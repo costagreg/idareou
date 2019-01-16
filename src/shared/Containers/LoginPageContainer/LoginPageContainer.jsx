@@ -6,8 +6,8 @@ import { FormContainer } from '../FormContainer'
 
 export const LoginPageContainer = () =>
   <FormContainer>
-    <TextInput name='email' placeholder='Email' />
-    <TextInput type='password' name='password' placeholder='Password' />
+    <TextInput type='email' name='email' placeholder='Email' required/>
+    <TextInput type='password' name='password' placeholder='Password' required/>
     <Button>Log in</Button>
   </FormContainer>
 

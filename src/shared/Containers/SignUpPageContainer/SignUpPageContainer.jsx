@@ -12,10 +12,10 @@ class SignUpPageContainer extends Component {
   render() {
     return (
       <FormContainer onSubmit={this.checkAndSaveData}>
-        <TextInput type='text' name='username' placeholder='Username' icon='user' required/>
+        <TextInput type='text' name='firstname' placeholder='Username' icon='user' required/>
         <TextInput type='email' name='email' placeholder='Email' icon='at' required/>
         <TextInput type='password' name='password' placeholder='Password' icon='unlock-alt' required/>
-        <TextInput type='password' name='confirm' placeholder='Confirm' icon='unlock-alt' compareWith='password' required/>
+        <TextInput type='password' name='confirm' placeholder='Confirm' icon='unlock-alt' required/>
         <TextInput type='text' name='monzouser' placeholder='Monzouser' icon='credit-card' required/>
         <Button>Submit</Button>
       </FormContainer>
