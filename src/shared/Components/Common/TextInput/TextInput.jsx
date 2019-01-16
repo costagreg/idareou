@@ -7,12 +7,12 @@ if (process.browser) {
 }
 
 const TextInput = ({ name, type, icon, error, placeholder, value, updateValue, required = false }) => (
-  <div className='TextInput'>
-    {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`)}></i>}
+  <div className={classNames('TextInput', { 'TextInput--error': error })}>
+    {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error })}></i>}
     <input
       name={name}
       type={type}
-      className={classNames('TextInput__Input', { error })}
+      className='TextInput__Input'
       placeholder={placeholder}
       value={value}
       required={required}
@@ -25,7 +25,7 @@ TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(['email', 'password', 'text']),
   icon: PropTypes.string,
-  error: PropTypes.string,
+  error: PropTypes.bool,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func,

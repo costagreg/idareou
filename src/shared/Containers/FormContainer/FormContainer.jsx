@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-if (process.browser) {
-  require('./FormContainer.scss')
-}
-
 class FormContainer extends Component {
   updateValue = (name, value) => {
     this.setState({ [name]: value })
