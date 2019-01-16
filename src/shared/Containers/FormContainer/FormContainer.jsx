@@ -10,8 +10,10 @@ class FormContainer extends Component {
     this.setState({ [name]: value })
   }
 
-  onSubmit = () => {
-    if (this.props.onSubmit) {
+  onSubmit = (event) => {
+    event.preventDefault()
+
+    if(this.props.onSubmit) {
       this.props.onSubmit(this.state)
     }
   }
