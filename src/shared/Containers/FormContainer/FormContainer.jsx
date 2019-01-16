@@ -10,8 +10,10 @@ class FormContainer extends Component {
     this.setState({ [name]: value })
   }
 
-  onSubmit = () => {
-    if (this.props.onSubmit) {
+  onSubmit = (event) => {
+    event.preventDefault()
+
+    if(this.props.onSubmit) {
       this.props.onSubmit(this.state)
     }
   }
@@ -19,7 +21,7 @@ class FormContainer extends Component {
   render() {
     const { children } = this.props
 
-    return <form className='FormContainer' onSubmit={this.onSubmit}>
+    return <form className='FormContainer' onSubmit={event => this.onSubmit(event)}>
       {React.Children.map(children, (child) => {
         const { props: { name: inputName, value: inputValue } } = child
         return React.cloneElement(child, {
