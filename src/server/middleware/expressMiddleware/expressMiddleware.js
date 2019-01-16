@@ -2,8 +2,8 @@ import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 
-import clienWebpack from '../../../../webpack.config'
-import serverWebpack from '../../../../webpack.config.server'
+import clienWebpack from '~root/webpack.config'
+import serverWebpack from '~root/webpack.config.server'
 
 export default app => {
   const clientConfig = clienWebpack()

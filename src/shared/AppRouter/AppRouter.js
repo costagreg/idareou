@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import HeaderContainer from '~Containers/HeaderContainer'
 import routes from './routes'
-import HeaderContainer from '../Containers/HeaderContainer'
 
 if (process.browser) {
   require('styles/global.scss')

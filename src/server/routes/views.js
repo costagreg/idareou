@@ -1,4 +1,4 @@
-import { getAppRouter } from '../controllers/viewsController'
+import { getAppRouter } from '~controllers/viewsController'
 
 export const views = app => {
   // VIEWS

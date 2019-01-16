@@ -13,13 +13,19 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "Components": "./src/shared/Components",
-        "Containers": "./src/shared/Containers",
-        "shared": "./src/shared/",
-        "helpers": "./src/shared/helpers/",
-        "server": "./src/server/",
-        "styles": "./src/styles/",
-        "dist": "./dist/"
+        "~Components": "./src/shared/Components",
+        "~common": "./src/shared/Components/common",
+        "~Containers": "./src/shared/Containers",
+        "~controllers": "./src/server/controllers",
+        "~shared": "./src/shared",
+        "~helpers": "./src/shared/helpers",
+        "~Pages": "./src/shared/Pages",
+        "~AppRouter": "./src/shared/AppRouter",
+        "~server": "./src/server",
+        "~styles": "./src/styles",
+        "~dist": "./dist",
+        "~assets": "./assets",
+        "~root": "./"
       }
     }]
   ]

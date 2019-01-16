@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Accodion from 'Components/Accordion'
-import BetCard from 'Components/BetCard'
+import Accodion from '~Components/Accordion'
+import BetCard from '~Components/BetCard'
 
 const DUMMYBETS = [
   {

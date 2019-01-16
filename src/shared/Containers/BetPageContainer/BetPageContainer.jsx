@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { TextInput } from 'Components/Common/TextInput'
-import { TextArea } from 'Components/Common/TextArea'
-import { AmountInput } from 'Components/Common/AmountInput'
-import { TextCheckBox } from 'Components/Common/TextCheckBox'
-import { Button } from 'Components/Common/Button'
+import { TextInput } from '~Components/Common/TextInput'
+import { TextArea } from '~Components/Common/TextArea'
+import { AmountInput } from '~Components/Common/AmountInput'
+import { TextCheckBox } from '~Components/Common/TextCheckBox'
+import { Button } from '~Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export const BetPageContainer = () =>
