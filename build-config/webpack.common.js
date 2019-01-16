@@ -48,7 +48,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      styles: path.resolve(__dirname, './../src/styles/')
+      styles: path.resolve(__dirname, './../src/styles')
     }
   },
   plugins: [

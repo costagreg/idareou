@@ -79,7 +79,9 @@
     "verbose": true,
     "setupTestFrameworkScriptFile": "./test/setUpTests.js",
     "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "<rootDir>/test/cssStub.js"
+      "^.+\\.(css|scss)$": "<rootDir>/test/cssStub.js",
+      "^~test(.*)$": "<rootDir>/test$1",
+      "^~helpers(.*)$": "<rootDir>/src/shared/helpers$1"
     }
   }
 }

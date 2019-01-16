@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import BetCard from './BetCard'
 
-import bets from '../../../../test/globalMocks/bets'
+import bets from '~test/globalMocks/bets'
 
 describe('given BetCard component', () => {
   const props = {
