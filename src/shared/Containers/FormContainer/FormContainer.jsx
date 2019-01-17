@@ -12,7 +12,7 @@ class FormContainer extends Component {
   }
 
   isConfirmSuccess({ name, value, type }) {
-    if(name !== 'confirm') return true
+    if(name !== 'confirmPassword' || name !== 'confirmEmail') return true
 
     return this.state[type].value === value
   }
@@ -24,7 +24,7 @@ class FormContainer extends Component {
       if(element.name && element.name.length > 0) {
         const error = element.checkValidity() && this.isConfirmSuccess(element) ? 0 : 1
         errors += error
-        this.updateValue(element.name, element.value, !!error)
+        this.updateValue(element.name, element.value, !!error ? 'error' : 'success')
       }
       return errors
     }, 0)

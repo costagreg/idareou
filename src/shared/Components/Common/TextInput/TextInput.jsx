@@ -6,9 +6,20 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
-const TextInput = ({ name, type, icon, error, placeholder, value, updateValue, required = false }) => (
-  <div className={classNames('TextInput', { 'TextInput--error': error })}>
-    {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error })}></i>}
+const TextInput = ({
+  name,
+  type,
+  icon,
+  error,
+  placeholder,
+  value,
+  updateValue,
+  required = false,
+  pattern
+}) => (
+  <div className={classNames('TextInput', { 'TextInput--error': error === 'error', 'TextInput--success': error === 'success' })}>
+    { icon &&
+      <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error === 'error' }, { 'TextInput__Icon--success': error === 'success' })}></i>}
     <input
       name={name}
       type={type}
@@ -16,7 +27,8 @@ const TextInput = ({ name, type, icon, error, placeholder, value, updateValue, r
       placeholder={placeholder}
       value={value}
       required={required}
-      onChange={e => { updateValue(name, e.target.value, false)}}
+      pattern={pattern}
+      onChange={e => { updateValue(name, e.target.value, '')}}
     />
   </div>
 )
@@ -25,11 +37,12 @@ TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(['email', 'password', 'text']),
   icon: PropTypes.string,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  pattern: PropTypes.string
 }
 
 TextInput.defaultProps = {

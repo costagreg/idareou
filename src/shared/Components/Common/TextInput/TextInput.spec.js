@@ -34,13 +34,6 @@ describe('@TextInput', () => {
       expect(component.find(`.fa-${iconMock}`).exists()).toBe(true)
     })
   })
-  describe('passing error as parameter', () => {
-    it('adds the error class to the element', () => {
-      const component = shallow(<TextInput type='text' error='errorMock' />)
-
-      expect(component.find('.error').exists()).toBe(true)
-    })
-  })
   describe('passing placeholder as parameter', () => {
     it('renders a placeholder', () => {
       const placeholderMock = 'placeholderMock'
@@ -63,6 +56,47 @@ describe('@TextInput', () => {
       const component = shallow(<TextInput value={valueMock} />)
 
       expect(component.find('input').prop('value')).toBe(valueMock)
+    })
+  })
+  describe('passing required as parameter', () => {
+    it('adds the value parameter to the element', () => {
+      const component = shallow(<TextInput required />)
+
+      expect(component.find('input').prop('required')).toBe(true)
+    })
+  })
+  describe('passing required as parameter', () => {
+    it('adds the value parameter to the element', () => {
+      const pattern = '[A-Z]'
+      const component = shallow(<TextInput pattern={pattern} />)
+
+      expect(component.find('input').prop('pattern')).toBe(pattern)
+    })
+  })
+  describe('when passing error as a parameter', () => {
+    describe('and error is error', () => {
+      const component = shallow(<TextInput error='error' icon='at' />)
+
+      it('should render the class TextInput--error', () => {
+        expect(component.find('.TextInput--error').length).toBe(1)
+        expect(component.find('.TextInput--success').length).toBe(0)
+      })
+      it('should render the class TextInput__Icon--error', () => {
+        expect(component.find('.TextInput__Icon--error').length).toBe(1)
+        expect(component.find('.TextInput__Icon--success').length).toBe(0)
+      })
+    })
+    describe('and error is success', () => {
+      const component = shallow(<TextInput error='success' icon='at' />)
+
+      it('should render the class TextInput--error', () => {
+        expect(component.find('.TextInput--success').length).toBe(1)
+        expect(component.find('.TextInput--error').length).toBe(0)
+      })
+      it('should render the class TextInput__Icon--error', () => {
+        expect(component.find('.TextInput__Icon--success').length).toBe(1)
+        expect(component.find('.TextInput__Icon--error').length).toBe(0)
+      })
     })
   })
   describe('onChange', () => {

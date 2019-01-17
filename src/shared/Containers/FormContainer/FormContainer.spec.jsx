@@ -4,7 +4,10 @@ import React from 'react'
 import FormContainer from './FormContainer'
 
 const mockEvents = {
-  preventDefault: jest.fn()
+  preventDefault: jest.fn(),
+  target: {
+    elements: []
+  }
 }
 
 describe('FormContainer', () => {
