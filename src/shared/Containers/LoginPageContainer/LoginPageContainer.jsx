@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { TextInput } from '~Components/Common/TextInput'
-import { Button } from '~Components/Common/Button'
+import { TextInput } from '~src/shared/Components/Common/TextInput'
+import { Button } from '~src/shared/Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export const LoginPageContainer = () =>

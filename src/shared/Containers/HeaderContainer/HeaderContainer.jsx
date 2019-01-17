@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import Header from '~Components/Header'
+import Header from '~src/shared/Components/Header'
 import Consumer from '../ContextContainer'
-import routes from '~AppRouter/routes'
+import routes from '~src/shared/AppRouter/routes'
 
 export class HeaderContainer extends Component {
   state = {

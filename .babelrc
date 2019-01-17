@@ -13,16 +13,7 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "~Components": "./src/shared/Components",
-        "~common": "./src/shared/Components/common",
-        "~Containers": "./src/shared/Containers",
-        "~controllers": "./src/server/controllers",
-        "~shared": "./src/shared",
-        "~helpers": "./src/shared/helpers",
-        "~Pages": "./src/shared/Pages",
-        "~AppRouter": "./src/shared/AppRouter",
-        "~server": "./src/server",
-        "~styles": "./src/styles",
+        "~src": "./src",
         "~dist": "./dist",
         "~assets": "./assets",
         "~root": "./"

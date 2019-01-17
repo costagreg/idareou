@@ -30,7 +30,7 @@ export default {
   resolve: {
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      styles: path.resolve(__dirname, './src/styles/')
+      src: path.resolve(__dirname, './src')
     }
   }
 }

@@ -1,4 +1,4 @@
-import HTMLTransformer from '~server/helpers/HTMLTransformer'
+import HTMLTransformer from '~src/server/helpers/HTMLTransformer'
 import ssr from './ssr'
 
 export const getAppRouter = async (req, res) => {

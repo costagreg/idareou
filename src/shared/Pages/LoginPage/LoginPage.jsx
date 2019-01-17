@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PageTitle } from '~Components/Common/PageTitle'
-import { LoginPageContainer } from '~Containers/LoginPageContainer'
+import { PageTitle } from '~src/shared/Components/Common/PageTitle'
+import { LoginPageContainer } from '~src/shared/Containers/LoginPageContainer'
 
 if(process.browser) {
   require('./LoginPage.scss')

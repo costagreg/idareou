@@ -1,7 +1,7 @@
-import HomePage from '~Pages/HomePage'
-import HistoryPageContainer from '~Containers/HistoryPageContainer'
-import BetPage from '~Pages/BetPage'
-import LoginPage from '~Pages/LoginPage'
+import HomePage from '~src/shared/Pages/HomePage'
+import HistoryPageContainer from '~src/shared/Containers/HistoryPageContainer'
+import BetPage from '~src/shared/Pages/BetPage'
+import LoginPage from '~src/shared/Pages/LoginPage'
 
 const routes = [
   {

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import HeaderContainer from '~Containers/HeaderContainer'
+import HeaderContainer from '~src/shared/Containers/HeaderContainer'
 import routes from './routes'
 
 if (process.browser) {

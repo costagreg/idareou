@@ -81,7 +81,7 @@
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "<rootDir>/test/cssStub.js",
       "^~test(.*)$": "<rootDir>/test$1",
-      "^~helpers(.*)$": "<rootDir>/src/shared/helpers$1"
+      "^~src$": "<rootDir>$1"
     }
   }
 }
