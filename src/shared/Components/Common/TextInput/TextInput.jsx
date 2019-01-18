@@ -6,7 +6,7 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
-const TextInput = ({ name, type, icon, error, placeholder, value, updateValue }) => (
+const TextInput = ({ name, type, icon, error, placeholder, value, updateValue, required = false }) => (
   <div className='TextInput'>
     {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`)}></i>}
     <input
@@ -15,6 +15,7 @@ const TextInput = ({ name, type, icon, error, placeholder, value, updateValue })
       className={classNames('TextInput__Input', { error })}
       placeholder={placeholder}
       value={value}
+      required={required}
       onChange={(e) => { updateValue(name, e.target.value)}}
     />
   </div>
@@ -27,7 +28,8 @@ TextInput.propTypes = {
   error: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  updateValue: PropTypes.func
+  updateValue: PropTypes.func,
+  required: PropTypes.bool
 }
 
 TextInput.defaultProps = {

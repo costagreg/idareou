@@ -1,9 +1,16 @@
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import FormContainer from './FormContainer'
 
+const mockEvents = {
+  preventDefault: jest.fn()
+}
+
 describe('FormContainer', () => {
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('renders a html form', () => {
     const component = shallow(<FormContainer />)
 
@@ -19,9 +26,10 @@ describe('FormContainer', () => {
       const mockCall = jest.fn()
       const component = shallow(<FormContainer onSubmit={mockCall} />)
 
-      component.simulate('submit')
+      component.simulate('submit', mockEvents)
 
       expect(mockCall.mock.calls.length).toBe(1)
+      expect(mockEvents.preventDefault).toHaveBeenCalledTimes(1)
     })
   })
 })
