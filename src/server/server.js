@@ -21,10 +21,10 @@ if(process.env.ENV !== 'prod') {
 }
 
 // Assets
-app.use('/assets', express.static(path.resolve(__dirname, '../../assets')))
+app.use('/assets', express.static('~assets/'))
 
 // User this ./dist because the publicPath is required in expressMiddleware
-app.use('/dist', express.static(path.resolve(__dirname, '../../dist')))
+app.use('/dist', express.static('~dist'))
 
 // Routes
 routes(app)

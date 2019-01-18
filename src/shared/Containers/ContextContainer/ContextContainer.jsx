@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import deviceTypes from '../../helpers/deviceTypes'
-import debouncer from '../../helpers/debouncer'
+import deviceTypes from '~src/shared/helpers/deviceTypes'
+import debouncer from '~src/shared/helpers/debouncer'
 
 const { Provider, Consumer } = React.createContext()
 

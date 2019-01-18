@@ -9,6 +9,15 @@
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-destructuring",
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "~src": "./src",
+        "~dist": "./dist",
+        "~assets": "./assets",
+        "~root": "./"
+      }
+    }]
   ]
 }

@@ -46,7 +46,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx']
+    extensions: ['.js', '.json', '.jsx'],
+    alias: {
+      src: path.resolve(__dirname, './../src')
+    }
   },
   plugins: [
     new HTMLWebpackPlugin({

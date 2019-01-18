@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import Consumer, { ContextContainer } from './ContextContainer'
 
-import deviceTypes from '../../helpers/deviceTypes'
+import deviceTypes from '~src/shared/helpers/deviceTypes'
 
 const MockChild = () => <div>child</div>
 

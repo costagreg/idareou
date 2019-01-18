@@ -36,6 +36,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-eslint": "^10.0.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
@@ -78,7 +79,9 @@
     "verbose": true,
     "setupTestFrameworkScriptFile": "./test/setUpTests.js",
     "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "<rootDir>/test/cssStub.js"
+      "^.+\\.(css|scss)$": "<rootDir>/test/cssStub.js",
+      "^~test(.*)$": "<rootDir>/test$1",
+      "^~src$": "<rootDir>$1"
     }
   }
 }
