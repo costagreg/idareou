@@ -11,10 +11,10 @@ class FormContainer extends Component {
     } })
   }
 
-  isConfirmSuccess({ name, value, type }) {
-    if(name !== 'confirmPassword' || name !== 'confirmEmail') return true
-
-    return this.state[type].value === value
+  isConfirmSuccess = ({ name, value, type }) => {
+    return name === 'confirmPassword' || name === 'confirmEmail'
+      ? this.state[type].value === value
+      : true
   }
 
   itHasErrors = listOfElements => {
