@@ -6,17 +6,29 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
-const TextInput = ({ name, type, icon, error, placeholder, value, updateValue, required = false }) => (
-  <div className='TextInput'>
-    {icon && <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`)}></i>}
+const TextInput = ({
+  name,
+  type,
+  icon,
+  error,
+  placeholder,
+  value,
+  updateValue,
+  required = false,
+  pattern
+}) => (
+  <div className={classNames('TextInput', { 'TextInput--error': error === 'error', 'TextInput--success': error === 'success' })}>
+    { icon &&
+      <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error === 'error' }, { 'TextInput__Icon--success': error === 'success' })}></i>}
     <input
       name={name}
       type={type}
-      className={classNames('TextInput__Input', { error })}
+      className='TextInput__Input'
       placeholder={placeholder}
       value={value}
       required={required}
-      onChange={(e) => { updateValue(name, e.target.value)}}
+      pattern={pattern}
+      onChange={e => { updateValue(name, e.target.value, '')}}
     />
   </div>
 )
@@ -29,7 +41,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  pattern: PropTypes.string
 }
 
 TextInput.defaultProps = {

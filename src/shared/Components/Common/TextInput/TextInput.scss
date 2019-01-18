@@ -8,8 +8,22 @@
   padding: 5px;
   margin: 20px 0;
   overflow: hidden;
+  transition: border .3s ease-in-out;
+  &--error {
+    border: 1px solid $darkred;
+  }
+  &--success {
+    border: 1px solid $darkgreen;
+  }
   &__Icon{
     margin:0 10px;
+    transition: color .3s ease-in-out;
+    &--error {
+      color: $darkred;
+    }
+    &--success {
+      color: $darkgreen;
+    }
   }
   &__Input{
     flex: 1;

@@ -23,7 +23,7 @@ TextArea.propTypes = {
   error: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  updateValue: PropTypes.func
 }
 
 export default TextArea
