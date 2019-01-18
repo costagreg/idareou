@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PageTitle } from '../../Components/Common/PageTitle'
-import SignUpPageContainer from '../../Containers/SignUpPageContainer'
+import { PageTitle } from '~src/shared/Components/Common/PageTitle'
+import SignUpPageContainer from '~src/shared/Containers/SignUpPageContainer'
 
 if(process.browser) {
   require('./SignUpPage.scss')

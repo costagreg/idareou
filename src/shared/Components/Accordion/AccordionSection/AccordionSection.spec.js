@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme'
 
 import AccordionSection from './AccordionSection'
 
-import bets from '../../../../../test/globalMocks/bets'
+import bets from '~test/globalMocks/bets'
 
 describe('given AccordionSection component', () => {
   const props = {
