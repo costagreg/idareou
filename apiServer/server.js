@@ -26,8 +26,8 @@ app.use('/graphql', expressGraphQL({
 
 // Catch any error
 app.use((err, req, res) => {
-  console.log(err)
-  res.send(500).send('Something broke in my API')
+  // console.log(err)
+  // res.status(500).send('Something broke in my API')
 })
 
 
