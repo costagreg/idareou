@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter, matchPath } from 'react-router'
 import { Provider } from 'react-redux'
 
-import configureStore from '~src/shared/redux/configureStore'
+import { configureStore } from '~src/shared/redux/configureStore'
 import AppRouter from '~src/shared/AppRouter'
 import routes from '~src/shared/AppRouter/routes'
 import { ContextContainer } from '~src/shared/Containers/ContextContainer'
@@ -30,6 +30,7 @@ export default async req => {
   const isDesktop = req.headers['user-agent'] && getDevice(req.headers['user-agent'])
 
   const store = configureStore({}, req)
+
   const promises = getNeedsByMatchedUrl(store, req.url)
 
   await Promise.all(promises)

@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
 
-const rootReducers = combineReducers({})
+import bets from './bets/bets'
+
+const rootReducers = combineReducers({
+  bets
+})
 
 export default rootReducers

@@ -5,7 +5,7 @@ import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 
 import AppRouter from './shared/AppRouter'
-import configureStore from './shared/redux/configureStore'
+import { configureStore } from './shared/redux/configureStore'
 import { ContextContainer } from './shared/Containers/ContextContainer'
 
 const { store, isDesktop } = window.__PRELOAD__STATE
