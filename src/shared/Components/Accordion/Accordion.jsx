@@ -10,21 +10,38 @@ if(process.browser) {
 class Accordion extends Component {
   state = {
     currentHeight: 0,
-    sectionSelected: null
+    sectionSelected: null,
+    cardRef: null
   }
 
   onSelectSection = (id, cardRef) => {
-    if(id === this.state.sectionSelected) {
+    if(id === this.state.sectionSelected && this.state.currentHeight === cardRef.scrollHeight) {
       this.setState({
         sectionSelected: null,
-        currentHeight: 0
+        currentHeight: 0,
+        cardRef: null
       })
     } else {
       this.setState({
         currentHeight: cardRef.scrollHeight,
-        sectionSelected: id
+        sectionSelected: id,
+        cardRef
       })
     }
+  }
+
+  resizeSection = () => {
+    if(this.state.sectionSelected) {
+      this.onSelectSection(this.state.sectionSelected, this.state.cardRef)
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resizeSection)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeSection)
   }
 
   render() {

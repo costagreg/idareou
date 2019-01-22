@@ -46,43 +46,50 @@ describe('given Accordion component', () => {
             const newInstance = shallow(<Accordion sections={mockSections}/>).instance()
             expect(newInstance.state).toEqual({
               currentHeight: 0,
-              sectionSelected: null
+              sectionSelected: null,
+              cardRef: null
             })
 
             newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
 
             expect(newInstance.state).toEqual({
               currentHeight: mockArguments.cardRef.scrollHeight,
-              sectionSelected: mockArguments.id
+              sectionSelected: mockArguments.id,
+              cardRef: mockArguments.cardRef
             })
           })
         })
         describe('when the section selected has not changed', () => {
-          it('should reset the state to the default one', () => {
-            const mockArguments = {
-              id: '0',
-              cardRef: {
-                scrollHeight: 10
+          describe('and the height is the same as saved', () => {
+            it('should reset the state to the default one', () => {
+              const mockArguments = {
+                id: '0',
+                cardRef: {
+                  scrollHeight: 10
+                }
               }
-            }
-            const newInstance = shallow(<Accordion sections={mockSections}/>).instance()
-            expect(newInstance.state).toEqual({
-              currentHeight: 0,
-              sectionSelected: null
-            })
-
-            newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
-
-            expect(newInstance.state).toEqual({
-              currentHeight: mockArguments.cardRef.scrollHeight,
-              sectionSelected: mockArguments.id
-            })
-
-            newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
-
-            expect(newInstance.state).toEqual({
-              currentHeight: 0,
-              sectionSelected: null
+              const newInstance = shallow(<Accordion sections={mockSections}/>).instance()
+              expect(newInstance.state).toEqual({
+                currentHeight: 0,
+                sectionSelected: null,
+                cardRef: null
+              })
+  
+              newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
+  
+              expect(newInstance.state).toEqual({
+                currentHeight: mockArguments.cardRef.scrollHeight,
+                sectionSelected: mockArguments.id,
+                cardRef: mockArguments.cardRef
+              })
+  
+              newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
+  
+              expect(newInstance.state).toEqual({
+                currentHeight: 0,
+                sectionSelected: null,
+                cardRef: null
+              })
             })
           })
         })

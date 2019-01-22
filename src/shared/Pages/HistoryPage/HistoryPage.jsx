@@ -1,57 +1,21 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Accodion from '~src/shared/Components/Accordion'
 import BetCard from '~src/shared/Components/BetCard'
 
-const DUMMYBETS = [
-  {
-    id: '0',
-    title: 'first bet',
-    description: 'Description my descripntion hahahaha',
-    amount: 10,
-    currency: '£',
-    options: [
-      {
-        opt: 'first',
-        choosen: true
-      },
-      {
-        opt: 'second choice',
-        choosen: false
-      }
-    ],
-    participants: ['jose', 'greg', 'myfriend'],
-    state: 'fail'
-  },
-  {
-    id: '1',
-    title: 'first bet',
-    description: 'Description my descripntion hahahaha',
-    amount: 10,
-    currency: '£',
-    options: [
-      {
-        opt: 'first',
-        choosen: true
-      },
-      {
-        opt: 'first',
-        choosen: false
-      }
-    ],
-    participants: ['jose', 'greg', 'myfriend'],
-    state: 'success'
-  }
-]
-
-const HistoryPage = () => {
+const HistoryPage = ({ bets }) => {
   return <div>
-    { DUMMYBETS &&
-      <Accodion sections={DUMMYBETS}>
+    { bets &&
+      <Accodion sections={bets}>
         <BetCard />
       </Accodion>
     }
   </div>
+}
+
+HistoryPage.propTypes = {
+  bets: PropTypes.array
 }
 
 export default HistoryPage

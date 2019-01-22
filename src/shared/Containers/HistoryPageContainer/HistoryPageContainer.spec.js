@@ -9,6 +9,7 @@ describe('given HistoryPageContainer component', () => {
       const component = shallow(<HistoryPageContainer />)
 
       expect(component.length).toBe(1)
+      expect(component.find('HistoryPage').length).toBe(1)
     })
   })
 })
