@@ -2,7 +2,7 @@ import express from 'express'
 import expressGraphQL from 'express-graphql'
 import dbConnection from './database/connection'
 import routes from './routes'
-import { User } from './graphql/schema'
+import { RootQuery } from './graphql/schema'
 
 const app = express()
 
@@ -20,7 +20,7 @@ routes(app)
 
 // GraphQL 
 app.use('/graphql', expressGraphQL({
-  schema: User,
+  schema: RootQuery,
   graphiql: true
 }))
 
