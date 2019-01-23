@@ -86,18 +86,6 @@ describe('@TextInput', () => {
         expect(component.find('.TextInput__Icon--success').length).toBe(0)
       })
     })
-    describe('and error is success', () => {
-      const component = shallow(<TextInput error='success' icon='at' />)
-
-      it('should render the class TextInput--error', () => {
-        expect(component.find('.TextInput--success').length).toBe(1)
-        expect(component.find('.TextInput--error').length).toBe(0)
-      })
-      it('should render the class TextInput__Icon--error', () => {
-        expect(component.find('.TextInput__Icon--success').length).toBe(1)
-        expect(component.find('.TextInput__Icon--error').length).toBe(0)
-      })
-    })
   })
   describe('onChange', () => {
     it('triggers the updateValue function passed', () => {
