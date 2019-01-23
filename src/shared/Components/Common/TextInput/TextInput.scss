@@ -1,19 +1,31 @@
 .TextInput {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   height: 40px;
-  border-radius: 3px;
-  border: 1px solid $grey;
+  border-bottom: 1px solid $grey;
   padding: 5px;
   margin: 20px 0;
   overflow: hidden;
-  transition: border .3s ease-in-out;
-  &--error {
-    border: 1px solid $darkred;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: width .3s ease-in-out;
   }
-  &--success {
-    border: 1px solid $darkgreen;
+
+  &--error {
+    border-bottom: transparent;
+    &::before {
+      content: '';
+      width: 100%;
+      border-bottom: 1px solid $red;
+    }
   }
   &__Icon{
     margin:0 10px;
