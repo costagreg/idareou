@@ -36,6 +36,17 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, args) {
         return User.create(args).then()
       }
+    },
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      async resolve(parentValue, { id }) {
+        const user = await User.findById(id)
+        await user.remove().then()
+        return user
+      }
     }
   }
 })
