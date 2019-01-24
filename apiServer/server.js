@@ -1,7 +1,8 @@
 import express from 'express'
 import expressGraphQL from 'express-graphql'
+import bodyParser from'body-parser'
+import cors from 'cors'
 import dbConnection from './database/connection'
-import routes from './routes'
 import { RootQuery } from './graphql/schema'
 
 const app = express()
@@ -15,21 +16,16 @@ const dbUrl = process.env.ENV !== 'prod'
 
 dbConnection(dbUrl)
 
-// Routes
-routes(app)
-
-// GraphQL 
+app.use(cors())
+app.use(bodyParser.json())
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
+})
 app.use('/graphql', expressGraphQL({
   schema: RootQuery,
   graphiql: true
 }))
-
-// Catch any error
-app.use((err, req, res) => {
-  // console.log(err)
-  // res.status(500).send('Something broke in my API')
-})
-
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)

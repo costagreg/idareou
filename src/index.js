@@ -16,7 +16,7 @@ const { store, isDesktop } = window.__PRELOAD__STATE
 
 const preloadState = configureStore(store)
 const client = new ApolloClient({
-  uri: 'http://localhost:3001'
+  uri: 'http://localhost:3001/graphql'
 })
 
 const render = (Component) => {
