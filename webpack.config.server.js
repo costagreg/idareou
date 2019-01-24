@@ -28,7 +28,7 @@ export default {
     new webpack.IgnorePlugin(/\.s?css$/)
   ],
   resolve: {
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.mjs', '.js', '.json', '.jsx'],
     alias: {
       src: path.resolve(__dirname, './src')
     }

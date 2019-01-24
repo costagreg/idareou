@@ -8,7 +8,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(mjs|js|jsx)$/,
         exclude: /node_modules/,
         use: [
           {
@@ -46,7 +46,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx'],
+    extensions: ['.mjs', '.js', '.json', '.jsx'],
     alias: {
       src: path.resolve(__dirname, './../src')
     }
