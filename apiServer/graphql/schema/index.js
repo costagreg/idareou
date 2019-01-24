@@ -1,3 +1,3 @@
 export { UserType } from './user'
 export { BetType } from './bet'
-export { RootQuery } from './root'
+export { RootQuery } from './schema'
