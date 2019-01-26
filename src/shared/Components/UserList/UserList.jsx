@@ -9,7 +9,6 @@ if(process.browser) {
 }
 
 const UserList = (props) => {
-  console.log(props)
   return(
     <div className="userList--modifer">
 

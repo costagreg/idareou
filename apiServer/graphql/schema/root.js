@@ -7,16 +7,16 @@ export const RootQueryType = new GraphQLObjectType({
   fields: {
     user: {
       type: UserType,
-      args: { id: { type: GraphQLString } }, // if you give me an username I will give you a user
+      args: { id: { type: GraphQLString } },
       resolve(parentValue, { id }) {
         return User.findById({ id }).then()
       }
     },
     users: {
       type: GraphQLList(UserType),
-      args: { }, // if you give me an username I will give you a user
+      args: {},
       resolve() {
-        return User.find({ }).then()
+        return User.find({}).then()
       }
     },
     bet: {

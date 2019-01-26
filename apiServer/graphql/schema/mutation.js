@@ -11,7 +11,7 @@ export const mutation = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
-        monzoUser: { type: new GraphQLNonNull(GraphQLString) }
+        monzouser: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, args) {
         return User.create(args).then()
@@ -35,7 +35,7 @@ export const mutation = new GraphQLObjectType({
         username: { type: GraphQLString },
         password: { type: GraphQLString },
         email: { type: GraphQLString },
-        monzoUser: { type: GraphQLString }
+        monzouser: { type: GraphQLString }
       },
       async resolve(parentValue, { id, ...rest }) {
         return User.findByIdAndUpdate({ _id: id }, rest)
