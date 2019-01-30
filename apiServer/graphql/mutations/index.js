@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql'
 import { UserType } from '../types'
-import { addUser, deleteUser, updateUser } from '../../database/queries'
+import { addUser, deleteUser, updateUser } from '../../database/queries/user'
 
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',

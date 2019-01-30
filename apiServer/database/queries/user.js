@@ -1,10 +1,10 @@
-import { User } from '../database/models'
+import { User } from '../models'
 
 export const addUser = (username, password, email, monzouser) => (
   User.create({ username, password, email, monzouser }).then()
 )
 
-export const deleteUser = (id) => {
+export const deleteUser = async (id) => {
   const user = await User.findById(id)
   await user.remove().then()
   return user

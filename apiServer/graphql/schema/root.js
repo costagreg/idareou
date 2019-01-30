@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLList, GraphQLString } from 'graphql'
-import { UserType, BetType } from '../../types'
+import { UserType, BetType } from '../types'
 import { User, Bet } from '../../database/models'
 
 export const RootQueryType = new GraphQLObjectType({
