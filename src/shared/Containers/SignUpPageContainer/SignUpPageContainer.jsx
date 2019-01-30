@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
+import addUser from '~src/shared/graphql/queries/addUser'
 import { FormContainer } from '../FormContainer'
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
 
 class SignUpPageContainer extends Component {
   checkAndSaveData = formData => {
-    this.props.mutate({ variables: formData })
+    this.props.mutate({
+      variables: formData
+    })
   }
 
   render() {
@@ -24,12 +26,5 @@ class SignUpPageContainer extends Component {
     )
   }
 }
-const mutation = gql`
-  mutation AddUser($username: String!,$password: String!,$email: String!,$monzouser: String!){
-    addUser(username: $username, password: $password, email: $email, monzouser: $monzouser){
-      _id
-      username
-    }
-  }
-`
-export default graphql(mutation)(SignUpPageContainer)
+
+export default graphql(addUser)(SignUpPageContainer)

@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql'
-import { UserType } from './index'
-import { User } from '../../database/models'
+import { UserType } from '../types'
+import { addUser, deleteUser, updateUser } from '../../database/queries'
 
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -13,8 +13,8 @@ export const mutation = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         monzouser: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, args) {
-        return User.create(args).then()
+      resolve(parentValue, { username, password, email, monzouser }) {
+        return addUser(username, password, email, monzouser)
       }
     },
     deleteUser: {
@@ -22,10 +22,8 @@ export const mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLString) }
       },
-      async resolve(parentValue, { id }) {
-        const user = await User.findById(id)
-        await user.remove().then()
-        return user
+      resolve(parentValue, { id }) {
+        return deleteUser(id)
       }
     },
     updateUser: {
@@ -37,10 +35,8 @@ export const mutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         monzouser: { type: GraphQLString }
       },
-      async resolve(parentValue, { id, ...rest }) {
-        return User.findByIdAndUpdate({ _id: id }, rest)
-          .then(() => User.findById({ _id: id }))
-          .then()
+      async resolve(parentValue, { id, username, password, email, monzouser }) {
+        return updateUser(id, username, password, email, monzouser)
       }
     }
   }

@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import HeaderContainer from '~src/shared/Containers/HeaderContainer'
 import routes from './routes'
 
-import UserList from '../Components/UserList'
 if (process.browser) {
   require('styles/global.scss')
 }
@@ -13,7 +12,6 @@ const AppRouter = () => {
     <Fragment>
       <div className='approuter'>
         <HeaderContainer />
-        <UserList />
         <Switch>
           {
             routes.map(({ Component, path }, index) =>
