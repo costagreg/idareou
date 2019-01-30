@@ -1,5 +1,5 @@
-import { User } from '../database/models'
+import { Bet } from '../models'
 
-export const findBetByUser = (id) => (
-  User.find({ _id: { $in: id } }).then()
+export const findBet = (id) => (
+  Bet.findById(id).then()
 )

@@ -19,3 +19,11 @@ export const updateUser = (id, username, password, email, monzouser) => (
 export const findUsers = (ids) => (
   User.find({ _id: { $in: ids } }).then()
 )
+
+export const findUser = (username, password) => (
+  User.find({ username, password }).then()
+)
+
+export const allUsers = () => (
+  User.find({}).then()
+)
