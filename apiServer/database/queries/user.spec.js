@@ -2,72 +2,52 @@ import { User } from '../models'
 import { addUser, findUser, updateUser, deleteUser, findUsers } from './user'
 
 describe('User queries', () => {
+  const userData = {
+    username: 'mockUsername',
+    password: 'mockPassword',
+    email: 'mockEmail',
+    monzouser: 'mockMonzouser'
+  }
   describe('addUser', () => {
     it('adds a new user', async () => {
-      const props = {
-        username: 'mockUsername',
-        password: 'mockPassword',
-        email: 'mockEmail',
-        monzouser: 'mockMonzouser'
-      }
-      const user = await addUser(props)
+      const user = await addUser(userData)
       const userFound = await User.findById(user.id)
 
-      expect(userFound.username).toEqual(props.username)
-      expect(userFound.password).toEqual(props.password)
-      expect(userFound.email).toEqual(props.email)
-      expect(userFound.monzouser).toEqual(props.monzouser)
+      expect(userFound.username).toEqual(userData.username)
+      expect(userFound.password).toEqual(userData.password)
+      expect(userFound.email).toEqual(userData.email)
+      expect(userFound.monzouser).toEqual(userData.monzouser)
     })
   })
 
   describe('findUser', () => {
     it('finds a user', async () => {
-      const props = {
-        username: 'mockUsername',
-        password: 'mockPassword',
-        email: 'mockEmail',
-        monzouser: 'mockMonzouser'
-      }
-      await addUser(props)
+      await addUser(userData)
       const userFound = await findUser({ username: 'mockUsername' })
 
-      expect(userFound[0].username).toEqual(props.username)
-      expect(userFound[0].password).toEqual(props.password)
-      expect(userFound[0].email).toEqual(props.email)
-      expect(userFound[0].monzouser).toEqual(props.monzouser)
+      expect(userFound[0].username).toEqual(userData.username)
+      expect(userFound[0].password).toEqual(userData.password)
+      expect(userFound[0].email).toEqual(userData.email)
+      expect(userFound[0].monzouser).toEqual(userData.monzouser)
     })
   })
 
   describe('updateUser', () => {
     it('updates a user', async () => {
-      const props = {
-        username: 'mockUsername',
-        password: 'mockPassword',
-        email: 'mockEmail',
-        monzouser: 'mockMonzouser'
-      }
-
-      const user = await addUser(props)
-      await updateUser(user.id, { ...props, username: 'mockUsername2' })
+      const user = await addUser(userData)
+      await updateUser(user.id, { ...userData, username: 'mockUsername2' })
       const userFound = await User.findById(user.id)
 
       expect(userFound.username).toEqual('mockUsername2')
-      expect(userFound.password).toEqual(props.password)
-      expect(userFound.email).toEqual(props.email)
-      expect(userFound.monzouser).toEqual(props.monzouser)
+      expect(userFound.password).toEqual(userData.password)
+      expect(userFound.email).toEqual(userData.email)
+      expect(userFound.monzouser).toEqual(userData.monzouser)
     })
   })
 
   describe('deleteUser', () => {
     it('delete a user', async () => {
-      const props = {
-        username: 'mockUsername',
-        password: 'mockPassword',
-        email: 'mockEmail',
-        monzouser: 'mockMonzouser'
-      }
-
-      const user = await addUser(props)
+      const user = await addUser(userData)
       await deleteUser(user.id)
       const userFound = await User.findById(user.id)
 
@@ -77,15 +57,8 @@ describe('User queries', () => {
 
   describe('findUsers', () => {
     it('finds a list of users providing the ids', async () => {
-      const props = {
-        username: 'mockUsername',
-        password: 'mockPassword',
-        email: 'mockEmail',
-        monzouser: 'mockMonzouser'
-      }
-
-      const user1 = await addUser(props)
-      const user2 = await addUser(props)
+      const user1 = await addUser(userData)
+      const user2 = await addUser(userData)
 
       const userFound = await findUsers([user1.id, user2.id])
 
