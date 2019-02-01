@@ -7,7 +7,7 @@ import 'babel-polyfill'
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 beforeAll((done) => {
-  mongoose.connect('mongodb://localhost/giochiflashgratis_test')
+  mongoose.connect('mongodb://localhost/idareyou_test')
   mongoose.connection
     .once('open', () => done())
     .on('error', err => {
