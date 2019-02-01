@@ -7,7 +7,7 @@ export const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     user: {
-      type: UserType,
+      type: GraphQLList(UserType),
       args: { username: { type: GraphQLString }, password: { type: GraphQLString } },
       resolve(parentValue, { username, password }) {
         return findUser(username, password)

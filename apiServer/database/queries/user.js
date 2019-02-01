@@ -21,7 +21,7 @@ export const findUsers = (ids) => (
 )
 
 export const findUser = (username, password) => (
-  User.find({ username, password }).then()
+  User.find({ username, password })
 )
 
 export const allUsers = () => (
