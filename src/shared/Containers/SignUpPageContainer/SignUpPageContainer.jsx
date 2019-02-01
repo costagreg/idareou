@@ -6,7 +6,7 @@ import { FormContainer } from '../FormContainer'
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
 
-class SignUpPageContainer extends Component {
+export class SignUpPageContainer extends Component {
   checkAndSaveData = formData => {
     this.props.mutate({
       variables: formData

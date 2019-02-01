@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLList, GraphQLString } from 'graphql'
 import { UserType, BetType } from '../types'
-import { findUser, allUsers } from '../../database/queries/user'
+import { findUser } from '../../database/queries/user'
 import { findBet } from '../../database/queries/bet'
 
 export const RootQueryType = new GraphQLObjectType({
@@ -9,15 +9,8 @@ export const RootQueryType = new GraphQLObjectType({
     user: {
       type: GraphQLList(UserType),
       args: { username: { type: GraphQLString }, password: { type: GraphQLString } },
-      resolve(parentValue, { username, password }) {
-        return findUser(username, password)
-      }
-    },
-    users: {
-      type: GraphQLList(UserType),
-      args: {},
-      resolve() {
-        return allUsers()
+      resolve(parentValue, args) {
+        return findUser(args)
       }
     },
     bet: {

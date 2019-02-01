@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import SignUpPageContainer from './SignUpPageContainer'
+import { SignUpPageContainer } from './SignUpPageContainer'
 
 describe('given SignUpPageContainer component', () => {
   describe('when trying to render the SignUpPageContainer component', () => {

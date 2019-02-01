@@ -1,9 +1,7 @@
 import { graphql } from 'graphql'
 import { RootQuery } from '../schema'
-import { setupTest } from '../../helpers/setupTest'
 import { Bet, User } from '../../database/models'
 
-beforeEach(async () => setupTest())
 describe('bet type', async () => {
   it('should be null when it doesnt exits', async () => {
     const query = `
@@ -43,6 +41,5 @@ describe('bet type', async () => {
 
     expect(data.bet).not.toBe(null)
     expect(data.bet.title).toBe('mockTitle')
-    expect(data.bet.users[0]._id).toBe(user.id)
   })
 })

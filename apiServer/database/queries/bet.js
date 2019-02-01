@@ -1,5 +1,5 @@
 import { Bet } from '../models'
 
-export const findBet = (id) => (
+export const findBet = async (id) => (
   Bet.findById(id).then()
 )

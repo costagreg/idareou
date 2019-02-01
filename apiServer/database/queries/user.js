@@ -1,7 +1,7 @@
 import { User } from '../models'
 
-export const addUser = (username, password, email, monzouser) => (
-  User.create({ username, password, email, monzouser }).then()
+export const addUser = async (data) => (
+  User.create(data).then()
 )
 
 export const deleteUser = async (id) => {
@@ -10,20 +10,16 @@ export const deleteUser = async (id) => {
   return user
 }
 
-export const updateUser = (id, username, password, email, monzouser) => (
-  User.findByIdAndUpdate({ _id: id }, { username, password, email, monzouser })
+export const updateUser = async (id, newData) => (
+  User.findByIdAndUpdate({ _id: id }, newData)
     .then(() => User.findById({ _id: id }))
     .then()
 )
 
-export const findUsers = (ids) => (
+export const findUsers = async (ids) => (
   User.find({ _id: { $in: ids } }).then()
 )
 
-export const findUser = (username, password) => (
-  User.find({ username, password })
-)
-
-export const allUsers = () => (
-  User.find({}).then()
+export const findUser = async (data) => (
+  User.find(data)
 )

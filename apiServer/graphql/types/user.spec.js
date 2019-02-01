@@ -1,9 +1,7 @@
 import { graphql } from 'graphql'
 import { RootQuery } from '../schema'
-import { setupTest } from '../../helpers/setupTest'
 import { User } from '../../database/models'
 
-beforeEach(async () => setupTest())
 describe('user type', async () => {
   it('should be null when it doesnt exits', async () => {
     const query = `
