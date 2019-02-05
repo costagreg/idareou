@@ -24,9 +24,9 @@ export const RootQueryType = new GraphQLObjectType({
     },
     me: {
       type: UserType,
-      async resolve(parentValue, args, auth) {
-        if (auth.user) {
-          const userFound = await findUserById(auth.user._id)
+      async resolve(parentValue, args, context) {
+        if (context.req.user) {
+          const userFound = await findUserById(context.req.user._id)
           return userFound
         }
       }
@@ -34,7 +34,7 @@ export const RootQueryType = new GraphQLObjectType({
     login: {
       type: LoginType,
       args: { username: { type: GraphQLString }, password: { type: GraphQLString } },
-      async resolve(parentValue, args) {
+      async resolve(parentValue, args, context) {
         const userFound = await findUser(args)
         if (userFound) {
           const { _id, email } = userFound[0]
@@ -42,6 +42,9 @@ export const RootQueryType = new GraphQLObjectType({
             _id,
             email
           }, process.env.JWT_SECRET, { expiresIn: '1d' })
+          context.res.cookie('token', token, {
+            maxAge: 1000 * 60 * 60 * 26
+          })
           return { token }
         }
       }
