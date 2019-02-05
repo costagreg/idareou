@@ -39,7 +39,6 @@ describe('bet type', async () => {
     const result = await graphql(RootQuery, query, {}, {})
     const { data } = result
 
-    expect(data.bet).not.toBe(null)
     expect(data.bet.title).toBe('mockTitle')
   })
 })

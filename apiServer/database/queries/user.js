@@ -1,25 +1,23 @@
 import { User } from '../models'
 
-export const addUser = async (data) => (
-  User.create(data).then()
+export const addUser = (data) => (
+  User.create(data)
 )
 
 export const deleteUser = async (id) => {
   const user = await User.findById(id)
-  await user.remove().then()
+  await user.remove()
   return user
 }
 
-export const updateUser = async (id, newData) => (
+export const updateUser = (id, newData) => (
   User.findByIdAndUpdate({ _id: id }, newData)
-    .then(() => User.findById({ _id: id }))
-    .then()
+    .then(() => User.findById({ _id: id })))
+
+export const findUsers = (ids) => (
+  User.find({ _id: { $in: ids } }).exec()
 )
 
-export const findUsers = async (ids) => (
-  User.find({ _id: { $in: ids } }).then()
-)
-
-export const findUser = async (data) => (
+export const findUser = (data) => (
   User.find(data)
 )

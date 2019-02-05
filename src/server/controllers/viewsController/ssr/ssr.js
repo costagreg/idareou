@@ -24,7 +24,7 @@ const getNeedsByMatchedUrl = (store, url) => (
 )
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001'
+  uri: process.env.GRAPHQL_URL
 })
 
 const getDevice = userAgent => {

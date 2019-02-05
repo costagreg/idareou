@@ -18,10 +18,10 @@ describe('user type', async () => {
   })
   it('should return the user if it exists', async () => {
     const userData = {
-      username: 'mockUsername',
-      password: 'mockPassword',
-      email: 'mockEmail',
-      monzouser: 'monzoUser'
+      username: 'myMockUsername',
+      password: 'myMockPassword',
+      email: 'myMockEmail',
+      monzouser: 'myMonzoUser'
     }
     const user = new User(userData)
     await user.save()

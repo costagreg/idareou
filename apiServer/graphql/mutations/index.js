@@ -35,7 +35,7 @@ export const mutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         monzouser: { type: GraphQLString }
       },
-      async resolve(parentValue, { id, ...newData }) {
+      resolve(parentValue, { id, ...newData }) {
         return updateUser(id, { ...newData })
       }
     }
