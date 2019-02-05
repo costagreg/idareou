@@ -17,9 +17,9 @@ const TextInput = ({
   required = false,
   pattern
 }) => (
-  <div className={classNames('TextInput', { 'TextInput--error': error === 'error', 'TextInput--success': error === 'success' })}>
+  <div className={classNames('TextInput', { 'TextInput--error': error === 'error' })}>
     { icon &&
-      <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error === 'error' }, { 'TextInput__Icon--success': error === 'success' })}></i>}
+      <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error === 'error' })}></i>}
     <input
       name={name}
       type={type}

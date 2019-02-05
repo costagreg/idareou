@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { initialState } from '~src/shared/redux/configureStore' // Remove
+import { initialState } from '~src/shared/redux/configureStore' // TODO: Remove when redux is fully set up
 
 import HistoryPage from '~src/shared/Pages/HistoryPage'
 
@@ -10,7 +10,15 @@ import { fetchToStore } from '~src/shared/redux/bets/bets'
 
 export class HistoryPageContainer extends Component {
   static fetchData(store) {
-    return store.dispatch(fetchToStore(initialState().bets)) // Remove the data passed
+    return store.dispatch(fetchToStore(initialState().bets)) // TODO: Remove when redux is fully set up
+  }
+
+  componentDidMount() {
+    const { bets = [], fetchToStore } = this.props
+
+    if(!bets.length) {
+      fetchToStore(initialState().bets) // TODO: Remove when redux is fully set up
+    }
   }
 
   render() {
@@ -23,7 +31,8 @@ export class HistoryPageContainer extends Component {
 }
 
 HistoryPageContainer.propTypes = {
-  bets: PropTypes.array
+  bets: PropTypes.array,
+  fetchToStore: PropTypes.func
 }
 
 
@@ -31,5 +40,5 @@ export default connect(
   state => ({
     bets: state.bets
   }),
-  undefined
+  { fetchToStore }
 )(HistoryPageContainer)
