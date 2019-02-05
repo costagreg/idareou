@@ -13,7 +13,7 @@ describe('given SignUpPage component', () => {
       expect(component.find('PageTitle').length).toBe(1)
     })
     it('should render the signUpPageContainer component', () => {
-      expect(component.find('SignUpPageContainer').length).toBe(1)
+      expect(component.find('Apollo(SignUpPageContainer)').length).toBe(1)
     })
   })
 })

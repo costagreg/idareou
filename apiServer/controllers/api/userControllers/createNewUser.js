@@ -8,7 +8,6 @@ export const createNewUser = async (_, res) => {
 
     return res.send(await userInstance.save())
   } catch (err) {
-    console.log('ERROR STATUS>>>>>>', err.message)
     return res.status(500).send(err.message)
   }
 }

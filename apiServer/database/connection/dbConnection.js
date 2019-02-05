@@ -5,7 +5,7 @@ export default (url) => {
     url,
     { useNewUrlParser: true }
   )
-
+  mongoose.Promise = global.Promise
   mongoose.connection.on('connected', () => {
     console.log('DB: connection open')
   })

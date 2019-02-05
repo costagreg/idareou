@@ -74,6 +74,23 @@ describe('FormContainer', () => {
       })
     })
   })
+  describe('@getValues', () => {
+    it('returns all key value of the object', () => {
+      const obj = {
+        nickname: {
+          value: 'nickname',
+          error: ''
+        },
+        email: {
+          value: 'email',
+          error: ''
+        }
+      }
+      const component = shallow(<FormContainer />)
+      const { getValues } = component.instance()
+      expect(getValues(obj)).toEqual({ nickname: 'nickname', email: 'email' })
+    })
+  })
   describe('@isConfirmSuccess', () => {
     describe('and the element name is confirmpassword', () => {
       describe('and the password has the same value as confirmPassword', () => {
