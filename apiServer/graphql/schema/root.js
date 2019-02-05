@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 // import bcrypt from 'bcrypt'
 import { GraphQLObjectType, GraphQLList, GraphQLString } from 'graphql'
 import { UserType, BetType, LoginType } from '../types'
-import { findUser } from '../../database/queries/user'
+import { findUser, findUserById } from '../../database/queries/user'
 import { findBet } from '../../database/queries/bet'
 
 export const RootQueryType = new GraphQLObjectType({
@@ -20,6 +20,15 @@ export const RootQueryType = new GraphQLObjectType({
       args: { id: { type: GraphQLString } },
       resolve(parentValue, { id }) {
         return findBet(id)
+      }
+    },
+    me: {
+      type: UserType,
+      async resolve(parentValue, args, auth) {
+        if (auth.user) {
+          const userFound = await findUserById(auth.user._id)
+          return userFound
+        }
       }
     },
     login: {

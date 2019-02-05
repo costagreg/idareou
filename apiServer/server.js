@@ -4,6 +4,7 @@ import bodyParser from'body-parser'
 import cors from 'cors'
 import dbConnection from './database/connection'
 import { RootQuery } from './graphql/schema'
+import jwt from 'express-jwt'
 
 const app = express()
 
@@ -16,13 +17,18 @@ const dbUrl = process.env.ENV !== 'prod'
 
 dbConnection(dbUrl)
 
+const auth = jwt({
+  secret: process.env.JWT_SECRET,
+  credentialsRequired: false
+})
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   next()
 })
-app.use('/graphql', expressGraphQL({
+app.use('/graphql', auth, expressGraphQL({
   schema: RootQuery,
   graphiql: true
 }))

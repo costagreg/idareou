@@ -22,3 +22,7 @@ export const findUsers = (ids) => (
 export const findUser = (data) => (
   User.find(data)
 )
+
+export const findUserById = (_id) => (
+  User.findById(_id)
+)
