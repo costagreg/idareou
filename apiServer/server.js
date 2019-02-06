@@ -21,15 +21,19 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false,
   getToken: (req) => {
-    // here get token froom cookie
-
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+      return req.headers.authorization.split(' ')[1]
+    }
+    if (req.query && req.query.token) {
+      return req.query.token
+    }
+    return null
   }
 })
 
-app.use(cors())
+app.use(cors({ credentials: true, origin: 'http://local.idareyou.com:3000' }))
 app.use(bodyParser.json())
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
   next()
 })
 app.use('/graphql', auth, expressGraphQL((req, res) => ({

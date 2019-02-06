@@ -51,8 +51,11 @@ export const mutation = new GraphQLObjectType({
             _id,
             email
           }, process.env.JWT_SECRET, { expiresIn: '1d' })
-          context.res.cookie('token', token, {
-            maxAge: 1000 * 60 * 60 * 26
+          context.res.cookie('t', token, {
+            maxAge: 1000 * 60 * 60 * 26,
+            domain: 'local.idareyou.com',
+            httpOnly: false,
+            secure: false
           })
           return { token }
         }

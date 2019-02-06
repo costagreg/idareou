@@ -3,9 +3,10 @@ import { hydrate } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
-import ApolloClient from 'apollo-boost'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ApolloClient } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
-
+import { HttpLink } from 'apollo-link-http'
 import AppRouter from './shared/AppRouter'
 import { configureStore } from './shared/redux/configureStore'
 import { ContextContainer } from './shared/Containers/ContextContainer'
@@ -15,8 +16,18 @@ const { store, isDesktop } = window.__PRELOAD__STATE
 // const { store } = window.__PRELOAD__STATE
 
 const preloadState = configureStore(store)
+console.log(process.env.GRAPHQL_URL)
+// const link = new HttpLink({
+//   uri: process.env.GRAPHQL_URL,
+//   credentials: 'same-origin'
+// })
+
 const client = new ApolloClient({
-  uri: process.env.GRAPHQL_URL
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    credentials: 'include',
+    uri: process.env.GRAPHQL_URL
+  })
 })
 
 const render = (Component) => {
