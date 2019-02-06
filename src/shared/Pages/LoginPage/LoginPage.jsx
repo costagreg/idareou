@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { PageTitle } from '~src/shared/Components/Common/PageTitle'
-import { LoginPageContainer } from '~src/shared/Containers/LoginPageContainer'
+import LoginPageContainer from '~src/shared/Containers/LoginPageContainer'
 
 if(process.browser) {
   require('./LoginPage.scss')

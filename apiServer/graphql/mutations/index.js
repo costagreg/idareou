@@ -1,6 +1,7 @@
+import jwt from 'jsonwebtoken'
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql'
-import { UserType } from '../types'
-import { addUser, deleteUser, updateUser } from '../../database/queries/user'
+import { UserType, LoginType } from '../types'
+import { addUser, deleteUser, updateUser, findUser } from '../../database/queries/user'
 
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -37,6 +38,24 @@ export const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, { id, ...newData }) {
         return updateUser(id, { ...newData })
+      }
+    },
+    login: {
+      type: LoginType,
+      args: { email: { type: GraphQLString }, password: { type: GraphQLString } },
+      async resolve(parentValue, args, context) {
+        const userFound = await findUser(args)
+        if (userFound && userFound.length > 0) {
+          const { _id, email } = userFound[0]
+          const token = jwt.sign({
+            _id,
+            email
+          }, process.env.JWT_SECRET, { expiresIn: '1d' })
+          context.res.cookie('token', token, {
+            maxAge: 1000 * 60 * 60 * 26
+          })
+          return { token }
+        }
       }
     }
   }

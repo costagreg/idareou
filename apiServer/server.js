@@ -1,10 +1,10 @@
 import express from 'express'
 import expressGraphQL from 'express-graphql'
 import bodyParser from 'body-parser'
+import jwt from 'express-jwt'
 import cors from 'cors'
 import dbConnection from './database/connection'
 import { RootQuery } from './graphql/schema'
-import jwt from 'express-jwt'
 
 const app = express()
 
@@ -20,8 +20,9 @@ dbConnection(dbUrl)
 const auth = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false,
-  getToken: function fromHeaderOrQuerystring (req) {
+  getToken: (req) => {
     // here get token froom cookie
+
   }
 })
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 
-import addUser from '~src/shared/graphql/queries/addUser'
+import { addUser } from '~src/shared/graphql/queries'
 import { FormContainer } from '../FormContainer'
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
