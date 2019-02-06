@@ -3,6 +3,7 @@ import expressGraphQL from 'express-graphql'
 import bodyParser from 'body-parser'
 import jwt from 'express-jwt'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import dbConnection from './database/connection'
 import { RootQuery } from './graphql/schema'
 
@@ -21,11 +22,8 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   credentialsRequired: false,
   getToken: (req) => {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-      return req.headers.authorization.split(' ')[1]
-    }
-    if (req.query && req.query.token) {
-      return req.query.token
+    if (req.cookies && req.cookies.token) {
+      return req.cookies.token
     }
     return null
   }
@@ -33,6 +31,7 @@ const auth = jwt({
 
 app.use(cors({ credentials: true, origin: 'http://local.idareyou.com:3000' }))
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use((req, res, next) => {
   next()
 })

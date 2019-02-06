@@ -49,6 +49,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
+    "cookie-parser": "^1.4.3",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.9.0",
