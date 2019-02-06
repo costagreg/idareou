@@ -13,22 +13,26 @@ const routes = [
   }, {
     Component: HistoryPageContainer,
     path: '/history',
-    name: 'History'
+    name: 'History',
+    auth: true
   }, {
     Component: BetPage,
     path: '/bet',
     exact: true,
-    name: 'Bet'
+    name: 'Bet',
+    auth: true
   }, {
     Component: LoginPage,
     path: '/login',
     exact: true,
-    name: 'Login'
+    name: 'Login',
+    auth: false
   }, {
     Component: SignUpPage,
     path: '/signup',
     exact: true,
-    name: 'Signup'
+    name: 'Signup',
+    auth: false
   }
 ]
 

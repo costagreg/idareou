@@ -11,19 +11,16 @@ if (process.browser) {
 }
 
 class AppRouter extends Component {
-  componentDidMount() {
-    console.log(this.props.data)
-  }
-
   render() {
+    const { data: { me } } = this.props
     return (
       <Fragment>
         <div className='approuter'>
-          <HeaderContainer />
+          <HeaderContainer me={me} />
           <Switch>
             {
-              routes.map(({ Component, path }, index) =>
-                <Route
+              routes.map(({ Component, path, auth }, index) =>
+                ((me && auth) || (!me && !auth)) && <Route
                   key={index}
                   exact
                   path={path}
