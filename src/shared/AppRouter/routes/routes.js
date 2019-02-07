@@ -12,6 +12,12 @@ const routes = [
     exact: true,
     name: 'Home'
   }, {
+    Component: null,
+    path: '/dashboard',
+    exact: true,
+    name: 'Dashboard',
+    auth: true
+  }, {
     Component: HistoryPageContainer,
     path: '/history',
     name: 'History',
