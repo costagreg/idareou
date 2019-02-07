@@ -29,7 +29,7 @@ const auth = jwt({
   }
 })
 
-app.use(cors({ credentials: true, origin: 'http://local.idareyou.com:3000' }))
+app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use((req, res, next) => {

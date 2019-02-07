@@ -3,6 +3,17 @@ import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql'
 import { UserType, LoginType } from '../types'
 import { addUser, deleteUser, updateUser, findUser } from '../../database/queries/user'
 
+function attachToken(data, context) {
+  const token = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '1d' })
+  context.res.cookie('token', token, {
+    maxAge: 1000 * 60 * 60 * 26,
+    domain: process.env.COOKIE_DOMAIN,
+    httpOnly: false,
+    secure: false
+  })
+  return token
+}
+
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
@@ -14,8 +25,12 @@ export const mutation = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         monzouser: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, args) {
-        return addUser(args)
+      async resolve(parentValue, args, context) {
+        const user = await addUser(args)
+        console.log(user)
+        const { _id, email } = user
+        attachToken({ _id, email }, context)
+        return user
       }
     },
     deleteUser: {
@@ -47,16 +62,7 @@ export const mutation = new GraphQLObjectType({
         const userFound = await findUser(args)
         if (userFound && userFound.length > 0) {
           const { _id, email } = userFound[0]
-          const token = jwt.sign({
-            _id,
-            email
-          }, process.env.JWT_SECRET, { expiresIn: '1d' })
-          context.res.cookie('token', token, {
-            maxAge: 1000 * 60 * 60 * 26,
-            domain: 'local.idareyou.com',
-            httpOnly: false,
-            secure: false
-          })
+          const token = attachToken({ _id, email }, context)
           return { token }
         }
       }

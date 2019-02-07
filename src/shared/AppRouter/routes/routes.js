@@ -4,6 +4,7 @@ import BetPage from '~src/shared/Pages/BetPage'
 import LoginPage from '~src/shared/Pages/LoginPage'
 import SignUpPage from '~src/shared/Pages/SignUpPage'
 import LogoutPage from '~src/shared/Pages/LogoutPage'
+import DashboardPage from '~src/shared/Pages/Dashboard'
 
 const routes = [
   {
@@ -12,7 +13,7 @@ const routes = [
     exact: true,
     name: 'Home'
   }, {
-    Component: null,
+    Component: DashboardPage,
     path: '/dashboard',
     exact: true,
     name: 'Dashboard',

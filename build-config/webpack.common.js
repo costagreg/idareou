@@ -64,7 +64,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         ENV: JSON.stringify(process.env.ENV),
-        GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL)
+        GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
+        COOKIE_DOMAIN: JSON.stringify(process.env.COOKIE_DOMAIN)
       }
     })
   ]

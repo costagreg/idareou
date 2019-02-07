@@ -13,7 +13,7 @@ class LogoutPage extends Component {
   }
 
   componentDidMount() {
-    document.cookie = 'token=s;path=/;domain=.local.idareyou.com;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+    document.cookie = `token=s;path=/;domain=${process.env.COOKIE_DOMAIN};expires=Thu, 01 Jan 1970 00:00:01 GMT;`
     this.props.client.query({
       query: me,
       fetchPolicy: 'network-only'

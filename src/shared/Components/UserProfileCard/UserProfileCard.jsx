@@ -5,7 +5,7 @@ if(process.browser) {
   require('./UserProfileCard.scss')
 }
 
-const UserProfileCard = ({ profileImage, userName }) => {
+const UserProfileCard = ({ profileImage, username }) => {
   return(
     <div className="userprofilecard">
     <div className="userprofilecard__image">
@@ -15,9 +15,9 @@ const UserProfileCard = ({ profileImage, userName }) => {
       />
     </div>
       {
-        userName &&
+        username &&
           <div className="userprofilecard__userName">
-            {userName}
+            {username}
           </div>
       }
     </div>
