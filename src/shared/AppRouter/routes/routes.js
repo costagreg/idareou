@@ -3,6 +3,7 @@ import HistoryPageContainer from '~src/shared/Containers/HistoryPageContainer'
 import BetPage from '~src/shared/Pages/BetPage'
 import LoginPage from '~src/shared/Pages/LoginPage'
 import SignUpPage from '~src/shared/Pages/SignUpPage'
+import LogoutPage from '~src/shared/Pages/LogoutPage'
 
 const routes = [
   {
@@ -33,6 +34,12 @@ const routes = [
     exact: true,
     name: 'Signup',
     auth: false
+  }, {
+    Component: LogoutPage,
+    path: '/logout',
+    exact: true,
+    name: 'Logout',
+    auth: true
   }
 ]
 

@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 
-import { loginUser } from '~src/shared/graphql/queries'
+import { loginUser, me } from '~src/shared/graphql/queries'
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export class LoginPageContainer extends Component {
   checkUser = formData => {
-    const result = this.props.mutate({
-      variables: formData
+    this.props.mutate({
+      variables: formData,
+      refetchQueries: [{ query: me }]
     })
   }
 
