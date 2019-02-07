@@ -4,7 +4,7 @@ import routes from './routes/routes'
 
 const app = express()
 
-const port = process.env.PORT || 3000
+const port = process.env.SSR_PORT
 
 if(process.env.ENV !== 'prod') {
   require('./middleware/expressMiddleware').default(app)
@@ -14,7 +14,7 @@ if(process.env.ENV !== 'prod') {
 routes(app)
 
 // Catch any error
-app.use((err, req, res, _) => {
+app.use((err, req, res) => {
   res.status(500).send('Something broke!')
 })
 

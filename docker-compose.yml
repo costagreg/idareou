@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  client:
+    build:
+      context: './'
+      dockerfile: ./src/Dockerfile
+    ports:
+      - "3000:${SSR_PORT}"
+    networks:
+      - default
+  database:
+    image: mongo
+    ports:
+      - "27017:27017" # remove when first publish
+    networks:
+      - default
+  server:
+    build:
+      context: './'
+      dockerfile: ./apiServer/Dockerfile
+    environment:
+      LOCAL_DB_URL: mongodb://idareou_database_1:27017/idareou
+    ports:
+      - "3001:${API_PORT}"
+    networks:
+      - default
+    depends_on:
+      - database
+
+networks:
+  default:
+    driver: bridge

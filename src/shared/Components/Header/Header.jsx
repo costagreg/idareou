@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import SideBar from '~src/shared/Components/common/SideBar'
+import SideBar from '~src/shared/Components/Common/SideBar'
 
 if(process.browser) {
   require('./Header.scss')
@@ -16,7 +16,7 @@ const Header = ({ context = {}, linskMarkUp, showSideBar, setShowSideBar } = {})
           <i onClick={setShowSideBar} className={classNames('fa fa-bars', 'topnav__icon', { rotate: showSideBar })}></i>
       }
       <div className='topnav__logo'>
-        IdareOu
+        IdareOusd
       </div>
       {
         context.isDesktop
