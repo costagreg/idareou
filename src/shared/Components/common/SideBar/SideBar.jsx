@@ -13,7 +13,6 @@ if(process.browser) {
 class SideBar extends Component {
   render() {
     const { linskMarkUp, showSideBar, setShowSideBar, data: { me } } = this.props
-    console.log(me)
     return (
       <div className="sidebar">
         <div

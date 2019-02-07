@@ -27,7 +27,6 @@ export const mutation = new GraphQLObjectType({
       },
       async resolve(parentValue, args, context) {
         const user = await addUser(args)
-        console.log(user)
         const { _id, email } = user
         attachToken({ _id, email }, context)
         return user
