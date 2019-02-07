@@ -12,18 +12,12 @@ import { configureStore } from './shared/redux/configureStore'
 import { ContextContainer } from './shared/Containers/ContextContainer'
 // import UserList from './shared/Components/UserList'
 
-const { store, isDesktop } = window.__PRELOAD__STATE
-// const { store } = window.__PRELOAD__STATE
+const { store, isDesktop } = window.__APOLLO_STATE__
 
 const preloadState = configureStore(store)
-console.log(process.env.GRAPHQL_URL)
-// const link = new HttpLink({
-//   uri: process.env.GRAPHQL_URL,
-//   credentials: 'same-origin'
-// })
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache().restore(store),
   link: new HttpLink({
     credentials: 'include',
     uri: process.env.GRAPHQL_URL

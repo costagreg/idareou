@@ -19,8 +19,8 @@ class AppRouter extends Component {
           <HeaderContainer me={me} />
           <Switch>
             {
-              routes.map(({ Component, path, auth }, index) =>
-                ((me && auth) || (!me && !auth)) && <Route
+              routes.map(({ Component, path }, index) =>
+                <Route
                   key={index}
                   exact
                   path={path}

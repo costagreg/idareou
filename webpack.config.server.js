@@ -25,7 +25,13 @@ export default {
   },
   target: 'node',
   plugins: [
-    new webpack.IgnorePlugin(/\.s?css$/)
+    new webpack.IgnorePlugin(/\.s?css$/),
+    new webpack.DefinePlugin({
+      'process.env': {
+        ENV: JSON.stringify(process.env.ENV),
+        GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL)
+      }
+    })
   ],
   resolve: {
     extensions: ['.mjs', '.js', '.json', '.jsx'],

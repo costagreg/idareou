@@ -20,7 +20,7 @@ class LogoutPage extends Component {
 
   render() {
     return (<div className="LogoutPage">
-      <PageTitle>You have been logout successfily</PageTitle>
+      <PageTitle>You have been logout successfully</PageTitle>
       <p className='LogoutPage__Msg'>Invite a friend <Link to='/invite'>Send invite</Link></p>
     </div>)
   }
