@@ -1,10 +1,12 @@
 import express from 'express'
-
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import expressGraphQL from 'express-graphql'
+
 import dbConnection from './database/connection'
-import { auth, expressGraphQLMiddleware } from './helpers/jwt'
+import { RootQuery } from './graphql/schema'
+import { auth } from './helpers/jwt'
 
 const app = express()
 
@@ -26,7 +28,11 @@ app.use(cookieParser())
 app.use((req, res, next) => {
   next()
 })
-app.use('/graphql', auth, expressGraphQLMiddleware)
+app.use('/graphql', auth, expressGraphQL((req, res) => ({
+  schema: RootQuery,
+  graphiql: true,
+  context: { req, res }
+})))
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)

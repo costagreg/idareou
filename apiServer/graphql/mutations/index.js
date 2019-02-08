@@ -48,7 +48,7 @@ export const mutation = new GraphQLObjectType({
       args: { email: { type: GraphQLString }, password: { type: GraphQLString } },
       async resolve(parentValue, args, context) {
         const userFound = await findUser(args)
-        if (userFound && userFound.length > 0) {
+        if (userFound.length > 0) {
           const { _id, email } = userFound[0]
           const token = attachTokenToResp({ _id, email }, context)
           return { token }

@@ -24,6 +24,7 @@ export const RootQueryType = new GraphQLObjectType({
     currentUser: {
       type: UserType,
       resolve(parentValue, args, { req: { user } }) {
+        // Grab the user is from the cookie instead of args
         if (user) {
           return findUserById(user._id)
         }
