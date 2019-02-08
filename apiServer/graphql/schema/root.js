@@ -23,10 +23,9 @@ export const RootQueryType = new GraphQLObjectType({
     },
     currentUser: {
       type: UserType,
-      async resolve(parentValue, args, { req: { user } }) {
+      resolve(parentValue, args, { req: { user } }) {
         if (user) {
-          const userFound = await findUserById(user._id)
-          return userFound
+          return findUserById(user._id)
         }
       }
     }

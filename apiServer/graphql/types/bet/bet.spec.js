@@ -1,6 +1,6 @@
 import { graphql } from 'graphql'
-import { RootQuery } from '../schema'
-import { Bet, User } from '../../database/models'
+import { RootQuery } from '../../schema'
+import { Bet, User } from '../../../database/models'
 
 describe('bet type', async () => {
   it('should be null when it doesnt exits', async () => {
