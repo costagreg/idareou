@@ -21,11 +21,11 @@ export const RootQueryType = new GraphQLObjectType({
         return findBet(id)
       }
     },
-    me: {
+    currentUser: {
       type: UserType,
-      async resolve(parentValue, args, context) {
-        if (context.req.user) {
-          const userFound = await findUserById(context.req.user._id)
+      async resolve(parentValue, args, { req: { user } }) {
+        if (user) {
+          const userFound = await findUserById(user._id)
           return userFound
         }
       }

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
-import { me } from '~src/shared/graphql/queries'
+import { currentUser } from '~src/shared/graphql/queries'
 import UserProfileCard from '~src/shared/Components/UserProfileCard'
 
 if(process.browser) {
@@ -12,7 +12,7 @@ if(process.browser) {
 
 class SideBar extends Component {
   render() {
-    const { linskMarkUp, showSideBar, setShowSideBar, data: { me } } = this.props
+    const { linskMarkUp, showSideBar, setShowSideBar, data: { currentUser } } = this.props
     return (
       <div className="sidebar">
         <div
@@ -22,9 +22,9 @@ class SideBar extends Component {
         </div>
         <div className={classNames('sidepanel', { show: showSideBar })}>
           {
-            me &&
+            currentUser &&
               <div className='sidepanel__userprofile'>
-                <UserProfileCard {...me}/>
+                <UserProfileCard {...currentUser}/>
               </div>
           }
           <div className="sidepanel__links">
@@ -43,4 +43,4 @@ SideBar.propTypes = {
   setShowSideBar: PropTypes.func
 }
 
-export default graphql(me)(SideBar)
+export default graphql(currentUser)(SideBar)

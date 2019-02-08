@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { graphql, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
-import { addUser, me } from '~src/shared/graphql/queries'
+import { addUser, currentUser } from '~src/shared/graphql/queries'
 import { FormContainer } from '../FormContainer'
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
@@ -11,10 +11,10 @@ export class SignUpPageContainer extends Component {
   checkAndSaveData = formData => {
     this.props.mutate({
       variables: formData
-    }).then((result) => {
+    }).then(result => {
       if(result.data && result.data.addUser && result.data.addUser._id) {
         this.props.client.query({
-          query: me,
+          query: currentUser,
           fetchPolicy: 'network-only'
         }).then(() => {
           this.props.history.push('/dashboard')

@@ -20,9 +20,9 @@ export class HeaderContainer extends Component {
   }
 
   getLinkMarkUp(links) {
-    const { me } = this.props
+    const { currentUser } = this.props
     return links.map(({ path, name, exact = false, auth }) =>
-      ((me && auth) || (!me && !auth) || (typeof auth === 'undefined')) && <NavLink
+      ((currentUser && auth) || (!currentUser && !auth) || (typeof auth === 'undefined')) && <NavLink
         key={name}
         exact={exact}
         to={path}
