@@ -1,4 +1,3 @@
-
 import { User } from '../models'
 
 export const addUser = (data) => (
