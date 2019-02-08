@@ -6,6 +6,7 @@ import { ApolloClient } from 'apollo-boost'
 import { ApolloProvider, getDataFromTree } from 'react-apollo'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createHttpLink } from 'apollo-link-http'
+
 import { configureStore } from '~src/shared/redux/configureStore'
 import AppRouter from '~src/shared/AppRouter'
 import routes from '~src/shared/AppRouter/routes'

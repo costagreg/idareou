@@ -11,8 +11,8 @@ export class SignUpPageContainer extends Component {
   checkAndSaveData = formData => {
     this.props.mutate({
       variables: formData
-    }).then(result => {
-      if(result.data && result.data.addUser && result.data.addUser._id) {
+    }).then(({ data }) => {
+      if(data && data.addUser && data.addUser._id) {
         this.props.client.query({
           query: currentUser,
           fetchPolicy: 'network-only'

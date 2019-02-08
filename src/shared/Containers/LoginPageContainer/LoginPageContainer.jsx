@@ -13,8 +13,8 @@ export class LoginPageContainer extends Component {
     this.setState({ error: false })
     this.props.mutate({
       variables: formData
-    }).then(result => {
-      if (result.data.login && result.data.login.token) {
+    }).then(({ data }) => {
+      if (data.login && data.login.token) {
         return this.props.client.query({
           query: currentUser,
           fetchPolicy: 'network-only'
