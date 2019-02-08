@@ -1,4 +1,4 @@
-import { Bet, User } from '../models'
+import { Bet, User } from '../../models'
 import { findBet } from './bet'
 
 describe('Bet queries', () => {

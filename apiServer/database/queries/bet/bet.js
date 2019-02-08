@@ -1,4 +1,4 @@
-import { Bet } from '../models'
+import { Bet } from '../../models'
 
 export const findBet = (id) => (
   Bet.findById(id)
