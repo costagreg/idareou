@@ -1,30 +1,54 @@
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
-import { initialState } from '~src/shared/redux/configureStore' // TODO: Remove when redux is fully set up
 
 import HistoryPage from '~src/shared/Pages/HistoryPage'
 
-import { fetchToStore } from '~src/shared/redux/bets/bets'
-
-export class HistoryPageContainer extends Component {
-  static fetchData(store) {
-    return store.dispatch(fetchToStore(initialState().bets)) // TODO: Remove when redux is fully set up
+const DUMMYBETS = [
+  {
+    id: '0',
+    title: 'first bet',
+    description: 'Description my descripntion hahahaha',
+    amount: 10,
+    currency: '£',
+    options: [
+      {
+        opt: 'first',
+        choosen: true
+      },
+      {
+        opt: 'second choice',
+        choosen: false
+      }
+    ],
+    participants: ['jose', 'greg', 'myfriend'],
+    state: 'fail'
+  },
+  {
+    id: '1',
+    title: 'first bet',
+    description: 'Description my descripntion hahahaha',
+    amount: 10,
+    currency: '£',
+    options: [
+      {
+        opt: 'first',
+        choosen: true
+      },
+      {
+        opt: 'first',
+        choosen: false
+      }
+    ],
+    participants: ['jose', 'greg', 'myfriend'],
+    state: 'success'
   }
+]
 
-  componentDidMount() {
-    const { bets = [], fetchToStore } = this.props
-
-    if(!bets.length) {
-      fetchToStore(initialState().bets) // TODO: Remove when redux is fully set up
-    }
-  }
-
+export default class HistoryPageContainer extends Component {
   render() {
     return (
       <Fragment>
-        <HistoryPage bets={this.props.bets}/>
+        <HistoryPage bets={DUMMYBETS}/>
       </Fragment>
     )
   }
@@ -34,11 +58,3 @@ HistoryPageContainer.propTypes = {
   bets: PropTypes.array,
   fetchToStore: PropTypes.func
 }
-
-
-export default connect(
-  state => ({
-    bets: state.bets
-  }),
-  { fetchToStore }
-)(HistoryPageContainer)
