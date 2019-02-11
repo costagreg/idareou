@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql, withApollo } from 'react-apollo'
+import { withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import Proptypes from 'prop-types'
 
@@ -10,16 +10,17 @@ import { FormContainer } from '../FormContainer'
 
 export class LoginPageContainer extends Component {
   checkUser = formData => {
-    this.setState({ error: false })
-    this.props.mutate({
+    const { client, history } = this.props
+    client.mutate({
+      mutation: loginUser,
       variables: formData
     }).then(({ data }) => {
       if (data.login && data.login.token) {
-        return this.props.client.query({
+        client.query({
           query: currentUser,
           fetchPolicy: 'network-only'
         }).then(() => {
-          this.props.history.push('/dashboard')
+          history.push('/dashboard')
         })
       }
     })
@@ -37,9 +38,9 @@ export class LoginPageContainer extends Component {
 }
 
 LoginPageContainer.propTypes = {
-  client: Proptypes.object,
-  history: Proptypes.object
+  client: Proptypes.object.isRequired,
+  history: Proptypes.object.isRequired
 }
 
 
-export default withApollo(withRouter(graphql(loginUser)(LoginPageContainer)))
+export default withRouter(withApollo(LoginPageContainer))
