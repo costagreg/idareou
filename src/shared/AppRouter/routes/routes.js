@@ -3,6 +3,8 @@ import HistoryPageContainer from '~src/shared/Containers/HistoryPageContainer'
 import BetPage from '~src/shared/Pages/BetPage'
 import LoginPage from '~src/shared/Pages/LoginPage'
 import SignUpPage from '~src/shared/Pages/SignUpPage'
+import LogoutPage from '~src/shared/Pages/LogoutPage'
+import DashboardPage from '~src/shared/Pages/Dashboard'
 
 const routes = [
   {
@@ -11,24 +13,40 @@ const routes = [
     exact: true,
     name: 'Home'
   }, {
+    Component: DashboardPage,
+    path: '/dashboard',
+    exact: true,
+    name: 'Dashboard',
+    auth: true
+  }, {
     Component: HistoryPageContainer,
     path: '/history',
-    name: 'History'
+    name: 'History',
+    auth: true
   }, {
     Component: BetPage,
     path: '/bet',
     exact: true,
-    name: 'Bet'
+    name: 'Bet',
+    auth: true
   }, {
     Component: LoginPage,
     path: '/login',
     exact: true,
-    name: 'Login'
+    name: 'Login',
+    auth: false
   }, {
     Component: SignUpPage,
     path: '/signup',
     exact: true,
-    name: 'Signup'
+    name: 'Signup',
+    auth: false
+  }, {
+    Component: LogoutPage,
+    path: '/logout',
+    exact: true,
+    name: 'Logout',
+    auth: true
   }
 ]
 

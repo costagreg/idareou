@@ -1,9 +1,9 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql'
-import { findUsers } from '../../database/queries/user'
-import { UserType } from './user'
+import { findUsers } from '../../../database/queries/user'
+import { UserType } from '../index'
 
 
-export const BetType = new GraphQLObjectType({
+export default new GraphQLObjectType({
   name: 'Bet',
   fields: {
     _id: { type: GraphQLString },

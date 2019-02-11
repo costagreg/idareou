@@ -1,4 +1,4 @@
-import { User } from '../models'
+import { User } from '../../models'
 
 export const addUser = (data) => (
   User.create(data)
@@ -20,4 +20,8 @@ export const findUsers = (ids) => (
 
 export const findUser = (data) => (
   User.find(data)
+)
+
+export const findUserById = (_id) => (
+  User.findById(_id)
 )

@@ -1,1 +1,1 @@
-export { default, LoginPageContainer } from './LoginPageContainer'
+export { default } from './LoginPageContainer'

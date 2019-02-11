@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 import Enzyme from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 import 'babel-polyfill'
-import { User, Bet } from '../apiServer/database/models'
 
 // Setup enzyme's react adapter
 Enzyme.configure({ adapter: new EnzymeAdapter() })

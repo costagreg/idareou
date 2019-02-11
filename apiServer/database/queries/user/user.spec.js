@@ -1,4 +1,4 @@
-import { User } from '../models'
+import { User } from '../../models'
 import { addUser, findUser, updateUser, deleteUser, findUsers } from './user'
 
 describe('User queries', () => {

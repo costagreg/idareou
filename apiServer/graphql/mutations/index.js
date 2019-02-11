@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql'
-import { UserType } from '../types'
-import { addUser, deleteUser, updateUser } from '../../database/queries/user'
+import { UserType, LoginType } from '../types'
+import { addUser, deleteUser, updateUser, findUser } from '../../database/queries/user'
+import { attachTokenToResp } from '../../helpers/jwt'
 
 export const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -13,8 +14,11 @@ export const mutation = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         monzouser: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, args) {
-        return addUser(args)
+      async resolve(parentValue, args, context) {
+        const user = await addUser(args)
+        const { _id, email } = user
+        attachTokenToResp({ _id, email }, context)
+        return user
       }
     },
     deleteUser: {
@@ -37,6 +41,18 @@ export const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, { id, ...newData }) {
         return updateUser(id, { ...newData })
+      }
+    },
+    login: {
+      type: LoginType,
+      args: { email: { type: GraphQLString }, password: { type: GraphQLString } },
+      async resolve(parentValue, args, context) {
+        const userFound = await findUser(args)
+        if (userFound.length > 0) {
+          const { _id, email } = userFound[0]
+          const token = attachTokenToResp({ _id, email }, context)
+          return { token }
+        }
       }
     }
   }

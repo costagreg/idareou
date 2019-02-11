@@ -1,9 +1,12 @@
 import express from 'express'
-import expressGraphQL from 'express-graphql'
-import bodyParser from'body-parser'
+import bodyParser from 'body-parser'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import expressGraphQL from 'express-graphql'
+
 import dbConnection from './database/connection'
 import { RootQuery } from './graphql/schema'
+import { auth } from './helpers/jwt'
 
 const app = express()
 
@@ -16,16 +19,20 @@ const dbUrl = process.env.ENV !== 'prod'
 
 dbConnection(dbUrl)
 
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  origin: process.env.FRONTEND_URL
+}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
   next()
 })
-app.use('/graphql', expressGraphQL({
+app.use('/graphql', auth, expressGraphQL((req, res) => ({
   schema: RootQuery,
-  graphiql: true
-}))
+  graphiql: true,
+  context: { req, res }
+})))
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)

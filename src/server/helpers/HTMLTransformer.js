@@ -11,5 +11,5 @@ export default ({ content = '', preloadState = '', title = '' }) =>
         : resolve(data
           .replace('data-content', content)
           .replace('data-title', title)
-          .replace('data-preloadState', JSON.stringify(preloadState))))
+          .replace('dataPreloadState', JSON.stringify(preloadState))))
   })
