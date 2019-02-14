@@ -12,7 +12,7 @@ const DUMMYBETS = [
     currency: '£',
     options: [
       {
-        id: 0,
+        id: 'first choice',
         choosen: true
       },
       {
