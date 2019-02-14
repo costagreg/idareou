@@ -9,21 +9,23 @@ import { Button } from '~src/shared/Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export class LoginPageContainer extends Component {
-  checkUser = formData => {
+  checkUser = async formData => {
     const { client, history } = this.props
-    client.mutate({
+    const loggedUser = await client.mutate({
       mutation: loginUser,
       variables: formData
-    }).then(({ data }) => {
-      if (data.login && data.login.token) {
-        client.query({
-          query: currentUser,
-          fetchPolicy: 'network-only'
-        }).then(() => {
-          history.push('/dashboard')
-        })
-      }
     })
+    const { data: { login } } = loggedUser
+
+    if (login && login.token) {
+      const user = await client.query({
+        query: currentUser,
+        fetchPolicy: 'network-only'
+      })
+      if (user.data.currentUser) {
+        history.push('/dashboard')
+      }
+    }
   }
 
   render() {
