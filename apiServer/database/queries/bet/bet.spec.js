@@ -2,12 +2,24 @@ import { Bet, User } from '../../models'
 import { findBet } from './bet'
 
 describe('Bet queries', () => {
+  describe('addBet', async () => {
+  //   const bet = new Bet({
+  //     title: 'title',
+  //     description: 'description',
+  //     amount: 10,
+  //     currency: '£',
+  //     options: [],
+  //     participants: []
+  //   })
+  })
   describe('findBet', () => {
     it('finds bet by id', async () => {
       const user = new User({
         username: 'mockUsername'
       })
+
       await user.save()
+
       const bet = new Bet({
         title: 'mockTitle',
         users: [user.id]
@@ -17,7 +29,7 @@ describe('Bet queries', () => {
       const betFound = await findBet(bet.id)
       expect(betFound.id).toEqual(bet.id)
       expect(betFound.title).toEqual('mockTitle')
-      expect(betFound.users).not.toBe(null)
+      expect(betFound.participate).not.toBe(null)
     })
   })
 })

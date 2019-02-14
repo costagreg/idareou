@@ -6,7 +6,12 @@ const betSchema = new Schema({
   title: String,
   description: String,
   amount: Number,
-  users: [{
+  currency: String,
+  options: [{
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }],
+  participants: [{
     type: Schema.Types.ObjectId,
     ref: 'user'
   }]
