@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
@@ -7,17 +7,17 @@ import { currentUser } from '~src/shared/graphql/queries'
 import UserProfileCard from '~src/shared/Components/UserProfileCard'
 
 if (process.browser) {
-  require('./SideBar.scss')
+  require('./Sidebar.scss')
 }
 
-const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, data: { currentUser } }) => (
-  <div className="sidebar">
+export const Sidebar = ({ linskMarkUp, showSidebar, setShowSidebar, data: { currentUser } }) => (
+  <div className="Sidebar">
     <div
-      className={classNames('sidebar__overlay', { show: showSideBar })}
-      onClick={setShowSideBar}
+      className={classNames('Sidebar__overlay', { show: showSidebar })}
+      onClick={setShowSidebar}
     >
     </div>
-    <div className={classNames('sidepanel', { show: showSideBar })}>
+    <div className={classNames('sidepanel', { show: showSidebar })}>
       {
         currentUser &&
         <div className='sidepanel__userprofile'>
@@ -31,11 +31,11 @@ const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, data: { currentUser
   </div>
 )
 
-SideBar.propTypes = {
+Sidebar.propTypes = {
   userProfile: PropTypes.object,
   linskMarkUp: PropTypes.array,
-  showSideBar: PropTypes.bool,
-  setShowSideBar: PropTypes.func
+  showSidebar: PropTypes.bool,
+  setShowSidebar: PropTypes.func
 }
 
-export default graphql(currentUser)(SideBar)
+export default graphql(currentUser)(Sidebar)
