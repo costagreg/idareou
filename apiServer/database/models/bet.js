@@ -9,7 +9,7 @@ const betSchema = new Schema({
   currency: String,
   options: [{
     type: Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'betoption'
   }],
   participants: [{
     type: Schema.Types.ObjectId,
