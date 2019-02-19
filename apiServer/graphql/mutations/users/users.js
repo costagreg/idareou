@@ -46,6 +46,7 @@ export const userMutations = {
     args: { email: { type: GraphQLString }, password: { type: GraphQLString } },
     async resolve(parentValue, args, context) {
       const userFound = await findUser(args)
+      console.log('yeap', context)
       if (userFound.length > 0) {
         const { _id, email } = userFound[0]
         const token = attachTokenToResp({ _id, email }, context)

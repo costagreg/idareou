@@ -16,6 +16,7 @@ describe('user type', async () => {
 
     expect(data.user).toEqual([])
   })
+
   it('should return the user if it exists', async () => {
     const userData = {
       username: 'myMockUsername',
