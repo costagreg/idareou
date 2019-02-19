@@ -13,7 +13,7 @@ describe('LoginPage', () => {
       expect(component.find('PageTitle').exists()).toBe(true)
     })
     it('should render the LoginPageContainer', () => {
-      expect(component.find('LoginPageContainer').exists()).toBe(true)
+      expect(component.find('withRouter(withApollo(LoginPageContainer))').exists()).toBe(true)
     })
     it('should render the SignUp msg', () => {
       expect(component.find('.LoginPage__Msg').exists()).toBe(true)

@@ -37,11 +37,11 @@ describe('UserProfileCard', () => {
       describe('and username is passed by props', () => {
         it('should render the username', () => {
           const props = {
-            userName: 'mockUserName'
+            username: 'mockUserName'
           }
           const component = shallow(<UserProfileCard {...props}/>)
 
-          expect(component.find('.userprofilecard__userName').text()).toBe(props.userName)
+          expect(component.find('.userprofilecard__userName').text()).toBe(props.username)
         })
       })
       describe('and username is not passed by props', () => {

@@ -10,8 +10,8 @@ describe('Header', () => {
   describe('given Header component', () => {
     const props = {
       linskMarkUp: linkCreator(3),
-      showSideBar: false,
-      setShowSideBar: jest.fn()
+      showSidebar: false,
+      setShowSidebar: jest.fn()
     }
     afterEach(() => {
       jest.resetAllMocks()
@@ -36,11 +36,11 @@ describe('Header', () => {
       })
       describe('when the context is setup to not desktop', () => {
         const component = shallow(<Header context={{ isDesktop: false }} {...props}/>)
-        it('should render the sideBar component', () => {
-          const sideBar = component.find('SideBar')
+        it('should render the Sidebar component', () => {
+          const Sidebar = component.find('Apollo(Sidebar)')
 
-          expect(sideBar.length).toBe(1)
-          expect(sideBar.props()).toEqual(props)
+          expect(Sidebar.length).toBe(1)
+          expect(Sidebar.props()).toEqual(props)
         })
         it('should render the topnav__icon', () => {
           const burger = component.find('.topnav__icon')
@@ -52,17 +52,17 @@ describe('Header', () => {
           it('setshowSidebar should be called', () => {
             const burger = component.find('.topnav__icon')
 
-            expect(props.setShowSideBar).not.toHaveBeenCalled()
+            expect(props.setShowSidebar).not.toHaveBeenCalled()
 
             burger.simulate('click')
 
-            expect(props.setShowSideBar).toHaveBeenCalledTimes(1)
+            expect(props.setShowSidebar).toHaveBeenCalledTimes(1)
           })
         })
         describe('and slider is showing', () => {
           const newProps = {
             ...props,
-            showSideBar: true
+            showSidebar: true
           }
           const newComponent = shallow(<Header context={{ isDesktop: false }} {...newProps}/>)
 
