@@ -10,11 +10,11 @@ const betSchema = new Schema({
   options: [{
     type: Schema.Types.ObjectId,
     ref: 'betoption'
-  }],
-  participants: [{
-    type: Schema.Types.ObjectId,
-    ref: 'user'
   }]
+  // participants: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user'
+  // }]
 })
 
 export const Bet = mongoose.model('bet', betSchema)

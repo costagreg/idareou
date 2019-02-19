@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graphql'
 import { findUsers } from '../../../database/queries/user'
+import { BetOptionType } from '../betOption'
 import { UserType } from '../index'
 
 export default new GraphQLObjectType({
@@ -10,12 +11,12 @@ export default new GraphQLObjectType({
     description: { type: GraphQLString },
     amount: { type: GraphQLInt },
     currency: { type: GraphQLString },
-    // options: { type: new GraphQLList() },
-    participants: {
-      type: new GraphQLList(UserType),
-      resolve({ users }) {
-        return findUsers(users)
-      }
-    }
+    options: { type: BetOptionType }
+    // participants: {
+    //   type: new GraphQLList(UserType),
+    //   resolve({ users }) {
+    //     return findUsers(users)
+    //   }
+    // }
   }
 })
