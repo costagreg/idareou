@@ -3,7 +3,7 @@ import { RootQuery } from '../../schema'
 import { User } from '../../../database/models'
 
 describe('user type', async () => {
-  it('should be null when it doesnt exits', async () => {
+  xit('should be null when it doesnt exits', async () => {
     const query = `
       {
         user(username: "test", password: "test") {
@@ -17,7 +17,7 @@ describe('user type', async () => {
     expect(data.user).toEqual([])
   })
 
-  it('should return the user if it exists', async () => {
+  xit('should return the user if it exists', async () => {
     const userData = {
       username: 'myMockUsername',
       password: 'myMockPassword',

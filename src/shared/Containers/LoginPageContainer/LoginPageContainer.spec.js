@@ -31,15 +31,16 @@ describe('LoginPageContainer', () => {
     })
   })
   describe('checkUser', () => {
+    const formData = {
+      email: 'emailMock',
+      password: 'passwordMock'
+    }
+
     it('send login details to the backend', () => {
       const props = {
         client: {
           mutate: jest.fn()
         }
-      }
-      const formData = {
-        email: 'emailMock',
-        password: 'passwordMock'
       }
 
       const component = shallow(<LoginPageContainer {...props} />)
@@ -58,10 +59,6 @@ describe('LoginPageContainer', () => {
           history: {
             push: jest.fn()
           }
-        }
-        const formData = {
-          email: 'emailMock',
-          password: 'passwordMock'
         }
 
         const component = shallow(<LoginPageContainer {...props} />)
