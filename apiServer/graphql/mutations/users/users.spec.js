@@ -7,6 +7,14 @@ const context = {
     cookie: () => { }
   }
 }
+
+const userData = {
+  username: 'usernameMock',
+  password: 'passwordMock',
+  email: 'emailMock',
+  monzouser: 'monzoUser'
+}
+
 describe('Users mutation', () => {
   describe('addUser', () => {
     it('adds a new user', async () => {
@@ -18,18 +26,11 @@ describe('Users mutation', () => {
           }
         }
       `
-      const variables = {
-        username: 'usernameMock',
-        password: 'passwordMock',
-        email: 'emailMock',
-        monzouser: 'monzoUser'
-      }
-      const result = await graphql(RootQuery, addUserMutation, {}, context, variables)
-
+      const result = await graphql(RootQuery, addUserMutation, {}, context, userData)
       const { data: { addUser } } = result
 
       expect(addUser._id).not.toBe(null)
-      expect(addUser.username).toBe(variables.username)
+      expect(addUser.username).toBe(userData.username)
     })
   })
 
@@ -40,16 +41,8 @@ describe('Users mutation', () => {
           deleteUser(id: $id){
             _id
           }
-        }
-      `
-      const variables = {
-        username: 'usernameMock',
-        password: 'passwordMock',
-        email: 'emailMock',
-        monzouser: 'monzoUser'
-      }
-
-      const user = new User(variables)
+        }`
+      const user = new User(userData)
       await user.save()
 
       const result = await graphql(RootQuery, deleteUserMutation, {}, context, { id: user._id.toString() })
@@ -70,22 +63,15 @@ describe('Users mutation', () => {
           }
         }
       `
-      const variables = {
-        username: 'usernameMock',
-        password: 'passwordMock',
-        email: 'emailMock',
-        monzouser: 'monzoUser'
-      }
-
-      const user = new User(variables)
-      await user.save()
-
       const newVariables = {
         username: 'usernameMockNew',
         password: 'passwordMockNew',
         email: 'emailMockNew',
         monzouser: 'monzoUserNew'
       }
+
+      const user = new User(userData)
+      await user.save()
       const result = await graphql(RootQuery, updateUserMutation, {}, context, { id: user._id.toString(), ...newVariables })
       const foundUser = await User.findById(user._id)
 
@@ -105,12 +91,6 @@ describe('Users mutation', () => {
           token
         }
       }`
-      const userData = {
-        username: 'myMockUsername',
-        password: 'myMockPassword',
-        email: 'myMockEmail',
-        monzouser: 'myMonzoUser'
-      }
       const user = new User(userData)
       await user.save()
 
