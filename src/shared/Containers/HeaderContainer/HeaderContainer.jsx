@@ -8,14 +8,14 @@ import routes from '~src/shared/AppRouter/routes'
 
 export class HeaderContainer extends Component {
   state = {
-    showSideBar: false
+    showSidebar: false
   }
 
   static displayName = 'HeaderContainer'
 
-  setShowSideBar = () => {
+  setShowSidebar = () => {
     this.setState({
-      showSideBar: !this.state.showSideBar
+      showSidebar: !this.state.showSidebar
     })
   }
 
@@ -26,7 +26,7 @@ export class HeaderContainer extends Component {
         key={name}
         exact={exact}
         to={path}
-        onClick={this.setShowSideBar}
+        onClick={this.setShowSidebar}
         >
         {name}
       </NavLink>)
@@ -37,8 +37,8 @@ export class HeaderContainer extends Component {
       <Header
         context={this.props.context}
         linskMarkUp={this.getLinkMarkUp(routes)}
-        setShowSideBar={this.setShowSideBar}
-        showSideBar={this.state.showSideBar}
+        setShowSidebar={this.setShowSidebar}
+        showSidebar={this.state.showSidebar}
       />
     )
   }
