@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server:prod": "ENV=prod nodemon --ignore src/ ./apiServer/index.js",
-    "server:dev": "ENV=dev nodemon --ignore src/ ./apiServer/index.js",
-    "build:dev": "ENV=dev webpack",
-    "start:dev": "ENV=dev node ./src/server/index.js",
-    "start:prod": "ENV=prod npm run build && ENV=prod node index.js",
+    "server": "nodemon --ignore src/ ./apiServer/index.js",
+    "build": "webpack",
+    "start": "node ./src/server/index.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },

@@ -10,9 +10,8 @@ import { auth } from './helpers/jwt'
 
 const app = express()
 
-const port = process.env.PORT || 3001
+const port = process.env.API_PORT
 
-// Connect to DB
 const dbUrl = process.env.ENV !== 'prod'
   ? process.env.LOCAL_DB_URL
   : process.env.REMOTE_DB_URL
@@ -28,6 +27,7 @@ app.use(cookieParser())
 app.use((req, res, next) => {
   next()
 })
+
 app.use('/graphql', auth, expressGraphQL((req, res) => ({
   schema: RootQuery,
   graphiql: true,
