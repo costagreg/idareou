@@ -57,28 +57,28 @@ describe('HeaderContainer', () => {
           links.forEach((link, index) => {
             expect(link.key).toBe(mockRouters[index].name)
             expect(link.props.to).toBe(mockRouters[index].path)
-            expect(link.props.onClick).toBe(compInstance.setShowSidebar)
+            expect(link.props.onClick).toBe(compInstance.setShowSideBar)
             expect(link.props.children).toBe(mockRouters[index].name)
           })
         })
       })
-      describe('when trying to toggle sidebar', () => {
-        it('should set up the new sidebar shown status and pass to children component', () => {
+      describe('when trying to toggle SideBar', () => {
+        it('should set up the new SideBar shown status and pass to children component', () => {
           const component = shallow(<HeaderContainer />)
           const compInstance = component.instance()
 
-          expect(compInstance.state.showSidebar).toBe(false)
-          expect(component.find('Header').props().showSidebar).toBe(false)
+          expect(compInstance.state.showSideBar).toBe(false)
+          expect(component.find('Header').props().showSideBar).toBe(false)
 
-          compInstance.setShowSidebar()
+          compInstance.setShowSideBar()
 
-          expect(compInstance.state.showSidebar).toBe(true)
-          expect(component.find('Header').props().showSidebar).toBe(true)
+          expect(compInstance.state.showSideBar).toBe(true)
+          expect(component.find('Header').props().showSideBar).toBe(true)
 
-          compInstance.setShowSidebar()
+          compInstance.setShowSideBar()
 
-          expect(compInstance.state.showSidebar).toBe(false)
-          expect(component.find('Header').props().showSidebar).toBe(false)
+          expect(compInstance.state.showSideBar).toBe(false)
+          expect(component.find('Header').props().showSideBar).toBe(false)
         })
       })
     })

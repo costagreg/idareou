@@ -2,18 +2,18 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import Sidebar from '~src/shared/Components/common/Sidebar'
+import SideBar from '~src/shared/Components/common/SideBar'
 
 if(process.browser) {
   require('./Header.scss')
 }
 
-const Header = ({ context = {}, linskMarkUp, showSidebar, setShowSidebar } = {}) =>
+const Header = ({ context = {}, linskMarkUp, showSideBar, setShowSideBar } = {}) =>
   <header className='header'>
     <div className='topnav'>
       {
         !context.isDesktop &&
-          <i onClick={setShowSidebar} className={classNames('fa fa-bars', 'topnav__icon', { rotate: showSidebar })}></i>
+          <i onClick={setShowSideBar} className={classNames('fa fa-bars', 'topnav__icon', { rotate: showSideBar })}></i>
       }
       <div className='topnav__logo'>
         IdareOu
@@ -21,10 +21,10 @@ const Header = ({ context = {}, linskMarkUp, showSidebar, setShowSidebar } = {})
       {
         context.isDesktop
           ? <ul className='topnav__navigation'>{linskMarkUp}</ul>
-          : <Sidebar
+          : <SideBar
               linskMarkUp={linskMarkUp}
-              showSidebar={showSidebar}
-              setShowSidebar={setShowSidebar}
+              showSideBar={showSideBar}
+              setShowSideBar={setShowSideBar}
             />
       }
     </div>
@@ -33,8 +33,8 @@ const Header = ({ context = {}, linskMarkUp, showSidebar, setShowSidebar } = {})
 Header.propTypes = {
   context: PropTypes.object,
   linskMarkUp: PropTypes.array,
-  showSidebar: PropTypes.bool,
-  setShowSidebar: PropTypes.func
+  showSideBar: PropTypes.bool,
+  setShowSideBar: PropTypes.func
 }
 
 export default Header

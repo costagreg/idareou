@@ -1,17 +1,17 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { Sidebar } from './Sidebar'
+import { SideBar } from './SideBar'
 
 const linkCreator = (num) =>
   Array(num).fill('link').map((link, index) => <li key={index}>{link}</li>)
 
-describe('Sidebar', () => {
-  describe('given a Sidebar component', () => {
+describe('SideBar', () => {
+  describe('given a SideBar component', () => {
     const props = {
       linskMarkUp: linkCreator(3),
-      showSidebar: false,
-      setShowSidebar: jest.fn(),
+      showSideBar: false,
+      setShowSideBar: jest.fn(),
       data: {
         currentUser: {
           email: 'costagregorialessio@gmail.com',
@@ -23,12 +23,12 @@ describe('Sidebar', () => {
       jest.resetAllMocks()
     })
     describe('when trying to render the component', () => {
-      const component = shallow(<Sidebar {...props}/>)
+      const component = shallow(<SideBar {...props}/>)
       it('should render the componet', () => {
         expect(component.length).toBe(1)
       })
-      it('should render the Sidebar overlay', () => {
-        const shadow = component.find('.Sidebar__overlay')
+      it('should render the SideBar overlay', () => {
+        const shadow = component.find('.SideBar__overlay')
 
         expect(shadow.length).toBe(1)
         expect(shadow.hasClass('show')).toBe(false)
@@ -49,38 +49,38 @@ describe('Sidebar', () => {
           const newProps = {
             ...props
           }
-          const newComponent = shallow(<Sidebar {...newProps}/>)
+          const newComponent = shallow(<SideBar {...newProps}/>)
           const userProfile = newComponent.find('UserProfileCard')
 
           expect(newComponent.find('.sidepanel__userprofile').length).toBe(1)
           expect(userProfile.props()).toEqual(props.data.currentUser)
         })
       })
-      describe('and the the Sidebar is set up to show', () => {
+      describe('and the the SideBar is set up to show', () => {
         const newProps = {
           ...props,
-          showSidebar: true
+          showSideBar: true
         }
-        const newComponent = shallow(<Sidebar {...newProps}/>)
-        it('should show the Sidebar overlay', () => {
-          const shadow = newComponent.find('.Sidebar__overlay')
+        const newComponent = shallow(<SideBar {...newProps}/>)
+        it('should show the SideBar overlay', () => {
+          const shadow = newComponent.find('.SideBar__overlay')
 
           expect(shadow.hasClass('show')).toBe(true)
         })
-        it('should show the Sidebar panel', () => {
+        it('should show the SideBar panel', () => {
           const panel = newComponent.find('.sidepanel')
 
           expect(panel.hasClass('show')).toBe(true)
         })
       })
       describe('when clicking on the overlay', () => {
-        it('should call the setShowSidebar', () => {
-          const shadow = component.find('.Sidebar__overlay')
+        it('should call the setShowSideBar', () => {
+          const shadow = component.find('.SideBar__overlay')
 
-          expect(props.setShowSidebar).not.toHaveBeenCalled()
+          expect(props.setShowSideBar).not.toHaveBeenCalled()
           shadow.simulate('click')
 
-          expect(props.setShowSidebar).toHaveBeenCalledTimes(1)
+          expect(props.setShowSideBar).toHaveBeenCalledTimes(1)
         })
       })
     })

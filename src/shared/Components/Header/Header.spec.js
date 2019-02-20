@@ -10,8 +10,8 @@ describe('Header', () => {
   describe('given Header component', () => {
     const props = {
       linskMarkUp: linkCreator(3),
-      showSidebar: false,
-      setShowSidebar: jest.fn()
+      showSideBar: false,
+      setShowSideBar: jest.fn()
     }
     afterEach(() => {
       jest.resetAllMocks()
@@ -36,11 +36,11 @@ describe('Header', () => {
       })
       describe('when the context is setup to not desktop', () => {
         const component = shallow(<Header context={{ isDesktop: false }} {...props}/>)
-        it('should render the Sidebar component', () => {
-          const Sidebar = component.find('Apollo(Sidebar)')
+        it('should render the SideBar component', () => {
+          const SideBar = component.find('Apollo(SideBar)')
 
-          expect(Sidebar.length).toBe(1)
-          expect(Sidebar.props()).toEqual(props)
+          expect(SideBar.length).toBe(1)
+          expect(SideBar.props()).toEqual(props)
         })
         it('should render the topnav__icon', () => {
           const burger = component.find('.topnav__icon')
@@ -49,20 +49,20 @@ describe('Header', () => {
           expect(burger.hasClass('rotate')).toBe(false)
         })
         describe('and click on the header burger', () => {
-          it('setshowSidebar should be called', () => {
+          it('setshowSideBar should be called', () => {
             const burger = component.find('.topnav__icon')
 
-            expect(props.setShowSidebar).not.toHaveBeenCalled()
+            expect(props.setShowSideBar).not.toHaveBeenCalled()
 
             burger.simulate('click')
 
-            expect(props.setShowSidebar).toHaveBeenCalledTimes(1)
+            expect(props.setShowSideBar).toHaveBeenCalledTimes(1)
           })
         })
         describe('and slider is showing', () => {
           const newProps = {
             ...props,
-            showSidebar: true
+            showSideBar: true
           }
           const newComponent = shallow(<Header context={{ isDesktop: false }} {...newProps}/>)
 

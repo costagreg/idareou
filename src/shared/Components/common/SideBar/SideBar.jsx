@@ -7,17 +7,17 @@ import { currentUser } from '~src/shared/graphql/queries'
 import UserProfileCard from '~src/shared/Components/UserProfileCard'
 
 if (process.browser) {
-  require('./Sidebar.scss')
+  require('./SideBar.scss')
 }
 
-export const Sidebar = ({ linskMarkUp, showSidebar, setShowSidebar, data: { currentUser } }) => (
-  <div className="Sidebar">
+export const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, data: { currentUser } }) => (
+  <div className="SideBar">
     <div
-      className={classNames('Sidebar__overlay', { show: showSidebar })}
-      onClick={setShowSidebar}
+      className={classNames('SideBar__overlay', { show: showSideBar })}
+      onClick={setShowSideBar}
     >
     </div>
-    <div className={classNames('sidepanel', { show: showSidebar })}>
+    <div className={classNames('sidepanel', { show: showSideBar })}>
       {
         currentUser &&
         <div className='sidepanel__userprofile'>
@@ -31,11 +31,11 @@ export const Sidebar = ({ linskMarkUp, showSidebar, setShowSidebar, data: { curr
   </div>
 )
 
-Sidebar.propTypes = {
+SideBar.propTypes = {
   userProfile: PropTypes.object,
   linskMarkUp: PropTypes.array,
-  showSidebar: PropTypes.bool,
-  setShowSidebar: PropTypes.func
+  showSideBar: PropTypes.bool,
+  setShowSideBar: PropTypes.func
 }
 
-export default graphql(currentUser)(Sidebar)
+export default graphql(currentUser)(SideBar)
