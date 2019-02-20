@@ -1,7 +1,7 @@
 import { Bet, User } from '../../models'
 import { findBet } from './bet'
 
-describe('Bet queries', () => {
+fdescribe('Bet queries', () => {
   describe('addBet', async () => {
   //   const bet = new Bet({
   //     title: 'title',
