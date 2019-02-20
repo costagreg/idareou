@@ -28,7 +28,7 @@ describe('SideBar', () => {
         expect(component.length).toBe(1)
       })
       it('should render the SideBar overlay', () => {
-        const shadow = component.find('.SideBar__overlay')
+        const shadow = component.find('.sidebar__overlay')
 
         expect(shadow.length).toBe(1)
         expect(shadow.hasClass('show')).toBe(false)
@@ -63,7 +63,7 @@ describe('SideBar', () => {
         }
         const newComponent = shallow(<SideBar {...newProps}/>)
         it('should show the SideBar overlay', () => {
-          const shadow = newComponent.find('.SideBar__overlay')
+          const shadow = newComponent.find('.sidebar__overlay')
 
           expect(shadow.hasClass('show')).toBe(true)
         })
@@ -75,7 +75,7 @@ describe('SideBar', () => {
       })
       describe('when clicking on the overlay', () => {
         it('should call the setShowSideBar', () => {
-          const shadow = component.find('.SideBar__overlay')
+          const shadow = component.find('.sidebar__overlay')
 
           expect(props.setShowSideBar).not.toHaveBeenCalled()
           shadow.simulate('click')
