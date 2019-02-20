@@ -15,3 +15,7 @@ beforeAll((done) => {
       console.log(err)
     })
 })
+
+process.env = {
+  JWT_SECRET: 'asdsd'
+}

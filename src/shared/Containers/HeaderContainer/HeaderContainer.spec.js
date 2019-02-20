@@ -62,8 +62,8 @@ describe('HeaderContainer', () => {
           })
         })
       })
-      describe('when trying to toggle sidebar', () => {
-        it('should set up the new sideBar shown status and pass to children component', () => {
+      describe('when trying to toggle SideBar', () => {
+        it('should set up the new SideBar shown status and pass to children component', () => {
           const component = shallow(<HeaderContainer />)
           const compInstance = component.instance()
 

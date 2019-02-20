@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
@@ -10,7 +10,7 @@ if (process.browser) {
   require('./SideBar.scss')
 }
 
-const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, data: { currentUser } }) => (
+export const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, data: { currentUser } }) => (
   <div className="sidebar">
     <div
       className={classNames('sidebar__overlay', { show: showSideBar })}

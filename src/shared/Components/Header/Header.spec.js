@@ -36,8 +36,8 @@ describe('Header', () => {
       })
       describe('when the context is setup to not desktop', () => {
         const component = shallow(<Header context={{ isDesktop: false }} {...props}/>)
-        it('should render the sideBar component', () => {
-          const sideBar = component.find('SideBar')
+        it('should render the SideBar component', () => {
+          const sideBar = component.find('Apollo(SideBar)')
 
           expect(sideBar.length).toBe(1)
           expect(sideBar.props()).toEqual(props)
@@ -49,7 +49,7 @@ describe('Header', () => {
           expect(burger.hasClass('rotate')).toBe(false)
         })
         describe('and click on the header burger', () => {
-          it('setshowSidebar should be called', () => {
+          it('setshowSideBar should be called', () => {
             const burger = component.find('.topnav__icon')
 
             expect(props.setShowSideBar).not.toHaveBeenCalled()

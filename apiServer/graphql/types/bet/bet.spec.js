@@ -3,7 +3,7 @@ import { RootQuery } from '../../schema'
 import { Bet, User } from '../../../database/models'
 
 describe('bet type', async () => {
-  it('should be null when it doesnt exits', async () => {
+  xit('should be null when it doesnt exits', async () => {
     const query = `
       {
         bet(id: "5c46d806e7179a544940a78a") {
@@ -16,7 +16,7 @@ describe('bet type', async () => {
 
     expect(data.bet).toBe(null)
   })
-  it('should return the bet if it exists', async () => {
+  xit('should return the bet if it exists', async () => {
     const user = new User({
       username: 'mockUsername'
     })
