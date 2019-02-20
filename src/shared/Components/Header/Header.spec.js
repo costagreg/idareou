@@ -37,10 +37,10 @@ describe('Header', () => {
       describe('when the context is setup to not desktop', () => {
         const component = shallow(<Header context={{ isDesktop: false }} {...props}/>)
         it('should render the SideBar component', () => {
-          const SideBar = component.find('Apollo(SideBar)')
+          const sideBar = component.find('Apollo(SideBar)')
 
-          expect(SideBar.length).toBe(1)
-          expect(SideBar.props()).toEqual(props)
+          expect(sideBar.length).toBe(1)
+          expect(sideBar.props()).toEqual(props)
         })
         it('should render the topnav__icon', () => {
           const burger = component.find('.topnav__icon')

@@ -11,9 +11,9 @@ if (process.browser) {
 }
 
 export const SideBar = ({ linskMarkUp, showSideBar, setShowSideBar, data: { currentUser } }) => (
-  <div className="SideBar">
+  <div className="sidebar">
     <div
-      className={classNames('SideBar__overlay', { show: showSideBar })}
+      className={classNames('sidebar__overlay', { show: showSideBar })}
       onClick={setShowSideBar}
     >
     </div>
