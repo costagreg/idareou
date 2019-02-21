@@ -1,1 +1,1 @@
-export { RootQuery } from './schema'
+export { schema } from './schema'
