@@ -51,7 +51,6 @@ export const userMutations = {
       if (userFound.length > 0) {
         const { _id, email, password } = userFound[0]
         const isValidPassword = await bcrypt.compareSync(userPassword, password)
-
         if (isValidPassword) {
           const token = attachTokenToResp({ _id, email }, context)
           return { token }

@@ -1,4 +1,5 @@
 import { graphql } from 'graphql'
+import bcrypt from 'bcrypt'
 import { RootQuery } from '../../schema'
 import { User } from '../../../database/models'
 
@@ -91,7 +92,8 @@ describe('Users mutation', () => {
           token
         }
       }`
-      const user = new User(userData)
+      const passwordHash = await bcrypt.hashSync(userData.password, 10)
+      const user = new User({ ...userData, password: passwordHash })
       await user.save()
 
       const variables = { email: userData.email, password: userData.password }

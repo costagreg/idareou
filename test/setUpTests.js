@@ -16,6 +16,10 @@ beforeAll((done) => {
     })
 })
 
+beforeEach((done) => {
+  mongoose.connection.db.dropDatabase(done)
+})
+
 process.env = {
   JWT_SECRET: 'asdsd'
 }

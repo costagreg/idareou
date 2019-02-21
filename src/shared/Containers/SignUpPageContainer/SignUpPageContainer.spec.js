@@ -4,7 +4,20 @@ import { shallow } from 'enzyme'
 import { SignUpPageContainer } from './SignUpPageContainer'
 import { addUser, currentUser } from '~src/shared/graphql/queries'
 
+const initProps = {
+  client: {
+    mutate: jest.fn(() => ({ data: { addUser: { _id: 'idmock' } } })),
+    query: jest.fn(() => ({ data: { currentUser: {} } }))
+  },
+  history: {
+    push: jest.fn(() => {})
+  }
+}
+
 describe('given SignUpPageContainer component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
   describe('when trying to render the SignUpPageContainer component', () => {
     const component = shallow(<SignUpPageContainer />)
 
@@ -23,12 +36,7 @@ describe('given SignUpPageContainer component', () => {
   })
 
   describe('checkAndSaveData', () => {
-    it('sends form data to the backend', () => {
-      const props = {
-        client: {
-          mutate: jest.fn()
-        }
-      }
+    it('sends form data to the backend', async () => {
       const formData = {
         username: 'username',
         email: 'email',
@@ -36,10 +44,12 @@ describe('given SignUpPageContainer component', () => {
         confirmPassword: 'confirmPassword',
         monzouser: 'monzouser'
       }
-
+      const props = {
+        ...initProps
+      }
       const component = shallow(<SignUpPageContainer {...props} />)
-      component.instance().checkAndSaveData(formData)
 
+      await component.instance().checkAndSaveData(formData)
       expect(props.client.mutate).toHaveBeenCalledWith({
         mutation: addUser,
         variables: formData
@@ -47,18 +57,12 @@ describe('given SignUpPageContainer component', () => {
     })
     describe('if signup is successful', () => {
       it('refetches the currentUser and redirect to dashboard', async () => {
-        const props = {
-          client: {
-            mutate: () => ({ data: { addUser: { _id: 'idmock' } } }),
-            query: jest.fn(() => ({ data: { currentUser: {} } }))
-          },
-          history: {
-            push: jest.fn()
-          }
-        }
         const formData = {
           email: 'emailMock',
           password: 'passwordMock'
+        }
+        const props = {
+          ...initProps
         }
 
         const component = shallow(<SignUpPageContainer {...props} />)
