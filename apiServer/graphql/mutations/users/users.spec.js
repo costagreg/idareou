@@ -48,9 +48,9 @@ describe('Users mutation', () => {
 
       const result = await graphql(RootQuery, deleteUserMutation, {}, context, { id: user._id.toString() })
       const { data: { deleteUser } } = result
-      const foundUser = User.findById(user._id)
+      const foundUser = await User.findById(user._id)
 
-      expect(foundUser).not.toEqual(null)
+      expect(foundUser).toEqual(null)
       expect(deleteUser._id).toEqual(user._id.toString())
     })
   })

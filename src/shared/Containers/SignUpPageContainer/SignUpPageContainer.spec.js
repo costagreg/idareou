@@ -47,9 +47,10 @@ describe('given SignUpPageContainer component', () => {
       const props = {
         ...initProps
       }
-      const component = shallow(<SignUpPageContainer {...props} />)
 
+      const component = shallow(<SignUpPageContainer {...props} />)
       await component.instance().checkAndSaveData(formData)
+
       expect(props.client.mutate).toHaveBeenCalledWith({
         mutation: addUser,
         variables: formData
