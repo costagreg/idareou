@@ -4,9 +4,19 @@ import { shallow } from 'enzyme'
 import { LoginPageContainer } from './LoginPageContainer'
 import { loginUser, currentUser } from '~src/shared/graphql/queries'
 
+const initProps = {
+  client: {
+    mutate: jest.fn(() => ({ data: { login: { token: 'tokenmock' } } })),
+    query: jest.fn(() => ({ data: { currentUser: {} } }))
+  },
+  history: {
+    push: jest.fn()
+  }
+}
+
 describe('LoginPageContainer', () => {
-  afterEach(() => {
-    jest.resetAllMocks()
+  beforeEach(() => {
+    jest.clearAllMocks()
   })
   describe('renders', () => {
     it('renders a form', () => {
@@ -36,15 +46,13 @@ describe('LoginPageContainer', () => {
       password: 'passwordMock'
     }
 
-    it('send login details to the backend', () => {
+    it('send login details to the backend', async () => {
       const props = {
-        client: {
-          mutate: jest.fn()
-        }
+        ...initProps
       }
 
       const component = shallow(<LoginPageContainer {...props} />)
-      component.instance().checkUser(formData)
+      await component.instance().checkUser(formData)
 
       expect(props.client.mutate).toHaveBeenCalledWith({ mutation: loginUser, variables: formData })
     })
@@ -52,13 +60,7 @@ describe('LoginPageContainer', () => {
     describe('login is positive', () => {
       it('refetches the currentUser and redirect to dashboard', async () => {
         const props = {
-          client: {
-            mutate: () => ({ data: { login: { token: 'tokenmock' } } }),
-            query: jest.fn(() => ({ data: { currentUser: {} } }))
-          },
-          history: {
-            push: jest.fn()
-          }
+          ...initProps
         }
 
         const component = shallow(<LoginPageContainer {...props} />)

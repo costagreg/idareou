@@ -1,4 +1,5 @@
 import { graphql } from 'graphql'
+import bcrypt from 'bcrypt'
 import { RootQuery } from '../../schema'
 import { User } from '../../../database/models'
 
@@ -7,6 +8,13 @@ const loginMutation = `mutation Login($email: String!,$password: String!){
     token
   }
 }`
+
+const userData = {
+  username: 'usernameMock',
+  password: 'passwordMock',
+  email: 'emailMock',
+  monzouser: 'monzoUser'
+}
 
 describe('Login type', async () => {
   it('should be null when it doesnt exits', async () => {
@@ -18,13 +26,8 @@ describe('Login type', async () => {
   })
 
   it('should return the token if it exists', async () => {
-    const userData = {
-      username: 'myMockUsername',
-      password: 'myMockPassword',
-      email: 'myMockEmail',
-      monzouser: 'myMonzoUser'
-    }
-    const user = new User(userData)
+    const passwordHash = await bcrypt.hashSync(userData.password, 10)
+    const user = new User({ ...userData, password: passwordHash })
     await user.save()
 
     const variables = { email: userData.email, password: userData.password }

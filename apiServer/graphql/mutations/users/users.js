@@ -1,8 +1,9 @@
 import { GraphQLString, GraphQLNonNull } from 'graphql'
+import bcrypt from 'bcrypt'
+
 import { UserType, LoginType } from '../../types'
 import { addUser, deleteUser, updateUser, findUser } from '../../../database/queries/user'
 import { attachTokenToResp } from '../../../helpers/jwt'
-
 export const userMutations = {
   addUser: {
     type: UserType,
@@ -13,7 +14,8 @@ export const userMutations = {
       monzouser: { type: new GraphQLNonNull(GraphQLString) }
     },
     async resolve(parentValue, args, context) {
-      const user = await addUser(args)
+      const passwordHash = await bcrypt.hash(args.password, 10)
+      const user = await addUser({ ...args, password: passwordHash })
       const { _id, email } = user
       attachTokenToResp({ _id, email }, context)
       return user
@@ -44,13 +46,15 @@ export const userMutations = {
   login: {
     type: LoginType,
     args: { email: { type: GraphQLString }, password: { type: GraphQLString } },
-    async resolve(parentValue, args, context) {
-      const userFound = await findUser(args)
-
+    async resolve(parentValue, { email: userEmail, password: userPassword }, context) {
+      const userFound = await findUser({ email: userEmail })
       if (userFound.length > 0) {
-        const { _id, email } = userFound[0]
-        const token = attachTokenToResp({ _id, email }, context)
-        return { token }
+        const { _id, email, password } = userFound[0]
+        const isValidPassword = await bcrypt.compareSync(userPassword, password)
+        if (isValidPassword) {
+          const token = attachTokenToResp({ _id, email }, context)
+          return { token }
+        }
       }
     }
   }
