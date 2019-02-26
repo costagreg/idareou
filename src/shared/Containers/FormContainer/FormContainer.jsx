@@ -33,6 +33,7 @@ class FormContainer extends Component {
   }
 
   getValues = (obj) => {
+    window.JOSE = obj
     return Object.keys(obj).reduce((acc, key) => ({ ...acc, [key]: obj[key].value }), {})
   }
 

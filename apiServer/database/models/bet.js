@@ -17,7 +17,10 @@ const betSchema = new Schema({
   title: String,
   description: String,
   amount: Number,
-  currency: String,
+  currency: {
+    type: String,
+    default: '£'
+  },
   master: {
     type: Schema.Types.ObjectId,
     ref: 'user'

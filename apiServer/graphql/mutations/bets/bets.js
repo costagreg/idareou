@@ -11,7 +11,7 @@ export const betMutations = {
       title: { type: new GraphQLNonNull(GraphQLString) },
       description: { type: new GraphQLNonNull(GraphQLString) },
       amount: { type: new GraphQLNonNull(GraphQLFloat) },
-      currency: { type: new GraphQLNonNull(GraphQLString) },
+      currency: { type: GraphQLString },
       options: { type: new GraphQLList(GraphQLString) }
     },
     async resolve(parentValue, args, { req: { user } }) {
