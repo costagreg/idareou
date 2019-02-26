@@ -10,6 +10,14 @@ import { Button } from '~src/shared/Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export class BetPageContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.optionTemplate = { name: 'option', placeholder: 'Write your option' }
+    this.state = {
+      options: [this.optionTemplate]
+    }
+  }
+
   optionTransformer(data) {
     const currentOptions = []
     Object.keys(data).forEach(key => {
@@ -39,11 +47,13 @@ export class BetPageContainer extends Component {
   render() {
     return (
       <FormContainer onSubmit={this.createBet}>
-        <TextInput name='title' placeholder='Title' />
-        <TextArea name='description' placeholder='Description' />
+        <TextInput name='title' placeholder='Title' required/>
+        <TextArea name='description' placeholder='Description' required/>
         <AmountInput name='amount' value='0.00' />
-        <TextInput name='option1' placeholder='Write your option' />
-        <TextInput name='option2' placeholder='Write your option' />
+        {
+          this.state.options.map((opt, index) =>
+            <TextInput key={`${opt.name}-${index}`} name={opt.name} placeholder={opt.placeholder} />)
+        }
         <Button>Create Bet</Button>
       </FormContainer>
     )
