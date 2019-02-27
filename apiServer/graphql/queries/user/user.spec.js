@@ -1,5 +1,5 @@
 import { graphql } from 'graphql'
-import { RootQuery } from '../../schema'
+import { schema } from '../../schema'
 import { User } from '../../../database/models'
 
 describe('user queries', () => {
@@ -20,7 +20,7 @@ describe('user queries', () => {
       const user = new User(userData)
       await user.save()
 
-      const result = await graphql(RootQuery, query, {}, { req: { user: { _id: user._id.toString() } } })
+      const result = await graphql(schema, query, {}, { req: { user: { _id: user._id.toString() } } })
       const { data: { currentUser } } = result
 
       expect(currentUser._id).toEqual(user._id.toString())

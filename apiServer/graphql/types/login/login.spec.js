@@ -1,6 +1,6 @@
 import { graphql } from 'graphql'
 import bcrypt from 'bcrypt'
-import { RootQuery } from '../../schema'
+import { schema } from '../../schema'
 import { User } from '../../../database/models'
 
 const loginMutation = `mutation Login($email: String!,$password: String!){
@@ -19,7 +19,7 @@ const userData = {
 describe('Login type', async () => {
   it('should be null when it doesnt exits', async () => {
     const variables = { email: 'mockEmail', password: 'mockPassword' }
-    const result = await graphql(RootQuery, loginMutation, {}, {}, variables)
+    const result = await graphql(schema, loginMutation, {}, {}, variables)
     const { data: { login } } = result
 
     expect(login).toEqual(null)
@@ -39,7 +39,7 @@ describe('Login type', async () => {
         }
       }
     }
-    const result = await graphql(RootQuery, loginMutation, {}, context, variables)
+    const result = await graphql(schema, loginMutation, {}, context, variables)
     const { data: { login: { token } } } = result
 
     expect(cookies.token).toEqual(token)
