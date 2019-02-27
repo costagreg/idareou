@@ -1,6 +1,6 @@
 import { GraphQLString, GraphQLNonNull, GraphQLFloat, GraphQLList } from 'graphql'
 import { BetType } from '../../types'
-import { addBet, updateBetParticipant } from '../../../database/queries/bet'
+import { addBet, updateBetParticipant, findBet } from '../../../database/queries/bet'
 import { addBetOption } from '../../../database/queries/betOption'
 
 
@@ -32,9 +32,11 @@ export const betMutations = {
     },
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {
-        const updtatedBet = await updateBetParticipant(args.betId, user._id, args.optionId)
+        const updtateBet = await updateBetParticipant(args.betId, user._id, args.optionId)
 
-        return updtatedBet
+        const betUpdated = await findBet(updtateBet._id)
+
+        return betUpdated
       }
     }
   }
