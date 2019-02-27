@@ -20,9 +20,9 @@ export class BetPageContainer extends Component {
 
   optionTransformer(data) {
     const currentOptions = []
-    Object.keys(data).forEach(key => {
+    Object.entries(data).filter(([key, value]) => {
       if(key.startsWith('option')) {
-        currentOptions.push(key)
+        currentOptions.push(value)
       }
     })
 
