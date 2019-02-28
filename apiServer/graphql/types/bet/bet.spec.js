@@ -1,5 +1,5 @@
 import { graphql } from 'graphql'
-import { RootQuery } from '../../schema'
+import { schema } from '../../schema'
 import { Bet, User } from '../../../database/models'
 
 describe('bet type', async () => {
@@ -11,7 +11,7 @@ describe('bet type', async () => {
         }
       }
     `
-    const result = await graphql(RootQuery, query, {}, {})
+    const result = await graphql(schema, query, {}, {})
     const { data } = result
 
     expect(data.bet).toBe(null)
@@ -36,7 +36,7 @@ describe('bet type', async () => {
         }
       }`
 
-    const result = await graphql(RootQuery, query, {}, {})
+    const result = await graphql(schema, query, {}, {})
     const { data } = result
 
     expect(data.bet.title).toBe('mockTitle')

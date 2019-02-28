@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 import expressGraphQL from 'express-graphql'
 
 import dbConnection from './database/connection'
-import { RootQuery } from './graphql/schema'
+import { schema } from './graphql/schema'
 import { auth } from './helpers/jwt'
 
 const app = express()
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/graphql', auth, expressGraphQL((req, res) => ({
-  schema: RootQuery,
+  schema,
   graphiql: true,
   context: { req, res }
 })))

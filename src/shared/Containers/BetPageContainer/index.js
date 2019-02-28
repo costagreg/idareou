@@ -1,1 +1,1 @@
-export { default, BetPageContainer } from './BetPageContainer'
+export { default } from './BetPageContainer'

@@ -1,5 +1,5 @@
 import { graphql } from 'graphql'
-import { RootQuery } from '../../schema'
+import { schema } from '../../schema'
 import { User } from '../../../database/models'
 
 describe('user type', async () => {
@@ -11,7 +11,7 @@ describe('user type', async () => {
         }
       }
     `
-    const result = await graphql(RootQuery, query, {}, {})
+    const result = await graphql(schema, query, {}, {})
     const { data } = result
 
     expect(data.user).toEqual([])
@@ -36,7 +36,7 @@ describe('user type', async () => {
           monzouser
         }
       }`
-    const result = await graphql(RootQuery, query, {}, {})
+    const result = await graphql(schema, query, {}, {})
     const { data } = result
 
     expect(data.user).not.toBe(null)

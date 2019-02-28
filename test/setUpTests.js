@@ -23,3 +23,9 @@ beforeEach((done) => {
 process.env = {
   JWT_SECRET: 'asdsd'
 }
+
+afterAll((done) => {
+  mongoose.connection.db.dropDatabase(() => {
+    mongoose.connection.close(done)
+  })
+})

@@ -1,6 +1,6 @@
 import { graphql } from 'graphql'
 import bcrypt from 'bcrypt'
-import { RootQuery } from '../../schema'
+import { schema } from '../../schema'
 import { User } from '../../../database/models'
 
 const context = {
@@ -27,7 +27,7 @@ describe('Users mutation', () => {
           }
         }
       `
-      const result = await graphql(RootQuery, addUserMutation, {}, context, userData)
+      const result = await graphql(schema, addUserMutation, {}, context, userData)
       const { data: { addUser } } = result
 
       expect(addUser._id).not.toBe(null)
@@ -46,7 +46,7 @@ describe('Users mutation', () => {
       const user = new User(userData)
       await user.save()
 
-      const result = await graphql(RootQuery, deleteUserMutation, {}, context, { id: user._id.toString() })
+      const result = await graphql(schema, deleteUserMutation, {}, context, { id: user._id.toString() })
       const { data: { deleteUser } } = result
       const foundUser = await User.findById(user._id)
 
@@ -73,7 +73,7 @@ describe('Users mutation', () => {
 
       const user = new User(userData)
       await user.save()
-      const result = await graphql(RootQuery, updateUserMutation, {}, context, { id: user._id.toString(), ...newVariables })
+      const result = await graphql(schema, updateUserMutation, {}, context, { id: user._id.toString(), ...newVariables })
       const foundUser = await User.findById(user._id)
 
       expect(result).not.toEqual(null)
@@ -105,7 +105,7 @@ describe('Users mutation', () => {
           }
         }
       }
-      const result = await graphql(RootQuery, loginMutation, {}, context, variables)
+      const result = await graphql(schema, loginMutation, {}, context, variables)
       const { data: { login: { token } } } = result
 
       expect(cookies.token).toEqual(token)
