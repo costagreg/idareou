@@ -35,7 +35,9 @@ describe('User queries', () => {
   describe('updateUser', () => {
     it('updates a user', async () => {
       const user = await addUser(userData)
+
       await updateUser(user.id, { ...userData, username: 'mockUsername2' })
+
       const userFound = await User.findById(user.id)
 
       expect(userFound.username).toEqual('mockUsername2')
