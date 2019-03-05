@@ -1,5 +1,6 @@
+import { GraphQLString, GraphQLNonNull } from 'graphql'
 import { UserType } from '../../types'
-import { findUserById } from '../../../database/queries/user'
+import { findUserById, findUser } from '../../../database/queries/user'
 
 export const userQuery = {
   currentUser: {
@@ -9,6 +10,16 @@ export const userQuery = {
       if (user) {
         return findUserById(user._id)
       }
+    }
+  },
+  findUser: {
+    type: UserType,
+    args: {
+      email: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    resolve(parentValue, { email }, context) {
+      console.log(email)
+      return findUser({ email })
     }
   }
 }
