@@ -71,6 +71,26 @@ describe('LoginPageContainer', () => {
           fetchPolicy: 'network-only'
         })
         expect(props.history.push).toHaveBeenCalledWith('/dashboard')
+        expect(component.state().error).toBe(false)
+      })
+    })
+
+    describe('login is wrong', () => {
+      it('changes error status to true', async () => {
+        const props = {
+          client: {
+            mutate: () => ({ data: {} }),
+            query: jest.fn(() => ({ data: { currentUser: {} } }))
+          },
+          history: {
+            push: jest.fn()
+          }
+        }
+
+        const component = shallow(<LoginPageContainer {...props} />)
+        await component.instance().checkUser(formData)
+
+        expect(component.state().error).toBe(true)
       })
     })
   })

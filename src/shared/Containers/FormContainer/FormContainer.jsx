@@ -39,7 +39,7 @@ class FormContainer extends Component {
   onSubmit = (event) => {
     event.preventDefault()
 
-    if(this.props.onSubmit && !this.itHasErrors(event.target.elements)) {
+    if (this.props.onSubmit && !this.itHasErrors(event.target.elements)) {
       this.props.onSubmit(this.getValues(this.state))
     }
   }
@@ -49,12 +49,17 @@ class FormContainer extends Component {
 
     return <form className='FormContainer' onSubmit={this.onSubmit} noValidate>
       {React.Children.map(children, (child) => {
-        const { props: { name: inputName, value: inputValue } } = child
-        return React.cloneElement(child, {
-          updateValue: this.updateValue,
-          value: inputName && (this.state[inputName] || {}).value || inputValue,
-          error: inputName && (this.state[inputName] || {}).error
-        })
+        if (child) {
+          const isReactComponent = child.type && typeof child.type === 'function'
+          const { props: { name: inputName, value: inputValue, error: inputError } } = child
+          const newProps = {
+            updateValue: this.updateValue,
+            value: (inputName && (this.state[inputName] || {}).value) || inputValue,
+            error: inputError || (inputName && (this.state[inputName] || {}).error)
+          }
+
+          return isReactComponent ? React.cloneElement(child, newProps) : child
+        }
       })}
     </form>
   }
@@ -62,7 +67,8 @@ class FormContainer extends Component {
 
 FormContainer.propTypes = {
   onSubmit: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  updateForm: PropTypes.func
 }
 
 export default FormContainer
