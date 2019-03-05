@@ -32,9 +32,13 @@ export const betMutations = {
     },
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {
-        const updtateBet = await updateBetParticipant(args.betId, user._id, args.optionId)
+        await updateBetParticipant(args.betId, user._id, args.optionId)
 
-        const betUpdated = await findBet(updtateBet._id)
+        const betUpdated = await findBet(args.betId)
+          .populate([
+            { path: 'participants.user' },
+            { path: 'participants.option' }
+          ])
 
         return betUpdated
       }

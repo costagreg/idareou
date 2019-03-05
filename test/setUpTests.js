@@ -8,7 +8,7 @@ Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 beforeAll((done) => {
   mongoose.Promise = global.Promise
-  mongoose.connect('mongodb://localhost/idareyou_test')
+  mongoose.connect('mongodb://localhost/idareyou_test', { useNewUrlParser: true })
   mongoose.connection
     .once('open', () => { done() })
     .on('error', err => {

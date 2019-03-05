@@ -10,8 +10,8 @@ export const addBet = (data) => (
 
 export const updateBetParticipant = async (betId, userId, optionId) => {
   const newParticipant = [{
-    userId,
-    optionId
+    user: userId,
+    option: optionId
   }]
 
   const updatedBet = await Bet.update(
