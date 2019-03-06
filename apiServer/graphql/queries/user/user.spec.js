@@ -46,7 +46,6 @@ describe('user queries', () => {
       await user.save()
 
       const result = await graphql(RootQuery, query, {}, {}, { email: 'costagregorioalessio@gmail.com' })
-      // const { data: { findUser } } = result
 
       expect(result).toBe({})
     })
