@@ -16,7 +16,9 @@ const TextInput = ({
   updateValue,
   required = false,
   pattern,
-  onChange
+  onChange,
+  validateOnChange,
+  validateElement
 }) => (
     <div className={classNames('TextInput', { 'TextInput--error': error === 'error' })}>
       {icon &&
@@ -31,8 +33,11 @@ const TextInput = ({
         pattern={pattern}
         onChange={e => {
           const { value } = e.target
-          updateValue(name, value, '')
-          onChange(value)
+          updateValue(value, '')
+          onChange(e, value, updateValue)
+          if (validateOnChange) {
+            validateElement(e.target)
+          }
         }
         }
       />
@@ -55,7 +60,7 @@ TextInput.propTypes = {
 TextInput.defaultProps = {
   value: '',
   type: 'text',
-  onChange: () => {}
+  onChange: () => { }
 }
 
 export default TextInput
