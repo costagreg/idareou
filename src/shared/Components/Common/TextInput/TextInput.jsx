@@ -6,8 +6,8 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
-const showErrorMsg = (errors) => {
-  return Array.isArray(errors) ? errors.join(' ') : errors
+const showErrorMsg = (error) => {
+  return Array.isArray(error) ? error.join(' ') : error.replace('error', '')
 }
 
 const TextInput = ({
