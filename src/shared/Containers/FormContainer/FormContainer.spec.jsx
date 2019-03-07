@@ -104,14 +104,14 @@ describe('FormContainer', () => {
             type: 'password',
             value: 'password1'
           }]
-  
+
           const component = shallow(<FormContainer />)
           const { isConfirmSuccess } = component.instance()
-  
+
           component.setState({ [nodeElements[0].name]: {
             value: nodeElements[0].value
           } })
-  
+
           expect(isConfirmSuccess(nodeElements[1])).toBe(true)
         })
       })
@@ -126,14 +126,14 @@ describe('FormContainer', () => {
             type: 'password',
             value: 'password2'
           }]
-  
+
           const component = shallow(<FormContainer />)
           const { isConfirmSuccess } = component.instance()
-  
+
           component.setState({ [nodeElements[0].name]: {
             value: nodeElements[0].value
           } })
-  
+
           expect(isConfirmSuccess(nodeElements[1])).toBe(false)
         })
       })
@@ -150,14 +150,14 @@ describe('FormContainer', () => {
             type: 'email',
             value: 'email1'
           }]
-  
+
           const component = shallow(<FormContainer />)
           const { isConfirmSuccess } = component.instance()
-  
+
           component.setState({ [nodeElements[0].name]: {
             value: nodeElements[0].value
           } })
-  
+
           expect(isConfirmSuccess(nodeElements[1])).toBe(true)
         })
       })
@@ -172,14 +172,14 @@ describe('FormContainer', () => {
             type: 'email',
             value: 'email2'
           }]
-  
+
           const component = shallow(<FormContainer />)
           const { isConfirmSuccess } = component.instance()
-  
+
           component.setState({ [nodeElements[0].name]: {
             value: nodeElements[0].value
           } })
-  
+
           expect(isConfirmSuccess(nodeElements[1])).toBe(false)
         })
       })
@@ -191,7 +191,7 @@ describe('FormContainer', () => {
           type: 'password',
           value: 'password1'
         }
-  
+
         const component = shallow(<FormContainer />)
         const { isConfirmSuccess } = component.instance()
 

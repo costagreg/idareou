@@ -6,8 +6,8 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
-const showErrorMsg = (error) => {
-  return Array.isArray(error) ? error.join(' ') : error.replace('error', '')
+export const showErrorMsg = (error) => {
+  return Array.isArray(error) ? error.join(' ') : error.replace('VALIDATION_ERROR', '')
 }
 
 const TextInput = ({

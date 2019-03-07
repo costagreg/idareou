@@ -35,7 +35,7 @@ class FormContainer extends Component {
       if (element.name && element.name.length > 0) {
         const error = element.checkValidity() && this.isConfirmSuccess(element) ? 0 : 1
         errors += error
-        this.updateValue(element.name, element.value, !!error ? 'error' : '')
+        this.updateValue(element.name, element.value, !!error ? 'STANDARD_ERROR' : '')
       }
       return errors
     }, 0)
