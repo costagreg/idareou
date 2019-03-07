@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { isArray } from 'util';
 
 if (process.browser) {
   require('./TextInput.scss')
+}
+
+const showErrorMsg = (errors) => {
+  return Array.isArray(errors) ? errors.join(' ') : errors
 }
 
 const TextInput = ({
@@ -33,7 +36,7 @@ const TextInput = ({
           onChange={e => { updateValue(name, e.target.value, '') }}
         />
       </div>
-      <div className='TextInput__ErrorMsg'>{isArray(error) ? error.reduce((acc, error) => acc + ' ' + error, '') : error.replace('error', '')}</div>
+      <div className='TextInput__ErrorMsg'>{showErrorMsg(error)}</div>
     </div>
 )
 
