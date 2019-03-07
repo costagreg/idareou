@@ -9,11 +9,7 @@ import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
 
 export class SignUpPageContainer extends Component {
-  state = {
-    errors: {}
-  }
-
-  checkAndSaveData = async formData => {
+  checkAndSaveData = async (formData, updateError) => {
     const { client, history } = this.props
     const addUserMutation = await client.mutate({
       mutation: addUser,
@@ -23,7 +19,10 @@ export class SignUpPageContainer extends Component {
     const { data, errors } = addUserMutation
 
     if (errors) {
-      this.setState({ errors: errors.length > 0 ? errors[0].state : [] })
+      const myerrors = errors.length > 0 ? errors[0].state : []
+      Object.keys(myerrors).forEach((field) => {
+        updateError(field, myerrors[field])
+      })
     } else {
       const { addUser: userData } = data
       if (userData && userData._id) {
@@ -41,8 +40,8 @@ export class SignUpPageContainer extends Component {
   render() {
     return (
       <FormContainer onSubmit={this.checkAndSaveData}>
-        <TextInput type='text' name='username' placeholder='Username' icon='user' error={ this.state.errors.username } required />
-        <TextInput type='email' name='email' placeholder='Email' icon='at'error={ this.state.errors.email } required />
+        <TextInput type='text' name='username' placeholder='Username' icon='user' required />
+        <TextInput type='email' name='email' placeholder='Email' icon='at' required />
         <TextInput type='password' name='password' placeholder='Password Min 6' pattern='^.{6,}$' icon='unlock-alt' required />
         <TextInput type='password' name='confirmPassword' placeholder='Confirm Password' pattern='^.{6,}$' icon='unlock-alt' required />
         <TextInput type='text' name='monzouser' placeholder='Monzouser' icon='credit-card' required />

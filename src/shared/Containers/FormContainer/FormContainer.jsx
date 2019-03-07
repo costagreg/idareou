@@ -13,6 +13,15 @@ class FormContainer extends Component {
     })
   }
 
+  updateError = (name, error) => {
+    this.setState({
+      [name]: {
+        ...this.state[name],
+        error
+      }
+    })
+  }
+
   isConfirmSuccess = ({ name, value, type }) => {
     return name === 'confirmPassword' || name === 'confirmEmail'
       ? this.state[type].value === value
@@ -26,7 +35,7 @@ class FormContainer extends Component {
       if (element.name && element.name.length > 0) {
         const error = element.checkValidity() && this.isConfirmSuccess(element) ? 0 : 1
         errors += error
-        this.updateValue(element.name, element.value, !!error ? 'error' : 'success')
+        this.updateValue(element.name, element.value, !!error ? 'error' : '')
       }
       return errors
     }, 0)
@@ -40,7 +49,7 @@ class FormContainer extends Component {
     event.preventDefault()
 
     if (this.props.onSubmit && !this.itHasErrors(event.target.elements)) {
-      this.props.onSubmit(this.getValues(this.state))
+      this.props.onSubmit(this.getValues(this.state), this.updateError)
     }
   }
 
