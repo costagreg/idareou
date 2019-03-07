@@ -45,6 +45,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func,
+  pattern: PropTypes.string,
   required: PropTypes.bool
 }
 
