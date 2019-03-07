@@ -91,7 +91,9 @@ describe('BetMutations', () => {
 
           const newBet = await Bet.create(betData)
 
-          const result = await graphql(schema, updateBetParticipantMutation, {}, context, { betId: newBet._id.toString(), optionId: newBetOption._id.toString() })
+          const variables = { betId: newBet._id.toString(), optionId: newBetOption._id.toString() }
+
+          const result = await graphql(schema, updateBetParticipantMutation, {}, context, variables)
 
           const { data: { updateBetParticipant } } = result
 
@@ -117,7 +119,9 @@ describe('BetMutations', () => {
 
           const newBet = await Bet.create(betData)
 
-          const result = await graphql(schema, updateBetParticipantMutation, {}, context, { betId: newBet._id.toString(), optionId: newBetOption._id.toString() })
+          const variables = { betId: newBet._id.toString(), optionId: newBetOption._id.toString() }
+
+          const result = await graphql(schema, updateBetParticipantMutation, {}, context, variables)
 
           const { data: { updateBetParticipant } } = result
 
