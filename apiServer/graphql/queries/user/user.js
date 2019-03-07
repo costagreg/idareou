@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLNonNull, GraphQLList } from 'graphql'
+import { GraphQLString, GraphQLList } from 'graphql'
 import { UserType } from '../../types'
 import { findUserById, findUser } from '../../../database/queries/user'
 

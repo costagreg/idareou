@@ -9,20 +9,31 @@ import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
 
 export class SignUpPageContainer extends Component {
+  state = {
+    errors: {}
+  }
+
   checkAndSaveData = async formData => {
     const { client, history } = this.props
     const addUserMutation = await client.mutate({
       mutation: addUser,
-      variables: formData
+      variables: formData,
+      errorPolicy: 'all'
     })
-    const { data: { addUser: userData } } = addUserMutation
-    if (userData && userData._id) {
-      const user = await client.query({
-        query: currentUser,
-        fetchPolicy: 'network-only'
-      })
-      if (user) {
-        history.push('/dashboard')
+    const { data, errors } = addUserMutation
+
+    if (errors) {
+      this.setState({ errors: errors.length > 0 ? errors[0].state : [] })
+    } else {
+      const { addUser: userData } = data
+      if (userData && userData._id) {
+        const user = await client.query({
+          query: currentUser,
+          fetchPolicy: 'network-only'
+        })
+        if (user) {
+          history.push('/dashboard')
+        }
       }
     }
   }
@@ -30,8 +41,8 @@ export class SignUpPageContainer extends Component {
   render() {
     return (
       <FormContainer onSubmit={this.checkAndSaveData}>
-        <TextInput type='text' name='username' placeholder='Username' icon='user' required />
-        <TextInput type='email' name='email' placeholder='Email' icon='at' required />
+        <TextInput type='text' name='username' placeholder='Username' icon='user' error={ this.state.errors.username } required />
+        <TextInput type='email' name='email' placeholder='Email' icon='at'error={ this.state.errors.email } required />
         <TextInput type='password' name='password' placeholder='Password Min 6' pattern='^.{6,}$' icon='unlock-alt' required />
         <TextInput type='password' name='confirmPassword' placeholder='Confirm Password' pattern='^.{6,}$' icon='unlock-alt' required />
         <TextInput type='text' name='monzouser' placeholder='Monzouser' icon='credit-card' required />
