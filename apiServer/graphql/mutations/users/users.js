@@ -4,6 +4,8 @@ import bcrypt from 'bcrypt'
 import { UserType, LoginType } from '../../types'
 import { addUser, deleteUser, updateUser, findUser } from '../../../database/queries/user'
 import { attachTokenToResp } from '../../../helpers/jwt'
+import ValidationError from '../../../helpers/ValidationError';
+
 export const userMutations = {
   addUser: {
     type: UserType,
@@ -15,8 +17,24 @@ export const userMutations = {
     },
     async resolve(parentValue, args, context) {
       const passwordHash = await bcrypt.hash(args.password, 10)
+      const errors = []
+
+      const usernameFound = await findUser({ username: args.username })
+      const emailFound = await findUser({ email: args.email })
+
+      if (usernameFound.length > 0) {
+        errors.push({ key: 'username', message: 'Username already in use' })
+      }
+
+      if (emailFound.length > 0) {
+        errors.push({ key: 'email', message: 'Email already in use' })
+      }
+
+      if(errors.length > 0) throw new ValidationError(errors)
+
       const user = await addUser({ ...args, password: passwordHash })
       const { _id, email } = user
+
       attachTokenToResp({ _id, email }, context)
       return user
     }

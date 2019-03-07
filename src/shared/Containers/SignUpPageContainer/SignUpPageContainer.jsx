@@ -3,11 +3,10 @@ import { withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import Proptypes from 'prop-types'
 
-import { addUser, currentUser, findUser } from '~src/shared/graphql/queries'
+import { addUser, currentUser } from '~src/shared/graphql/queries'
 import { FormContainer } from '../FormContainer'
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
-import debouncer from '~src/shared/helpers/debouncer'
 
 export class SignUpPageContainer extends Component {
   checkAndSaveData = async formData => {
@@ -28,30 +27,11 @@ export class SignUpPageContainer extends Component {
     }
   }
 
-  checkEmail = debouncer(async (e, value, updateValue) => {
-    const isValidEmail = e.target.checkValidity()
-    if (isValidEmail) {
-      updateValue(value, 'success')
-      const findUserList = await this.props.client.query({
-        query: findUser,
-        variables: { email: value }
-      })
-      if (findUserList.data.findUser.length > 0) {
-        // valid user
-        updateValue(value, 'error')
-        e.target.setCustomValidity('Your email is already in use')
-        e.target.reportValidity()
-      } else {
-        updateValue(value, 'success')
-      }
-    }
-  }, 300)
-
   render() {
     return (
-      <FormContainer onSubmit={this.checkAndSaveData} validateOnChange={true}>
+      <FormContainer onSubmit={this.checkAndSaveData}>
         <TextInput type='text' name='username' placeholder='Username' icon='user' required />
-        <TextInput type='email' name='email' placeholder='Email' icon='at' required onChange={(e, value, updateValue) => { e.persist(); this.checkEmail(e, value, updateValue) }} />
+        <TextInput type='email' name='email' placeholder='Email' icon='at' required />
         <TextInput type='password' name='password' placeholder='Password Min 6' pattern='^.{6,}$' icon='unlock-alt' required />
         <TextInput type='password' name='confirmPassword' placeholder='Confirm Password' pattern='^.{6,}$' icon='unlock-alt' required />
         <TextInput type='text' name='monzouser' placeholder='Monzouser' icon='credit-card' required />

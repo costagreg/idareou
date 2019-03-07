@@ -19,18 +19,14 @@ class FormContainer extends Component {
       : true
   }
 
-  validateElement = (element) => {
-    const error = element.checkValidity() && this.isConfirmSuccess(element) ? 0 : 1
-    this.updateValue(element.name, element.value, !!error ? 'error' : 'success')
-    return error
-  }
-
   itHasErrors = listOfElements => {
     const arrayOfElements = Array.from(listOfElements)
 
     return !!arrayOfElements.reduce((errors, element) => {
       if (element.name && element.name.length > 0) {
-        errors += this.validateElement(element)
+        const error = element.checkValidity() && this.isConfirmSuccess(element) ? 0 : 1
+        errors += error
+        this.updateValue(element.name, element.value, !!error ? 'error' : 'success')
       }
       return errors
     }, 0)
@@ -49,21 +45,18 @@ class FormContainer extends Component {
   }
 
   render() {
-    const { children, validateOnChange } = this.props
+    const { children } = this.props
 
     return <form className='FormContainer' onSubmit={this.onSubmit} noValidate>
       {React.Children.map(children, (child) => {
         if (child) {
           const isReactComponent = child.type && typeof child.type === 'function'
           const { props: { name: inputName, value: inputValue, error: inputError } } = child
-          const updateValue = (value, error) => this.updateValue(inputName, value, error)
 
           const newProps = {
-            updateValue,
+            updateValue: this.updateValue,
             value: (inputName && (this.state[inputName] || {}).value) || inputValue,
-            error: inputError || (inputName && (this.state[inputName] || {}).error),
-            validateOnChange,
-            validateElement: this.validateElement
+            error: inputError || (inputName && (this.state[inputName] || {}).error)
           }
 
           return isReactComponent ? React.cloneElement(child, newProps) : child
@@ -76,8 +69,7 @@ class FormContainer extends Component {
 FormContainer.propTypes = {
   onSubmit: PropTypes.func,
   children: PropTypes.node,
-  updateForm: PropTypes.func,
-  validateOnChange: PropTypes.bool
+  updateForm: PropTypes.func
 }
 
 export default FormContainer
