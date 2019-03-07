@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { UserType, LoginType } from '../../types'
 import { addUser, deleteUser, updateUser, findUser } from '../../../database/queries/user'
 import { attachTokenToResp } from '../../../helpers/jwt'
-import ValidationError from '../../../helpers/ValidationError';
+import ValidationError from '../../../helpers/ValidationError'
 
 export const userMutations = {
   addUser: {
