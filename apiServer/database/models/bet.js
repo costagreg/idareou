@@ -3,11 +3,11 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose
 
 const participantSchema = new Schema({
-  userId: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
-  optionId: {
+  option: {
     type: Schema.Types.ObjectId,
     ref: 'betoption'
   }

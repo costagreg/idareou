@@ -1,4 +1,4 @@
-import { Bet, BetOption } from '../../models'
+import { Bet, BetOption, User } from '../../models'
 import { findBet, addBet, updateBetParticipant } from './bet'
 
 describe('Bet queries', () => {
@@ -61,7 +61,7 @@ describe('Bet queries', () => {
 
       const newBetOption = await BetOption.create({ title: 'newTitle' })
 
-      const newUser = await BetOption.create({ username: 'newUser' })
+      const newUser = await User.create({ username: 'newUser' })
 
       const beforeBeforeUpdate = await Bet.findById(betCreated._id)
 
@@ -71,8 +71,8 @@ describe('Bet queries', () => {
 
       const betAfterUpdate = await Bet.findById(betCreated._id)
 
-      expect(betAfterUpdate.participants[0].optionId).toEqual(newBetOption._id)
-      expect(betAfterUpdate.participants[0].userId).toEqual(newUser._id)
+      expect(betAfterUpdate.participants[0].option.toString()).toEqual(newBetOption._id.toString())
+      expect(betAfterUpdate.participants[0].user.toString()).toEqual(newUser._id.toString())
     })
   })
 })
