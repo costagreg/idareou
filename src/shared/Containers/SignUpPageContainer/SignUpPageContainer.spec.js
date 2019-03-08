@@ -37,6 +37,7 @@ describe('given SignUpPageContainer component', () => {
 
   describe('checkAndSaveData', () => {
     it('sends form data to the backend', async () => {
+      const updateError = jest.fn()
       const formData = {
         username: 'username',
         email: 'email',
@@ -45,16 +46,22 @@ describe('given SignUpPageContainer component', () => {
         monzouser: 'monzouser'
       }
       const props = {
-        ...initProps
+        client: {
+          mutate: jest.fn()
+        }
       }
 
       const component = shallow(<SignUpPageContainer {...props} />)
       await component.instance().checkAndSaveData(formData)
 
+      component.instance().checkAndSaveData(formData, updateError)
+
       expect(props.client.mutate).toHaveBeenCalledWith({
         mutation: addUser,
-        variables: formData
+        variables: formData,
+        errorPolicy: 'all'
       })
+      expect(updateError).not.toHaveBeenCalled()
     })
     describe('if signup is successful', () => {
       it('refetches the currentUser and redirect to dashboard', async () => {
