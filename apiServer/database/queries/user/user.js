@@ -18,9 +18,9 @@ export const findUsers = (ids) => (
   User.find({ _id: { $in: ids } }).exec()
 )
 
-export const findUser = async (data) => {
-  return User.find(data)
-}
+export const findUser = (data) => (
+  User.find(data)
+)
 
 export const findUserById = (_id) => (
   User.findById(_id)
