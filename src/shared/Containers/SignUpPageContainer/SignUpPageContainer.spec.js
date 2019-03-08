@@ -35,6 +35,29 @@ describe('given SignUpPageContainer component', () => {
     })
   })
 
+  describe('showErrors', () => {
+    it('update the FormContainer with the latest errors from the server', () => {
+      const mockUpdateError = jest.fn(() => { })
+      const props = {
+        updateError: mockUpdateError
+      }
+      const component = shallow(<SignUpPageContainer {...props} />)
+      const mockResponse = {
+        errors: [
+          {
+            state: {
+              mockField1: 'mockFieldMessage1',
+              mockField2: 'mockFieldMessage2'
+            }
+          }
+        ]
+      }
+      component.instance().showErrors(mockResponse.errors, mockUpdateError)
+
+      expect(mockUpdateError).toHaveBeenCalledWith('mockField1', 'mockFieldMessage1')
+      expect(mockUpdateError).toHaveBeenCalledWith('mockField2', 'mockFieldMessage2')
+    })
+  })
   describe('checkAndSaveData', () => {
     it('sends form data to the backend', async () => {
       const updateError = jest.fn()
@@ -81,6 +104,33 @@ describe('given SignUpPageContainer component', () => {
           fetchPolicy: 'network-only'
         })
         expect(props.history.push).toHaveBeenCalledWith('/dashboard')
+      })
+    })
+    describe('if signup is not successful', () => {
+      it('shows the errors', async () => {
+        const mockShowErrors = jest.fn()
+        const mockUpdateError = jest.fn()
+        const mockError = [{
+          state: {
+            mockField1: 'mockFieldMessage1',
+            mockField2: 'mockFieldMessage2'
+          }
+        }]
+        const formData = {
+          email: 'emailMock',
+          password: 'passwordMock'
+        }
+        const props = {
+          client: {
+            mutate: () => ({ data: {}, errors: mockError })
+          }
+        }
+
+        const component = shallow(<SignUpPageContainer {...props} />)
+        component.instance().showErrors = mockShowErrors
+        await component.instance().checkAndSaveData(formData, mockUpdateError)
+
+        expect(mockShowErrors).toHaveBeenCalledWith(mockError, mockUpdateError)
       })
     })
   })
