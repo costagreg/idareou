@@ -21,8 +21,8 @@ describe('showErrorMsg', () => {
       expect(error).toEqual(expected)
     })
 
-    it('deletes the VALIDATION_ERROR string', () => {
-      const error = 'VALIDATION_ERROR'
+    it('deletes the STANDARD_ERROR string', () => {
+      const error = 'STANDARD_ERROR'
       const expected = ''
 
       expect(showErrorMsg(error)).toEqual(expected)

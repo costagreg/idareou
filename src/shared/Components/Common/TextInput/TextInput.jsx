@@ -7,7 +7,7 @@ if (process.browser) {
 }
 
 export const showErrorMsg = (error) => {
-  return Array.isArray(error) ? error.join(' ') : error.replace('VALIDATION_ERROR', '')
+  return Array.isArray(error) ? error.join(' ') : error.replace('STANDARD_ERROR', '')
 }
 
 const TextInput = ({

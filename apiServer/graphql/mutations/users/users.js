@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { UserType, LoginType } from '../../types'
 import { addUser, deleteUser, updateUser, findUser } from '../../../database/queries/user'
 import { attachTokenToResp } from '../../../helpers/jwt'
-import ValidationError from '../../../helpers/ValidationError'
+import { ValidationError } from '../../../helpers/ValidationError'
 
 export const userMutations = {
   addUser: {
@@ -30,7 +30,7 @@ export const userMutations = {
         errors.push({ key: 'email', message: 'Email already in use' })
       }
 
-      if(errors.length > 0) throw new ValidationError(errors)
+      if (errors.length > 0) throw new ValidationError(errors)
 
       const user = await addUser({ ...args, password: passwordHash })
       const { _id, email } = user
