@@ -1,6 +1,6 @@
 import { graphql } from 'react-apollo'
 import React, { Fragment, Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
 import { currentUser } from '~src/shared/graphql/queries'
 import HeaderContainer from '~src/shared/Containers/HeaderContainer'
@@ -12,7 +12,7 @@ if (process.browser) {
 
 class AppRouter extends Component {
   filterRoute = (currentUser, auth, route) =>
-    ((currentUser && auth) || (!currentUser && !auth) || (typeof auth === 'undefined')) && route
+    (currentUser || (!currentUser && !auth) || (typeof auth === 'undefined')) && route
 
   renderRoutes = (currentUser) =>
     routes.map(({ Component, path, auth }, index) =>
@@ -23,15 +23,24 @@ class AppRouter extends Component {
         component={Component}
       />))
 
+  shouldRedirectBack = () =>
+    routes.find(({ path, redirect }) => this.props.location.pathname === path && redirect)
+
   render() {
-    const { data: { currentUser } } = this.props
+    const { data: { currentUser }, location } = this.props
+    console.log(this.props.location)
     return (
       <Fragment>
         <div className='approuter'>
           <HeaderContainer currentUser={currentUser} />
           <Switch>
-            {this.renderRoutes(currentUser)}
-            <Redirect to="/" />
+            { this.renderRoutes(currentUser) }
+            { <Redirect to={{
+                pathname: '/login',
+                state: { from: this.shouldRedirectBack() && location.pathname }
+                }}
+              />
+            }
           </Switch>
         </div>
       </Fragment>
@@ -39,4 +48,4 @@ class AppRouter extends Component {
   }
 }
 
-export default graphql(currentUser)(AppRouter)
+export default withRouter(graphql(currentUser)(AppRouter))
