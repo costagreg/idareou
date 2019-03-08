@@ -1,30 +1,13 @@
 .TextInput {
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  border-bottom: 1px solid $grey;
-  padding: 5px;
-  margin: 20px 0;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    transition: width .3s ease-in-out;
-  }
-
+  padding: 10px 0;
   &--error {
-    border-bottom: transparent;
-    &::before {
-      content: '';
-      width: 100%;
-      border-bottom: 1px solid $red;
+    .TextInput__Container{
+      border-bottom: transparent;
+      &::before {
+        content: '';
+        width: 100%;
+        border-bottom: 1px solid $red;
+      }
     }
   }
   &__Icon{
@@ -37,11 +20,38 @@
       color: $darkgreen;
     }
   }
+  &__Container{
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-bottom: 1px solid $grey;
+    padding: 5px;
+    overflow: hidden;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      transition: width .3s ease-in-out;
+    }
+  }
+
   &__Input{
     flex: 1;
     border:0;
     height: 100%;
     outline: 0;
     font-size: 1rem;
+  }
+
+  &__ErrorMsg{
+    position: absolute;
+    font-size: 0.5rem;
+    padding: 5px 0;
+    color: $red;
   }
 }

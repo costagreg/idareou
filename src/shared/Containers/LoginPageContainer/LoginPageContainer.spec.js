@@ -73,5 +73,25 @@ describe('LoginPageContainer', () => {
         expect(props.history.push).toHaveBeenCalledWith('/dashboard')
       })
     })
+
+    describe('login is wrong', () => {
+      it('changes error status to true', async () => {
+        const mockUpdateError = jest.fn()
+        const props = {
+          client: {
+            mutate: () => ({ data: {} }),
+            query: jest.fn(() => ({ data: { currentUser: {} } }))
+          },
+          history: {
+            push: jest.fn()
+          }
+        }
+
+        const component = shallow(<LoginPageContainer {...props} />)
+        await component.instance().checkUser(formData, mockUpdateError)
+
+        expect(mockUpdateError).toHaveBeenCalledWith('password', 'Your username/password is wrong')
+      })
+    })
   })
 })

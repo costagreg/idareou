@@ -9,14 +9,13 @@ import { Button } from '~src/shared/Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export class LoginPageContainer extends Component {
-  checkUser = async formData => {
+  checkUser = async (formData, updateError) => {
     const { client, history } = this.props
     const loggedUser = await client.mutate({
       mutation: loginUser,
       variables: formData
     })
     const { data: { login } } = loggedUser
-
     if (login && login.token) {
       const user = await client.query({
         query: currentUser,
@@ -25,12 +24,14 @@ export class LoginPageContainer extends Component {
       if (user.data.currentUser) {
         history.push('/dashboard')
       }
+    } else {
+      updateError('password', 'Your username/password is wrong')
     }
   }
 
   render() {
     return (
-      <FormContainer onSubmit={this.checkUser} >
+      <FormContainer onSubmit={this.checkUser} updateForm={this.updateForm} >
         <TextInput type='email' name='email' placeholder='Email' icon='at' required />
         <TextInput type='password' name='password' placeholder='Password' icon='unlock-alt' required />
         <Button>Log in</Button>

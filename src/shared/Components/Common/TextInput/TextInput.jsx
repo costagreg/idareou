@@ -6,6 +6,10 @@ if (process.browser) {
   require('./TextInput.scss')
 }
 
+export const showErrorMsg = (error) => {
+  return Array.isArray(error) ? error.join(' ') : error.replace('STANDARD_ERROR', '')
+}
+
 const TextInput = ({
   name,
   type,
@@ -17,37 +21,42 @@ const TextInput = ({
   required = false,
   pattern
 }) => (
-  <div className={classNames('TextInput', { 'TextInput--error': error === 'error' })}>
-    { icon &&
-      <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error === 'error' })}></i>}
-    <input
-      name={name}
-      type={type}
-      className='TextInput__Input'
-      placeholder={placeholder}
-      value={value}
-      required={required}
-      pattern={pattern}
-      onChange={e => { updateValue(name, e.target.value, '')}}
-    />
-  </div>
+    <div className={classNames('TextInput', { 'TextInput--error': error })}>
+      <div className={classNames('TextInput__Container')}>
+        {icon &&
+          <i className={classNames('TextInput__Icon', 'fa', `fa-${icon}`, { 'TextInput__Icon--error': error })}></i>}
+        <input
+          name={name}
+          type={type}
+          className='TextInput__Input'
+          placeholder={placeholder}
+          value={value}
+          required={required}
+          pattern={pattern}
+          onChange={e => { updateValue(name, e.target.value, '') }}
+        />
+      </div>
+      <div className='TextInput__ErrorMsg'>{showErrorMsg(error)}</div>
+    </div>
 )
 
 TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(['email', 'password', 'text']),
   icon: PropTypes.string,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
   placeholder: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func,
-  required: PropTypes.bool,
-  pattern: PropTypes.string
+  pattern: PropTypes.string,
+  required: PropTypes.bool
 }
 
 TextInput.defaultProps = {
   value: '',
-  type: 'text'
+  type: 'text',
+  error: '',
+  onChange: () => { }
 }
 
 export default TextInput

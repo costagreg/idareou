@@ -1,7 +1,34 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import TextInput from './TextInput'
+import TextInput, { showErrorMsg } from './TextInput'
+
+describe('showErrorMsg', () => {
+  describe('input is an array', () => {
+    it('converts input to string', () => {
+      const error = ['string1', 'string2']
+      const expected = 'string1 string2'
+
+      expect(showErrorMsg(error)).toEqual(expected)
+    })
+  })
+
+  describe('input is a string', () => {
+    it('returns a string', () => {
+      const error = 'string1'
+      const expected = 'string1'
+
+      expect(error).toEqual(expected)
+    })
+
+    it('deletes the STANDARD_ERROR string', () => {
+      const error = 'STANDARD_ERROR'
+      const expected = ''
+
+      expect(showErrorMsg(error)).toEqual(expected)
+    })
+  })
+})
 
 describe('@TextInput', () => {
   it('renders a text input as default', () => {
@@ -75,7 +102,7 @@ describe('@TextInput', () => {
   })
   describe('when passing error as a parameter', () => {
     describe('and error is error', () => {
-      const component = shallow(<TextInput error='error' icon='at' />)
+      const component = shallow(<TextInput error='MOCK_ERROR' icon='at' />)
 
       it('should render the class TextInput--error', () => {
         expect(component.find('.TextInput--error').length).toBe(1)
@@ -84,6 +111,10 @@ describe('@TextInput', () => {
       it('should render the class TextInput__Icon--error', () => {
         expect(component.find('.TextInput__Icon--error').length).toBe(1)
         expect(component.find('.TextInput__Icon--success').length).toBe(0)
+      })
+      it('should render the class TextInput__ErrorMsg', () => {
+        expect(component.find('.TextInput__ErrorMsg').length).toBe(1)
+        expect(component.find('.TextInput__ErrorMsg').text()).toBe('MOCK_ERROR')
       })
     })
   })

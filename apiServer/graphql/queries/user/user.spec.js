@@ -4,7 +4,7 @@ import { User } from '../../../database/models'
 
 describe('user queries', () => {
   describe('currentUser', () => {
-    it('get current user', async () => {
+    it('gets current user', async () => {
       const query = `
       {
         currentUser{
@@ -24,6 +24,34 @@ describe('user queries', () => {
       const { data: { currentUser } } = result
 
       expect(currentUser._id).toEqual(user._id.toString())
+    })
+  })
+
+  describe('findUser', () => {
+    it('gets a user', async () => {
+      const query = `
+      query FindUser($email: String!) {
+        findUser(email: $email) {
+          username
+        }
+      }`
+
+      const userData = {
+        username: 'myMockUsername',
+        password: 'myMockPassword',
+        email: 'costagregorioalessio@gmail.com',
+        monzouser: 'myMonzoUser'
+      }
+      const user = new User(userData)
+      await user.save()
+
+      const result = await graphql(RootQuery, query, {}, {}, { email: 'costagregorioalessio@gmail.com' })
+      const { data: { findUser } } = result
+
+      expect(findUser.username).toEqual(findUser.username)
+      expect(findUser.password).toEqual(findUser.myMockPassword)
+      expect(findUser.email).toEqual(findUser.email)
+      expect(findUser.monzouser).toEqual(findUser.monzouser)
     })
   })
 })

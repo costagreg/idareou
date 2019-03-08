@@ -10,10 +10,10 @@ const context = {
 }
 
 const userData = {
-  username: 'usernameMock',
-  password: 'passwordMock',
-  email: 'emailMock',
-  monzouser: 'monzoUser'
+  username: 'username',
+  password: 'password',
+  email: 'email',
+  monzouser: 'user'
 }
 
 describe('Users mutation', () => {
@@ -32,6 +32,23 @@ describe('Users mutation', () => {
 
       expect(addUser._id).not.toBe(null)
       expect(addUser.username).toBe(userData.username)
+    })
+
+    it('throws an error if email or username is used already', async () => {
+      const addUserMutation = `
+        mutation AddUser($username: String!,$password: String!,$email: String!,$monzouser: String!){
+          addUser(username: $username, password: $password, email: $email, monzouser: $monzouser){
+            _id
+            username
+          }
+        }
+      `
+      const user = new User(userData)
+      await user.save()
+
+      const result = await graphql(RootQuery, addUserMutation, {}, context, userData)
+
+      expect(result.errors).not.toBe(null)
     })
   })
 
@@ -73,6 +90,7 @@ describe('Users mutation', () => {
 
       const user = new User(userData)
       await user.save()
+
       const result = await graphql(schema, updateUserMutation, {}, context, { id: user._id.toString(), ...newVariables })
       const foundUser = await User.findById(user._id)
 

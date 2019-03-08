@@ -31,7 +31,13 @@ app.use((req, res, next) => {
 app.use('/graphql', auth, expressGraphQL((req, res) => ({
   schema,
   graphiql: true,
-  context: { req, res }
+  context: { req, res },
+  formatError: error => ({
+    message: error.message,
+    state: error.originalError && error.originalError.state,
+    locations: error.locations,
+    path: error.path
+  })
 })))
 
 app.listen(port, () => {

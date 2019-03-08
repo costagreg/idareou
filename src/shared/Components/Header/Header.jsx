@@ -16,7 +16,7 @@ const Header = ({ context = {}, linskMarkUp, showSideBar, setShowSideBar } = {})
           <i onClick={setShowSideBar} className={classNames('fa fa-bars', 'topnav__icon', { rotate: showSideBar })}></i>
       }
       <div className='topnav__logo'>
-        IdareOusd
+        IdareOu
       </div>
       {
         context.isDesktop

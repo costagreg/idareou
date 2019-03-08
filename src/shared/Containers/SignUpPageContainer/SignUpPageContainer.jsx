@@ -9,20 +9,34 @@ import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { Button } from '~src/shared/Components/Common/Button'
 
 export class SignUpPageContainer extends Component {
-  checkAndSaveData = async formData => {
+  showErrors = (errors, updateError) => {
+    errors = errors.length > 0 ? errors[0].state : []
+    Object.keys(errors).forEach((field) => {
+      updateError(field, errors[field])
+    })
+  }
+
+  checkAndSaveData = async (formData, updateError) => {
     const { client, history } = this.props
     const addUserMutation = await client.mutate({
       mutation: addUser,
-      variables: formData
+      variables: formData,
+      errorPolicy: 'all'
     })
-    const { data: { addUser: userData } } = addUserMutation
-    if (userData && userData._id) {
-      const user = await client.query({
-        query: currentUser,
-        fetchPolicy: 'network-only'
-      })
-      if(user) {
-        history.push('/dashboard')
+    const { data, errors } = addUserMutation
+
+    if (errors) {
+      this.showErrors(errors, updateError)
+    } else {
+      const { addUser: userData } = data
+      if (userData && userData._id) {
+        const user = await client.query({
+          query: currentUser,
+          fetchPolicy: 'network-only'
+        })
+        if (user) {
+          history.push('/dashboard')
+        }
       }
     }
   }
