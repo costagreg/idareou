@@ -17,7 +17,7 @@ describe('betOption queries', () => {
           }
         }`
 
-        const result = await graphql(schema, query, {}, context, { _id: newBetOption._id.toString() })
+        const result = await graphql(schema, query, {}, context)
 
         const { data: { findBetOption } } = result
 
