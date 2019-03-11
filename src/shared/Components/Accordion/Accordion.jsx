@@ -51,8 +51,8 @@ class Accordion extends Component {
       {
         sections.map(section =>
           <AccordionSection
-            key={section.id}
-            id={section.id}
+            key={section._id}
+            id={section._id}
             title={section.title}
             state={section.state}
             onSelectSection={this.onSelectSection}
