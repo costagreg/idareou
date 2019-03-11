@@ -11,7 +11,8 @@ const initProps = {
   },
   history: {
     push: jest.fn()
-  }
+  },
+  location: {}
 }
 
 describe('LoginPageContainer', () => {
@@ -58,19 +59,41 @@ describe('LoginPageContainer', () => {
     })
 
     describe('login is positive', () => {
-      it('refetches the currentUser and redirect to dashboard', async () => {
-        const props = {
-          ...initProps
-        }
-
-        const component = shallow(<LoginPageContainer {...props} />)
-        await component.instance().checkUser(formData)
-
-        expect(props.client.query).toHaveBeenCalledWith({
-          query: currentUser,
-          fetchPolicy: 'network-only'
+      describe('and the location object not provide where to redirect', () => {
+        it('refetches the currentUser and redirect to dashboard', async () => {
+          const props = {
+            ...initProps
+          }
+  
+          const component = shallow(<LoginPageContainer {...props} />)
+          await component.instance().checkUser(formData)
+  
+          expect(props.client.query).toHaveBeenCalledWith({
+            query: currentUser,
+            fetchPolicy: 'network-only'
+          })
+          expect(props.history.push).toHaveBeenCalledWith('/dashboard')
         })
-        expect(props.history.push).toHaveBeenCalledWith('/dashboard')
+      })
+
+      describe('and the location object provide where to redirect', () => {
+        it('refetches the currentUser and redirect to dashboard', async () => {
+          const props = {
+            ...initProps,
+            location: {
+              state: { from: '/bet' }
+            }
+          }
+  
+          const component = shallow(<LoginPageContainer {...props} />)
+          await component.instance().checkUser(formData)
+  
+          expect(props.client.query).toHaveBeenCalledWith({
+            query: currentUser,
+            fetchPolicy: 'network-only'
+          })
+          expect(props.history.push).toHaveBeenCalledWith('/bet')
+        })
       })
     })
 
