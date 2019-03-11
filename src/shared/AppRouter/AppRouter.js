@@ -11,24 +11,32 @@ if (process.browser) {
 }
 
 class AppRouter extends Component {
-  filterRoute = (currentUser, auth, route) =>
+  filterNonAuthRoutes = (currentUser, auth, route) =>
     (currentUser || (!currentUser && !auth) || (typeof auth === 'undefined')) && route
 
   renderRoutes = (currentUser) =>
     routes.map(({ Component, path, auth }, index) =>
-      this.filterRoute(currentUser, auth, <Route
+      this.filterNonAuthRoutes(currentUser, auth, <Route
         key={index}
         exact
         path={path}
-        component={Component}
+        render={props => (!auth && currentUser) && (path !== '/')
+          ? <Redirect to='/' />
+          : <Component {...props} />
+        }
       />))
 
   shouldRedirectBack = () =>
     routes.find(({ path, redirect }) => this.props.location.pathname === path && redirect)
 
+  shouldComponentUpdate(nextProps) {
+    // Avoid re-render on graphql query the currentUser before push the to history
+    return !(this.props.location.pathname === nextProps.location.pathname && (this.props.location.state || {}.from))
+  }
+
   render() {
     const { data: { currentUser }, location } = this.props
-    console.log(this.props.location)
+
     return (
       <Fragment>
         <div className='approuter'>
