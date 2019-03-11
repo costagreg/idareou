@@ -14,6 +14,8 @@ export default gql`
         username
       }
     },
-    options
+    options{
+      title
+    }
   }
 }`
