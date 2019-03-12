@@ -4,8 +4,8 @@ import { shallow } from 'enzyme'
 import Accordion from './Accordion'
 
 const mockSections = [
-  { id: '0' },
-  { id: '1' }
+  { _id: '0' },
+  { _id: '1' }
 ]
 
 describe('given Accordion component', () => {
@@ -15,7 +15,7 @@ describe('given Accordion component', () => {
 
       expect(component.length).toBe(1)
     })
-    describe('when bets are passed', () => {
+    describe('when betjest s are passed', () => {
       it('should render an accordionSection per bet', () => {
         const component = shallow(<Accordion sections={mockSections}/>)
         const { onSelectSection } = component.instance()
@@ -25,7 +25,7 @@ describe('given Accordion component', () => {
 
         accordionSections.forEach((section, index) => {
           expect(section.props()).toEqual({
-            id: mockSections[index].id,
+            id: mockSections[index]._id,
             onSelectSection,
             sectionSelected: null,
             currentHeight: 0
