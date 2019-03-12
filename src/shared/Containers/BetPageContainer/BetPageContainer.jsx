@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
+import { currentBets } from '~src/shared/graphql/queries'
 
 import { TextInput } from '~src/shared/Components/Common/TextInput'
 import { TextArea } from '~src/shared/Components/Common/TextArea'
@@ -40,7 +41,8 @@ export class BetPageContainer extends Component {
         ...data,
         options: currentOptions,
         amount: parseFloat(data.amount)
-      }
+      },
+      refetchQueries: [{ query: currentBets }]
     })
   }
 
@@ -52,7 +54,7 @@ export class BetPageContainer extends Component {
         <AmountInput name='amount' value='0.00' />
         {
           this.state.options.map((opt, index) =>
-            <TextInput key={`${opt.name}-${index}`} name={opt.name} placeholder={opt.placeholder} />)
+            <TextInput key={`${opt.name}-${index}`} name={opt.name} placeholder={opt.placeholder} required />)
         }
         <Button>Create Bet</Button>
       </FormContainer>
