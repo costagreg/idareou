@@ -11,7 +11,8 @@ const initProps = {
   },
   history: {
     push: jest.fn(() => {})
-  }
+  },
+  location: {}
 }
 
 describe('given SignUpPageContainer component', () => {
@@ -59,7 +60,7 @@ describe('given SignUpPageContainer component', () => {
     })
   })
   describe('checkAndSaveData', () => {
-    it('sends form data to the backend', async () => {
+    it('sends form data to the backend', async () => { // TODO: GREG CHANGE IT PLEASE
       const updateError = jest.fn()
       const formData = {
         username: 'username',
@@ -68,18 +69,13 @@ describe('given SignUpPageContainer component', () => {
         confirmPassword: 'confirmPassword',
         monzouser: 'monzouser'
       }
-      const props = {
-        client: {
-          mutate: jest.fn()
-        }
-      }
 
-      const component = shallow(<SignUpPageContainer {...props} />)
+      const component = shallow(<SignUpPageContainer {...initProps} />)
       await component.instance().checkAndSaveData(formData)
 
       component.instance().checkAndSaveData(formData, updateError)
 
-      expect(props.client.mutate).toHaveBeenCalledWith({
+      expect(initProps.client.mutate).toHaveBeenCalledWith({
         mutation: addUser,
         variables: formData,
         errorPolicy: 'all'
@@ -87,23 +83,48 @@ describe('given SignUpPageContainer component', () => {
       expect(updateError).not.toHaveBeenCalled()
     })
     describe('if signup is successful', () => {
-      it('refetches the currentUser and redirect to dashboard', async () => {
-        const formData = {
-          email: 'emailMock',
-          password: 'passwordMock'
-        }
-        const props = {
-          ...initProps
-        }
+      describe('and the location object non provide where to redirect', () => {
+        it('refetches the currentUser and redirect to dashboard', async () => {
+          const formData = {
+            email: 'emailMock',
+            password: 'passwordMock'
+          }
+          const props = {
+            ...initProps
+          }
 
-        const component = shallow(<SignUpPageContainer {...props} />)
-        await component.instance().checkAndSaveData(formData)
+          const component = shallow(<SignUpPageContainer {...props} />)
+          await component.instance().checkAndSaveData(formData)
 
-        expect(props.client.query).toHaveBeenCalledWith({
-          query: currentUser,
-          fetchPolicy: 'network-only'
+          expect(props.client.query).toHaveBeenCalledWith({
+            query: currentUser,
+            fetchPolicy: 'network-only'
+          })
+          expect(props.history.push).toHaveBeenCalledWith('/dashboard')
         })
-        expect(props.history.push).toHaveBeenCalledWith('/dashboard')
+      })
+      describe('and the location object provide where to redirect', () => {
+        it('refetches the currentUser and redirect to dashboard', async () => {
+          const formData = {
+            email: 'emailMock',
+            password: 'passwordMock'
+          }
+          const props = {
+            ...initProps,
+            location: {
+              state: { from: '/bet' }
+            }
+          }
+
+          const component = shallow(<SignUpPageContainer {...props} />)
+          await component.instance().checkAndSaveData(formData)
+
+          expect(props.client.query).toHaveBeenCalledWith({
+            query: currentUser,
+            fetchPolicy: 'network-only'
+          })
+          expect(props.history.push).toHaveBeenCalledWith('/bet')
+        })
       })
     })
     describe('if signup is not successful', () => {

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withApollo } from 'react-apollo'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import Proptypes from 'prop-types'
 
 import { loginUser, currentUser } from '~src/shared/graphql/queries'
@@ -10,7 +10,7 @@ import { FormContainer } from '../FormContainer'
 
 export class LoginPageContainer extends Component {
   checkUser = async (formData, updateError) => {
-    const { client, history } = this.props
+    const { client, history, location } = this.props
     const loggedUser = await client.mutate({
       mutation: loginUser,
       variables: formData
@@ -22,7 +22,9 @@ export class LoginPageContainer extends Component {
         fetchPolicy: 'network-only'
       })
       if (user.data.currentUser) {
-        history.push('/dashboard')
+        const { state = {} } = location
+
+        history.push(state.from || '/dashboard')
       }
     } else {
       updateError('password', 'Your username/password is wrong')
@@ -30,10 +32,18 @@ export class LoginPageContainer extends Component {
   }
 
   render() {
+    const { state = {} } = this.props.location
+
     return (
-      <FormContainer onSubmit={this.checkUser} updateForm={this.updateForm} >
+      <FormContainer onSubmit={this.checkUser}>
         <TextInput type='email' name='email' placeholder='Email' icon='at' required />
         <TextInput type='password' name='password' placeholder='Password' icon='unlock-alt' required />
+        <p className='LoginPage__Msg'>
+          Are you not a user yet?
+          <Link to={{ pathname: '/signup', state: { from: state.from } }}>
+            Sign up
+          </Link>
+        </p>
         <Button>Log in</Button>
       </FormContainer>
     )

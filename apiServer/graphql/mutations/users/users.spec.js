@@ -46,7 +46,7 @@ describe('Users mutation', () => {
       const user = new User(userData)
       await user.save()
 
-      const result = await graphql(RootQuery, addUserMutation, {}, context, userData)
+      const result = await graphql(schema, addUserMutation, {}, context, userData)
 
       expect(result.errors).not.toBe(null)
     })

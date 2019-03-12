@@ -17,12 +17,13 @@ export class SignUpPageContainer extends Component {
   }
 
   checkAndSaveData = async (formData, updateError) => {
-    const { client, history } = this.props
+    const { client, history, location } = this.props
     const addUserMutation = await client.mutate({
       mutation: addUser,
       variables: formData,
       errorPolicy: 'all'
     })
+
     const { data, errors } = addUserMutation
 
     if (errors) {
@@ -35,7 +36,9 @@ export class SignUpPageContainer extends Component {
           fetchPolicy: 'network-only'
         })
         if (user) {
-          history.push('/dashboard')
+          const { state = {} } = location
+
+          history.push(state.from || '/dashboard')
         }
       }
     }
