@@ -9,9 +9,7 @@ export const betOptionsQueries = {
       ids: { type: new GraphQLList(GraphQLString) }
     },
     async resolve(parentValue, { ids }) {
-      const betOption = await findBetOptions(ids)
-
-      return betOption
+      return findBetOptions(ids)
     }
   }
 }
