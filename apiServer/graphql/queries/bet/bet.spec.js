@@ -4,7 +4,7 @@ import { schema } from '../../schema'
 import { Bet, User } from '../../../database/models'
 
 describe('Bet queries', () => {
-  describe('findBetByCurrentUser', () => {
+  describe('currentBets', () => {
     it('returns all bets involved with the current user', async () => {
       const user1 = await User.create({ username: 'userMaster' })
       const user2 = await User.create({ username: 'participant1' })
@@ -21,14 +21,14 @@ describe('Bet queries', () => {
 
       const query = `
       {
-        findBetByCurrentUser{
+        currentBets{
           _id
         }
       }`
       const result = await graphql(schema, query, {}, context)
-      const { data: { findBetByCurrentUser } } = result
+      const { data: { currentBets } } = result
 
-      expect(findBetByCurrentUser[0]._id).toEqual(bet._id.toString())
+      expect(currentBets[0]._id).toEqual(bet._id.toString())
 
 
     })

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export default gql`
 {
-  findBetByCurrentUser{
+  currentBets{
     _id,
     title,
     description,

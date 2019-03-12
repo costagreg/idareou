@@ -3,7 +3,7 @@ import { BetType } from '../../types'
 import { findBetByUser } from '../../../database/queries/bet'
 
 export const betQueries = {
-  findBetByCurrentUser: {
+  currentBets: {
     type: new GraphQLList(BetType),
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {

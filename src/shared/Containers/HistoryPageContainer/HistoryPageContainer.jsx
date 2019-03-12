@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
 import HistoryPage from '~src/shared/Pages/HistoryPage'
-import { findBetByCurrentUser } from '~src/shared/graphql/queries'
+import { currentBets } from '~src/shared/graphql/queries'
 
 const DUMMYBETS = [
   {
@@ -48,8 +48,7 @@ const DUMMYBETS = [
 
 export class HistoryPageContainer extends Component {
   render() {
-    const bets = this.props.data.findBetByCurrentUser
-    console.log(bets)
+    const bets = this.props.data.currentBets
 
     return (
       <Fragment>
@@ -64,4 +63,4 @@ HistoryPageContainer.propTypes = {
   fetchToStore: PropTypes.func
 }
 
-export default graphql(findBetByCurrentUser)(HistoryPageContainer)
+export default graphql(currentBets)(HistoryPageContainer)
