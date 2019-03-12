@@ -17,36 +17,36 @@ const routes = [
     path: '/dashboard',
     exact: true,
     name: 'Dashboard',
-    auth: true
+    needAuthentication: true
   }, {
     Component: HistoryPageContainer,
     path: '/history',
     name: 'History',
-    auth: true
+    needAuthentication: true
   }, {
     Component: BetPage,
     path: '/bet',
     exact: true,
     name: 'Bet',
-    auth: true
+    needAuthentication: true
   }, {
     Component: LoginPage,
     path: '/login',
     exact: true,
     name: 'Login',
-    auth: false
+    needAuthentication: false
   }, {
     Component: SignUpPage,
     path: '/signup',
     exact: true,
     name: 'Signup',
-    auth: false
+    needAuthentication: false
   }, {
     Component: LogoutPage,
     path: '/logout',
     exact: true,
     name: 'Logout',
-    auth: true
+    needAuthentication: true
   }
 ]
 

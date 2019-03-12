@@ -11,19 +11,22 @@ if (process.browser) {
 }
 
 class AppRouter extends Component {
-  filterAuthRoutes = (currentUser, auth, route) =>
-    (currentUser || (!currentUser && !auth) || (typeof auth === 'undefined')) && route
+  filterPrivateRoutes = (userIsLogged, needAuthentication, route) =>
+    (userIsLogged || (!userIsLogged && !needAuthentication) || (typeof needAuthentication === 'undefined')) && route
 
-  renderRoutes = (currentUser) =>
-    routes.map(({ Component, path, auth }, index) =>
-      this.filterAuthRoutes(currentUser, auth, <Route
+  // Signup and login not accessible when logged. Not redirect on homepage
+  filterPublicRoutes = ({ needAuthentication, userIsLogged, path, props, Component }) =>
+    (!needAuthentication && userIsLogged) && (path !== '/')
+      ? <Redirect to='/' />
+      : <Component {...props} />
+
+  renderRoutes = (userIsLogged) =>
+    routes.map(({ Component, path, needAuthentication }, index) =>
+      this.filterPrivateRoutes(userIsLogged, needAuthentication, <Route
         key={index}
         exact
         path={path}
-        render={props => (!auth && currentUser) && (path !== '/')
-          ? <Redirect to='/' />
-          : <Component {...props} />
-        }
+        render={props => this.filterPublicRoutes({ needAuthentication, userIsLogged, path, props, Component })}
       />))
 
   redirectIfExist = () =>
@@ -42,7 +45,7 @@ class AppRouter extends Component {
         <div className='approuter'>
           <HeaderContainer currentUser={currentUser} />
           <Switch>
-            { this.renderRoutes(currentUser) }
+            { this.renderRoutes(!!currentUser) }
             { <Redirect to={{
                 pathname: '/login',
                 state: { from: this.redirectIfExist() && location.pathname }
