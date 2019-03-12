@@ -36,7 +36,6 @@ const AccordionSection = ({
 AccordionSection.propTypes = {
   id: Proptypes.string.isRequired,
   title: Proptypes.string.isRequired,
-  state: Proptypes.string.isRequired,
   children: Proptypes.node.isRequired,
   sectionSelected: Proptypes.string,
   onSelectSection: Proptypes.func.isRequired,

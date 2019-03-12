@@ -1,5 +1,5 @@
 import { Bet, BetOption, User } from '../../models'
-import { findBet, addBet, updateBetParticipant } from './bet'
+import { findBet, addBet, updateBetParticipant, findBetByUser } from './bet'
 
 describe('Bet queries', () => {
   const bet = {
@@ -73,6 +73,40 @@ describe('Bet queries', () => {
 
       expect(betAfterUpdate.participants[0].option.toString()).toEqual(newBetOption._id.toString())
       expect(betAfterUpdate.participants[0].user.toString()).toEqual(newUser._id.toString())
+    })
+  })
+
+  describe('findBetByUser', () => {
+    it('should return the bet if the id passed is in the master attribute', async () => {
+      const user1 = await User.create({ username: 'userMaster' })
+      const user2 = await User.create({ username: 'participant1' })
+      const user3 = await User.create({ username: 'partecipant2' })
+
+      const betProps = {
+        ...bet,
+        master: user1._id,
+        participants: [{ user: user2._id }, { user: user3._id }]
+      }
+      const newBet = await Bet.create(betProps)
+      const betFound = await findBetByUser(user1._id)
+
+      expect(betFound[0]._id).toEqual(newBet._id)
+    })
+
+    it('should return the bet if the id passed is in the partecipants attribute', async () => {
+      const user1 = await User.create({ username: 'userMaster' })
+      const user2 = await User.create({ username: 'participant1' })
+      const user3 = await User.create({ username: 'partecipant2' })
+
+      const betProps = {
+        ...bet,
+        master: user1._id,
+        participants: [{ user: user2._id }, { user: user3._id }]
+      }
+      const newBet = await Bet.create(betProps)
+      const betFound = await findBetByUser(user3._id)
+
+      expect(betFound[0]._id).toEqual(newBet._id)
     })
   })
 })

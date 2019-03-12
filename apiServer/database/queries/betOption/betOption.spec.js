@@ -1,6 +1,6 @@
 import { BetOption } from '../../models'
 
-import { addBetOption, findBetOption } from './betOption'
+import { addBetOption, findBetOptions } from './betOption'
 
 describe('Betptions', () => {
   describe('when calling addBetOptiopns', async () => {
@@ -21,19 +21,19 @@ describe('Betptions', () => {
 
         const betCreated = await BetOption.create(newBet)
 
-        const betFound = await findBetOption(betCreated.id)
+        const betFound = await findBetOptions([betCreated.id])
 
-        expect(betFound._id).toEqual(betCreated._id)
-        expect(betFound.title).toEqual(betCreated.title)
+        expect(betFound[0]._id).toEqual(betCreated._id)
+        expect(betFound[0].title).toEqual(betCreated.title)
       })
     })
     describe('when bet option id has not been created already', () => {
-      it('should return null', async () => {
+      it('should return an empy array', async () => {
         const newBet = { title: 'titleMock', _id: '847290dskdjs01' }
 
-        const betFound = await findBetOption(newBet.id)
+        const betFound = await findBetOptions([newBet.id])
 
-        expect(betFound).toBe(null)
+        expect(betFound).toEqual([])
       })
     })
   })

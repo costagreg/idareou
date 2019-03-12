@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
-
+import { currentBets } from '~src/shared/graphql/queries'
 import { BetPageContainer } from './BetPageContainer'
 
 jest.mock('~src/shared/graphql/mutations/betMutation', () => ({
@@ -76,7 +76,8 @@ describe('BetPageContainer', () => {
           expect(newIsntance.optionTransformer).toHaveBeenCalled()
           expect(mockApolloClient.mutate).toHaveBeenCalledWith({
             mutation: addBet,
-            variables: { ...formData, options: [], amount: parseFloat(formData.amount) }
+            variables: { ...formData, options: [], amount: parseFloat(formData.amount) },
+            refetchQueries: [{ query: currentBets }]
           })
         })
       })

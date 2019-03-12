@@ -3,6 +3,7 @@ import { schema } from '../../schema'
 import { Bet, User } from '../../../database/models'
 
 describe('bet type', async () => {
+  // TO-DO: Write test for bet
   xit('should be null when it doesnt exits', async () => {
     const query = `
       {

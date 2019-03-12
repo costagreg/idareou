@@ -33,7 +33,7 @@ describe('given BetCard component', () => {
         expect(options.length).toBe(props.options.length)
       })
       describe('and the option has been choosen', () => {
-        it('should have success class when state is success', () => {
+        xit('should have success class when state is success', () => {
           const newProps = {
             ...props,
             state: 'success'
@@ -50,7 +50,7 @@ describe('given BetCard component', () => {
             expect(opt.text()).toBe(newProps.options[index].opt)
           })
         })
-        it('should have fail class when state is fail', () => {
+        xit('should have fail class when state is fail', () => {
           const newProps = {
             ...props,
             state: 'fail'

@@ -21,3 +21,7 @@ export const updateBetParticipant = async (betId, userId, optionId) => {
 
   return updatedBet
 }
+
+export const findBetByUser = (id) => (
+  Bet.find({ $or: [{ 'participants.user': id }, { master: id }] })
+)
