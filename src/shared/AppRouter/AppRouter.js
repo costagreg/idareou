@@ -11,12 +11,12 @@ if (process.browser) {
 }
 
 class AppRouter extends Component {
-  filterNonAuthRoutes = (currentUser, auth, route) =>
+  filterAuthRoutes = (currentUser, auth, route) =>
     (currentUser || (!currentUser && !auth) || (typeof auth === 'undefined')) && route
 
   renderRoutes = (currentUser) =>
     routes.map(({ Component, path, auth }, index) =>
-      this.filterNonAuthRoutes(currentUser, auth, <Route
+      this.filterAuthRoutes(currentUser, auth, <Route
         key={index}
         exact
         path={path}
@@ -26,8 +26,8 @@ class AppRouter extends Component {
         }
       />))
 
-  shouldRedirectBack = () =>
-    routes.find(({ path, redirect }) => this.props.location.pathname === path && redirect)
+  redirectIfExist = () =>
+    routes.find(({ path }) => this.props.location.pathname === path)
 
   shouldComponentUpdate(nextProps) {
     // Avoid re-render on graphql query the currentUser before push the to history
@@ -45,7 +45,7 @@ class AppRouter extends Component {
             { this.renderRoutes(currentUser) }
             { <Redirect to={{
                 pathname: '/login',
-                state: { from: this.shouldRedirectBack() && location.pathname }
+                state: { from: this.redirectIfExist() && location.pathname }
                 }}
               />
             }

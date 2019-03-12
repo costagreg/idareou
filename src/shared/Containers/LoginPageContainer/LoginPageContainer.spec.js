@@ -20,25 +20,33 @@ describe('LoginPageContainer', () => {
     jest.clearAllMocks()
   })
   describe('renders', () => {
+    const component = shallow(<LoginPageContainer  {...initProps}/>)
     it('renders a form', () => {
-      const component = shallow(<LoginPageContainer />)
-
       expect(component.find('FormContainer').length).toBe(1)
     })
     it('renders a textinput for email', () => {
-      const component = shallow(<LoginPageContainer />)
-
       expect(component.find('TextInput[name="email"]').exists()).toBe(true)
     })
     it('renders a textinput for password', () => {
-      const component = shallow(<LoginPageContainer />)
-
       expect(component.find('TextInput[name="password"]').exists()).toBe(true)
     })
     it('renders a textinput a submit button', () => {
-      const component = shallow(<LoginPageContainer />)
-
       expect(component.find('Button').exists()).toBe(true)
+    })
+    it('should render the SignUp msg', () => {
+      expect(component.find('.LoginPage__Msg').exists()).toBe(true)
+    })
+  })
+  describe('when the sign up link is clicked', () => {
+    describe('if state is not passed by location to redirect back', () => {
+      const component = shallow(<LoginPageContainer  {...initProps}/>)
+      it('should redirect to signup page with no state', () => {
+        const expected = {
+          pathname: '/signup',
+          state: { from: undefined }
+        }
+        expect(component.find('.LoginPage__Msg Link').props().to).toEqual(expected)
+      })
     })
   })
   describe('checkUser', () => {
@@ -101,12 +109,10 @@ describe('LoginPageContainer', () => {
       it('changes error status to true', async () => {
         const mockUpdateError = jest.fn()
         const props = {
+          ...initProps,
           client: {
             mutate: () => ({ data: {} }),
             query: jest.fn(() => ({ data: { currentUser: {} } }))
-          },
-          history: {
-            push: jest.fn()
           }
         }
 

@@ -11,49 +11,42 @@ const routes = [
     Component: HomePage,
     path: '/',
     exact: true,
-    name: 'Home',
-    redirect: true
+    name: 'Home'
   }, {
     Component: DashboardPage,
     path: '/dashboard',
     exact: true,
     name: 'Dashboard',
-    auth: true,
-    redirect: true
+    auth: true
   }, {
     Component: HistoryPageContainer,
     path: '/history',
     name: 'History',
-    auth: true,
-    redirect: true
+    auth: true
   }, {
     Component: BetPage,
     path: '/bet',
     exact: true,
     name: 'Bet',
-    auth: true,
-    redirect: true
+    auth: true
   }, {
     Component: LoginPage,
     path: '/login',
     exact: true,
     name: 'Login',
-    auth: false,
-    redirect: false
+    auth: false
   }, {
     Component: SignUpPage,
     path: '/signup',
     exact: true,
     name: 'Signup',
-    auth: false,
-    redirect: false
+    auth: false
   }, {
     Component: LogoutPage,
     path: '/logout',
     exact: true,
     name: 'Logout',
-    auth: true,
-    redirect: false
+    auth: true
   }
 ]
 

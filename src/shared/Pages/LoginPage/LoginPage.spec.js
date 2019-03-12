@@ -15,13 +15,5 @@ describe('LoginPage', () => {
     it('should render the LoginPageContainer', () => {
       expect(component.find('withRouter(withApollo(LoginPageContainer))').exists()).toBe(true)
     })
-    it('should render the SignUp msg', () => {
-      expect(component.find('.LoginPage__Msg').exists()).toBe(true)
-    })
-    describe('when the sign up link is clicked', () => {
-      it('should redirect to signup page', () => {
-        expect(component.find('.LoginPage__Msg Link').props().to).toBe('/signup')
-      })
-    })
   })
 })
