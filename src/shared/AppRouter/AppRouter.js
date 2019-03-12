@@ -11,8 +11,10 @@ if (process.browser) {
 }
 
 class AppRouter extends Component {
-  filterPrivateRoutes = (userIsLogged, needAuthentication, route) =>
-    (userIsLogged || (!userIsLogged && !needAuthentication) || (typeof needAuthentication === 'undefined')) && route
+  filterPrivateRoutes = (userIsLogged, needAuthentication, hideRoute, route) =>
+   // !hideRoute && // TODO ADD IT
+   (userIsLogged || (!userIsLogged && !needAuthentication) ||
+   (typeof needAuthentication === 'undefined')) && route
 
   // Signup and login not accessible when logged. Not redirect on homepage
   filterPublicRoutes = ({ needAuthentication, userIsLogged, path, props, Component }) =>
@@ -21,8 +23,8 @@ class AppRouter extends Component {
       : <Component {...props} />
 
   renderRoutes = (userIsLogged) =>
-    routes.map(({ Component, path, needAuthentication }, index) =>
-      this.filterPrivateRoutes(userIsLogged, needAuthentication, <Route
+    routes.map(({ Component, path, needAuthentication, hideRoute }, index) =>
+      this.filterPrivateRoutes(userIsLogged, needAuthentication, hideRoute, <Route
         key={index}
         exact
         path={path}
