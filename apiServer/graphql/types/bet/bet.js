@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat } from 'graphql'
 import { UserType } from '../user'
 import { BetOptionType } from '../betOption'
-import { findBetOption } from '../../../database/queries/betOption'
+import { findBetOptions } from '../../../database/queries/betOption'
 
 const participantType = new GraphQLObjectType({
   name: 'participant',
@@ -21,11 +21,9 @@ export default new GraphQLObjectType({
     currency: { type: GraphQLString },
     options: {
       type: new GraphQLList(BetOptionType),
-      resolve: async (parentValue) => {
-        const options = await findBetOption(parentValue.options[0])
-
-        return [options]
-      }
+      resolve: async (parentValue) => (
+        findBetOptions(parentValue.options)
+      )
     },
     master: { type: GraphQLString },
     participants: { type: new GraphQLList(participantType) }

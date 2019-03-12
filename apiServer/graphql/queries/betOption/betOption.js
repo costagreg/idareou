@@ -1,15 +1,15 @@
-import { GraphQLString, GraphQLNonNull } from 'graphql'
+import { GraphQLString, GraphQLList } from 'graphql'
 import { BetOptionType } from '../../types'
-import { findBetOption } from '../../../database/queries/betOption'
+import { findBetOptions } from '../../../database/queries/betOption'
 
 export const betOptionsQueries = {
-  findBetOption: {
-    type: BetOptionType,
+  findBetOptions: {
+    type: new GraphQLList(BetOptionType),
     args: {
-      _id: { type: new GraphQLNonNull(GraphQLString) }
+      ids: { type: new GraphQLList(GraphQLString) }
     },
-    async resolve(parentValue, args) {
-      const betOption = await findBetOption(args._id)
+    async resolve(parentValue, { ids }) {
+      const betOption = await findBetOptions(ids)
 
       return betOption
     }

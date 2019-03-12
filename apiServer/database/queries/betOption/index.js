@@ -1,1 +1,1 @@
-export { addBetOption, findBetOption } from './betOption'
+export { addBetOption, findBetOptions } from './betOption'

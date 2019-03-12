@@ -12,16 +12,16 @@ describe('betOption queries', () => {
 
         const query = `
         {
-          findBetOption(_id: "${newBetOption._id.toString()}"){
+          findBetOptions(ids: ["${newBetOption._id.toString()}"]){
             _id
           }
         }`
 
         const result = await graphql(schema, query, {}, context)
 
-        const { data: { findBetOption } } = result
+        const { data: { findBetOptions } } = result
 
-        expect(findBetOption._id).toEqual(newBetOption._id.toString())
+        expect(findBetOptions[0]._id).toEqual(newBetOption._id.toString())
       })
     })
   })
