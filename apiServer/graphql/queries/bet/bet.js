@@ -1,6 +1,6 @@
-import { GraphQLList } from 'graphql'
+import { GraphQLList, GraphQLNonNull, GraphQLString} from 'graphql'
 import { BetType } from '../../types'
-import { findBetByUser } from '../../../database/queries/bet'
+import { findBetByUser, findBet } from '../../../database/queries/bet'
 
 export const betQueries = {
   currentBets: {
@@ -8,6 +8,17 @@ export const betQueries = {
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {
         return findBetByUser(user._id)
+      }
+    }
+  },
+  findBet: {
+    type: BetType,
+    args: {
+      id: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    async resolve(parentValue, args, { req: { user } }) {
+      if (user) {
+        return findBet(args.id)
       }
     }
   }
