@@ -48,7 +48,7 @@ const routes = [
     path: '/invite/:id',
     exact: true,
     name: 'Join Bet',
-    needAuthentication: false
+    needAuthentication: true
   }, {
     Component: LogoutPage,
     path: '/logout',
