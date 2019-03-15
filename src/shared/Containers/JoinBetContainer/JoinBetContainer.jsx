@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
+import Proptypes from 'prop-types'
 
-export class JoinBetContainer extends Component {
+export default class JoinBetContainer extends Component {
+  render() {
+    return <div>Yeah sajdjsd {this.props.betId} </div>
+  }
+}
 
+JoinBetContainer.propTypes = {
+  betId: Proptypes.string
 }

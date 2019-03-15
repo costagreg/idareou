@@ -1,16 +1,16 @@
 import React from 'react'
 
 import { PageTitle } from '~src/shared/Components/Common/PageTitle'
-import { JoinBetContainer } from '~src/shared/Containers/JoinBetContainer'
+import JoinBetContainer from '~src/shared/Containers/JoinBetContainer'
 
 if (process.browser) {
   require('./JoinBetPage.scss')
 }
 
-const JoinBetPage = () => (
+const JoinBetPage = (props) => (
   <div className="JoinBet">
     <PageTitle>Join Bet</PageTitle>
-    <JoinBetContainer />
+    <JoinBetContainer betId={props.match.params.id} />
   </div>
 )
 
