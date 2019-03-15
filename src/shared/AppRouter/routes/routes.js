@@ -6,6 +6,7 @@ import SignUpPage from '~src/shared/Pages/SignUpPage'
 import LogoutPage from '~src/shared/Pages/LogoutPage'
 import DashboardPage from '~src/shared/Pages/Dashboard'
 import BetLinkPageContainer from '~src/shared/Containers/BetLinkPageContainer'
+import JoinBet from '~src/shared/Pages/JoinBetPage'
 
 const routes = [
   {
@@ -41,6 +42,12 @@ const routes = [
     path: '/signup',
     exact: true,
     name: 'Signup',
+    needAuthentication: false
+  }, {
+    Component: JoinBet,
+    path: '/invite/:id',
+    exact: true,
+    name: 'Join Bet',
     needAuthentication: false
   }, {
     Component: LogoutPage,

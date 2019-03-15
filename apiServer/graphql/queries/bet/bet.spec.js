@@ -33,7 +33,7 @@ describe('Bet queries', () => {
           }
         }`
       const result = await graphql(schema, query, {}, context, paramas)
-      console.log(result)
+
       const { data: { findBet } } = result
       expect(findBet._id.toString()).toEqual(betHelper.bet._id.toString())
     })
