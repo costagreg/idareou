@@ -5,10 +5,10 @@ if (process.browser) {
   require('./CheckBox.scss')
 }
 
-const CheckBox = ({ name, text }) => (
+const CheckBox = ({ name, text, value }) => (
   <div className='CheckBox'>
-    <input className='CheckBox__Input' id={name} name={name} type='checkbox' />
-    <label className='CheckBox__Label' for={name} >{text}</label>
+    <input className='CheckBox__Input' id={name} name={name} value={value} type='checkbox' />
+    <label className='CheckBox__Label' htmlFor={name} >{text}</label>
   </div>
 )
 
