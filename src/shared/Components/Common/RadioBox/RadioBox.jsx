@@ -2,26 +2,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 if (process.browser) {
-  require('./CheckBox.scss')
+  require('./RadioBox.scss')
 }
 
-const CheckBox = ({
+const RadioBox = ({
   name,
   text,
   value,
   updateValue
 }) => (
-    <div className='CheckBox'>
+    <div className='RadioBox'>
       <input
-        className='CheckBox__Input'
+        className='RadioBox__Input'
         id={name}
         name={name}
-        type='checkbox'
+        type='radio'
         checked={value === 'checked' }
         readOnly
       />
       <label
-        className='CheckBox__Label'
+        className='RadioBox__Label'
         onClick={() => updateValue(name, value === 'checked' ? '' : 'checked', '')}
       >
         {text}
@@ -29,11 +29,11 @@ const CheckBox = ({
     </div>
 )
 
-CheckBox.propTypes = {
+RadioBox.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
   value: PropTypes.string,
   updateValue: PropTypes.func
 }
 
-export default CheckBox
+export default RadioBox
