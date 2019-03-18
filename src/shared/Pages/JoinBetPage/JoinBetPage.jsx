@@ -8,7 +8,7 @@ if (process.browser) {
 }
 
 const JoinBetPage = (props) => (
-  <div className="JoinBet">
+  <div className="JoinBetPage">
     <PageTitle>Join Bet</PageTitle>
     <JoinBetContainer betId={props.match.params.id} />
   </div>

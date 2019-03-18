@@ -33,7 +33,10 @@ export class JoinBetContainer extends Component {
       <JoinBetCard {...bet}></JoinBetCard>
       <FormContainer onSubmit={(formData) => {console.log(formData)}}>
         <h4>Choose your option</h4>
-        {bet.options && bet.options.map(({ _id, title }) => <CheckBox key={_id} name='options' text={title} value={_id} />)}
+        <Checkboxlist name='options'>
+          {bet.options && bet.options.map(({ _id, title }, index) => <CheckBox key={_id} groupName={`options`} name={`options-${index}`} text={title} />)}
+          <CheckBox name='options-1' text={'adsdsaddsa'} />
+        </Checkboxlist>
         <Button>Join Bet</Button>
       </FormContainer>
     </Fragment>

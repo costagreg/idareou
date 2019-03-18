@@ -5,11 +5,28 @@ if (process.browser) {
   require('./CheckBox.scss')
 }
 
-const CheckBox = ({ name, text, value }) => (
-  <div className='CheckBox'>
-    <input className='CheckBox__Input' id={name} name={name} value={value} type='checkbox' />
-    <label className='CheckBox__Label' htmlFor={name} >{text}</label>
-  </div>
+const CheckBox = ({
+  name,
+  text,
+  value,
+  updateValue
+}) => (
+    <div className='CheckBox'>
+      <input
+        className='CheckBox__Input'
+        id={name}
+        name={name}
+        type='checkbox'
+        checked={value === 'checked' }
+        readOnly
+      />
+      <label
+        className='CheckBox__Label'
+        onClick={() => updateValue(name, value === 'checked' ? '' : 'checked', '')}
+      >
+        {text}
+      </label>
+    </div>
 )
 
 CheckBox.propTypes = {

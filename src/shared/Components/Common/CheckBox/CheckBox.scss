@@ -1,6 +1,6 @@
 .CheckBox {
   display: flex;
-
+  padding: 10px 0;
   &__Input {
     display: none;
     & + .CheckBox__Label::after{
