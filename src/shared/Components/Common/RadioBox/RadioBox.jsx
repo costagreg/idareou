@@ -9,20 +9,22 @@ const RadioBox = ({
   name,
   text,
   value,
+  optionValue,
   updateValue
 }) => (
     <div className='RadioBox'>
       <input
         className='RadioBox__Input'
-        id={name}
         name={name}
         type='radio'
-        checked={value === 'checked' }
+        checked={value === optionValue}
         readOnly
+
       />
       <label
         className='RadioBox__Label'
-        onClick={() => updateValue(name, value === 'checked' ? '' : 'checked', '')}
+        htmlFor={name}
+        onClick={() => { updateValue(name, optionValue, '') }}
       >
         {text}
       </label>

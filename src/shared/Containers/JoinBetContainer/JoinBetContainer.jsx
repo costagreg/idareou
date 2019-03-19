@@ -33,8 +33,8 @@ export class JoinBetContainer extends Component {
       <JoinBetCard {...bet}></JoinBetCard>
       <FormContainer onSubmit={(formData) => { console.log(formData) }}>
         <h4>Choose your option</h4>
-        {bet.options && bet.options.map(({ _id, title }) => <RadioBox key={_id} name={`options`} text={title} />)}
-        <RadioBox name='options' text={'adsdsaddsa'} />
+          {bet.options && bet.options.map(({ _id, title }) => <RadioBox key={_id} name={`options`} text={title} optionValue={_id} />)}
+          <RadioBox name='options' optionValue={'adsdsaddsa'} text={'sdsd'}/>
         <Button>Join Bet</Button>
       </FormContainer>
     </Fragment>
