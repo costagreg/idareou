@@ -35,7 +35,8 @@ RadioBox.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
   value: PropTypes.string,
-  updateValue: PropTypes.func
+  updateValue: PropTypes.func,
+  optionValue: PropTypes.string
 }
 
 export default RadioBox
