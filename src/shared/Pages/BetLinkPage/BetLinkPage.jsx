@@ -9,7 +9,7 @@ if (process.browser) {
 const BetLinkPage = ({ betId }) =>
   <Fragment>
     <PageTitle className="BetLinkPage__title">Share this link</PageTitle>
-    {/* <p className="BetLinkPage__link">{`http://dareme.com/${betId || jdh2839jsd}`}</p>
-    <p className="BetLinkPage__secondTitle">Or send them an email</p> */}
+    <p className="BetLinkPage__link">{`http://dareme.com/${betId}`}</p>
+    <p className="BetLinkPage__secondTitle">Or send them an email</p>
   </Fragment>
 export default BetLinkPage

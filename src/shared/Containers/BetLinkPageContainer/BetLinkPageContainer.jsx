@@ -1,27 +1,36 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { withApollo } from 'react-apollo'
+import { withApollo, graphql } from 'react-apollo'
 
-import { currentBets } from '~src/shared/graphql/queries'
+import { betAdded } from '~src/shared/graphql/queries'
 
 import BetLinkPage from '~src/shared/Pages/BetLinkPage'
 
 class BetLinkPageContainer extends Component {
-  componentDidMount() {
+  state = {}
+
+  getBetId = async () => {
     const { client } = this.props
     try {
-      const data = client.readQuery({ query: currentBets })
-      console.log(data)
+      const { data } = await client.query({
+        query: betAdded
+      })
+      this.setState({
+        betId: data.betAdded
+      })
     } catch(e) {
-      console.log(client)
+      console.log(e)
     }
-
   }
+
+  componentDidMount() {
+    this.getBetId()
+  }
+
   render() {
-    console.log(this.props.location)
     return(
       <div className="BetLinkPage">
-        <BetLinkPage />
+        <BetLinkPage betId={this.state.betId}/>
       </div>
     )
   }

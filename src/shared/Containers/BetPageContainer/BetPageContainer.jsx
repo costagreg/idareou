@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
-
 import { withRouter } from 'react-router-dom'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
@@ -32,26 +31,29 @@ export class BetPageContainer extends Component {
     return currentOptions
   }
 
-  createBet = async (data) => {
+  createBet = async (formData) => {
     const { client, history } = this.props
 
-    const currentOptions = this.optionTransformer(data)
+    const currentOptions = this.optionTransformer(formData)
 
     try {
       const { data } = await client.mutate({
         mutation: addBet,
         variables: {
-          ...data,
+          ...formData,
           options: currentOptions,
-          amount: parseFloat(data.amount)
-        }
+          amount: parseFloat(formData.amount)
+        },
+        refetchQueries: [{ query: currentBets }] // TODO: Change when https://github.com/apollographql/apollo-feature-requests/issues/1 is fixed
       })
-      console.log('NEW BET', data)
-    }
-    catch(e) {
-      console.log('ERRO', e)
-    }
 
+      await client.writeData({ data: { betAdded: data.addBet._id }})
+
+      history.push(`/sharelink/${data.addBet._id}`)
+    }
+    catch(error) {
+      console.log(error)
+    }
   }
 
   render() {
