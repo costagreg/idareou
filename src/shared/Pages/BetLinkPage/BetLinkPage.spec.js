@@ -23,7 +23,7 @@ describe('given BetLinkPage component', () => {
       const link = component.find('.BetLinkPage__link')
 
       expect(link.length).toBe(1)
-      expect(link.text()).toBe(`http://idareou.com/${mockBetId}`)
+      expect(link.text()).toBe(`${process.env.HOST}/invite/${mockBetId}`)
     })
   })
 })

@@ -65,7 +65,8 @@ module.exports = {
       'process.env': {
         ENV: JSON.stringify(process.env.ENV),
         GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
-        COOKIE_DOMAIN: JSON.stringify(process.env.COOKIE_DOMAIN)
+        COOKIE_DOMAIN: JSON.stringify(process.env.COOKIE_DOMAIN),
+        HOST: JSON.stringify(process.env.ENV !== 'prod' ? process.env.DEV_HOST : process.env.PROD_HOST),
       }
     })
   ]

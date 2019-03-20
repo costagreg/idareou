@@ -20,7 +20,7 @@ dbConnection(dbUrl)
 
 app.use(cors({
   credentials: true,
-  origin: process.env.FRONTEND_URL
+  origin: process.env.DEV_HOST // ALWAYS FROM DEV SERVER
 }))
 app.use(bodyParser.json())
 app.use(cookieParser())

@@ -39,8 +39,8 @@ export class BetLinkPageContainer extends Component {
 }
 
 BetLinkPageContainer.propTypes = {
-  client: Proptypes.object,
-  history: Proptypes.object
+  client: Proptypes.object.isRequired,
+  history: Proptypes.object.isRequired
 }
 
 export default withRouter(withApollo(BetLinkPageContainer))

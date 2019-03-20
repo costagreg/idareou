@@ -30,7 +30,7 @@ export default {
       'process.env': {
         ENV: JSON.stringify(process.env.ENV),
         GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
-        FRONTEND_URL: JSON.stringify(process.env.FRONTEND_URL),
+        HOST: JSON.stringify(process.env.ENV !== 'prod' ? process.env.DEV_HOST : process.env.PROD_HOST),
         COOKIE_DOMAIN: JSON.stringify(process.env.COOKIE_DOMAIN)
       }
     })

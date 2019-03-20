@@ -11,12 +11,12 @@ if (process.browser) {
 const BetLinkPage = ({ betId }) =>
   <Fragment>
     <PageTitle className="BetLinkPage__title">Share this link</PageTitle>
-    <p className="BetLinkPage__link">{`http://idareou.com/${betId}`}</p>
+    <p className="BetLinkPage__link">{`${process.env.HOST}/invite/${betId}`}</p>
     <Link className="BetLinkPage__button" to="/dashboard">Go to Dashboard</Link>
   </Fragment>
 
 BetLinkPage.propTypes = {
-  betId: Proptypes.string
+  betId: Proptypes.string.isRequired
 }
 
 export default BetLinkPage
