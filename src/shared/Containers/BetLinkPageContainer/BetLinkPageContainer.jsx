@@ -6,18 +6,22 @@ import { betAdded } from '~src/shared/graphql/queries'
 
 import BetLinkPage from '~src/shared/Pages/BetLinkPage'
 
-class BetLinkPageContainer extends Component {
+export class BetLinkPageContainer extends Component {
   state = {}
 
   getBetId = async () => {
-    const { client } = this.props
-    const { data } = await client.query({
-      query: betAdded
-    })
+    const { client, history } = this.props
 
-    this.setState({
-      betId: data.betAdded
-    })
+    try {
+      const bet = await client.query({
+        query: betAdded
+      })
+      this.setState({
+        betId: bet.data.betAdded
+      })
+    } catch(e) {
+      history.push('/')
+    }
   }
 
   componentDidMount() {

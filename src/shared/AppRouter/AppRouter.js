@@ -11,8 +11,7 @@ if (process.browser) {
 }
 
 class AppRouter extends Component {
-  filterPrivateRoutes = (userIsLogged, needAuthentication, hideRoute, route) =>
-   !hideRoute &&
+  filterPrivateRoutes = (userIsLogged, needAuthentication, route) =>
    (userIsLogged || (!userIsLogged && !needAuthentication) ||
    (typeof needAuthentication === 'undefined')) && route
 
@@ -23,8 +22,8 @@ class AppRouter extends Component {
       : <Component {...props} />
 
   renderRoutes = (userIsLogged) =>
-    routes.map(({ Component, path, needAuthentication, hideRoute }, index) =>
-      this.filterPrivateRoutes(userIsLogged, needAuthentication, hideRoute, <Route
+    routes.map(({ Component, path, needAuthentication }, index) =>
+      this.filterPrivateRoutes(userIsLogged, needAuthentication, <Route
         key={index}
         exact
         path={path}
