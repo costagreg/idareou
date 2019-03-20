@@ -20,7 +20,7 @@ describe('JoinBet page', () => {
     })
     it('should render JoinBetContainer passing the id bet', () => {
       const component = shallow(<JoinBetPage {...initProps} />)
-      console.log(component.debug())
+
       expect(component.find('withApollo(JoinBetContainer)').exists()).toEqual(true)
       expect(component.find('withApollo(JoinBetContainer)').props().betId).toEqual(initProps.match.params.id)
     })

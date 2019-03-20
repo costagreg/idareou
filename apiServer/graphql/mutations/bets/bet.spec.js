@@ -97,8 +97,6 @@ describe('BetMutations', () => {
 
           const { data: { updateBetParticipant } } = result
 
-          console.log(result)
-
           const currentParticipant = updateBetParticipant.participants[0]
 
           expect(currentParticipant.user._id).toEqual(newUser._id.toString())
