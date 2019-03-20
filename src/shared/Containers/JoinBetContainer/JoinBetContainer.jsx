@@ -11,27 +11,33 @@ import { RadioBox } from '~src/shared/Components/Common/RadioBox'
 import { Button } from '~src/shared/Components/Common/Button'
 
 export class JoinBetContainer extends Component {
-  state = {
-    bet: {}
+
+  state = {}
+
+  fetchBet = async (betId) => {
+    const { client, history } = this.props
+
+    const findBetQuery = await client.query({
+      query: findBet,
+      variables: {
+        id: betId
+      }
+    })
+
+    const { data } = findBetQuery
+
+    if (data && data.findBet) {
+      this.setState({ bet: data.findBet })
+    } else {
+      history.push('/')
+    }
   }
 
   async componentDidMount() {
-    const { betId, client, history } = this.props
+    const { betId, history } = this.props
+
     try {
-      const findBetQuery = await client.query({
-        query: findBet,
-        variables: {
-          id: betId
-        }
-      })
-
-      const { data } = findBetQuery
-
-      if (data && data.findBet) {
-        this.setState({ bet: data.findBet })
-      } else {
-        history.push('/')
-      }
+      await this.fetchBet(betId)
     } catch {
       history.push('/')
     }
@@ -51,6 +57,10 @@ export class JoinBetContainer extends Component {
 
   render() {
     const { bet } = this.state
+
+    if(!bet) {
+      return null
+    }
 
     return <Fragment>
       <JoinBetCard {...bet}></JoinBetCard>

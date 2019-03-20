@@ -56,6 +56,30 @@ describe('JoinBetContainer', () => {
       })
     })
     describe('when mounted', () => {
+      it('triggers fetchBet', () => {
+        const fetchBetMock = jest.fn()
+        const component = shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
+
+        component.instance().fetchBet = fetchBetMock
+
+        component.instance().componentDidMount()
+
+        expect(fetchBetMock).toBeCalledTimes(1)
+      })
+      describe('when we get an error form the server', () => {
+        it('we redirect to homepage', async () => {
+          const fetchBetMock = jest.fn(() => {throw new Error('sdsd')})
+          const component = shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
+
+          component.instance().fetchBet = fetchBetMock
+
+          component.instance().componentDidMount()
+
+          expect(initProps.history.push).toHaveBeenCalledWith('/')
+        })
+      })
+    })
+    describe('@fetchBet', () => {
       it('pings the server to check the bet exits', () => {
         shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
 
@@ -63,8 +87,16 @@ describe('JoinBetContainer', () => {
         expect(initProps.client.query).toHaveBeenCalledWith({ query: findBet, variables: { id: mockBetId } })
       })
 
-      describe('if bet has been founded', () => {
+      describe('if the bet has been founded', async () => {
         it('updates the state', async () => {
+          const component = await shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
+
+          expect(component.state()).toEqual({ bet: mockBet })
+        })
+      })
+
+      describe('if the bet hasnt been founded', async () => {
+        it('redirects to the homepage as the link is invalid', async () => {
           const component = await shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
 
           expect(component.state()).toEqual({ bet: mockBet })
