@@ -13,6 +13,7 @@ const BetCard = ({
   options,
   participants
 }) => {
+  console.log(participants)
   return <div className="betcard">
     <div className="betcard__section betcard__description">{description}</div>
     <hr />

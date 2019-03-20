@@ -4,6 +4,7 @@ import { withApollo } from 'react-apollo'
 
 import JoinBetCard from '~src/shared/Components/JoinBetCard'
 import { findBet } from '~src/shared/graphql/queries'
+import { updateBetParticipant } from '~src/shared/graphql/mutations/betMutation'
 import { FormContainer } from '~src/shared/Containers/FormContainer'
 import { RadioBox } from '~src/shared/Components/Common/RadioBox'
 import { Button } from '~src/shared/Components/Common/Button'
@@ -13,15 +14,25 @@ export class JoinBetContainer extends Component {
     bet: {}
   }
 
-  componentDidMount() {
-    this.props.client.query({
+  async componentDidMount() {
+    const findBetQuery = await this.props.client.query({
       query: findBet,
       variables: {
         id: this.props.betId
       }
-    }).then(({ data: { findBet } }) => {
-      if (findBet) {
-        this.setState({ bet: findBet })
+    })
+    const { data } = findBetQuery
+    if (data && data.findBet) {
+      this.setState({ bet: data.findBet })
+    }
+  }
+
+  submitData = (formData) => {
+    this.props.client.mutate({
+      mutation: updateBetParticipant,
+      variables: {
+        betId: this.props.betId,
+        optionId: formData.optionId
       }
     })
   }
@@ -31,10 +42,9 @@ export class JoinBetContainer extends Component {
 
     return <Fragment>
       <JoinBetCard {...bet}></JoinBetCard>
-      <FormContainer onSubmit={(formData) => { console.log(formData) }}>
+      <FormContainer onSubmit={this.submitData}>
         <h4>Choose your option</h4>
-          {bet.options && bet.options.map(({ _id, title }) => <RadioBox key={_id} name={`options`} text={title} optionValue={_id} />)}
-          <RadioBox name='options' optionValue={'adsdsaddsa'} text={'sdsd'}/>
+        {bet.options && bet.options.map(({ _id, title }) => <RadioBox key={_id} name={`optionId`} text={title} optionValue={_id} />)}
         <Button>Join Bet</Button>
       </FormContainer>
     </Fragment>
