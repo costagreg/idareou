@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { withApollo } from 'react-apollo'
+import Proptypes from 'prop-types'
 
 import { betAdded } from '~src/shared/graphql/queries'
 
@@ -35,6 +36,11 @@ export class BetLinkPageContainer extends Component {
       </div>
     )
   }
+}
+
+BetLinkPageContainer.propTypes = {
+  client: Proptypes.object,
+  history: Proptypes.object
 }
 
 export default withRouter(withApollo(BetLinkPageContainer))

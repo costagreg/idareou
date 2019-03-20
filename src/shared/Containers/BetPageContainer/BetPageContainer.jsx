@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
+import Proptypes from 'prop-types'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
 import { currentBets } from '~src/shared/graphql/queries'
@@ -76,6 +77,11 @@ export class BetPageContainer extends Component {
       </FormContainer>
     )
   }
+}
+
+BetPageContainer.propTypes = {
+  client: Proptypes.object,
+  history: Proptypes.object
 }
 
 export default withRouter(withApollo(BetPageContainer))
