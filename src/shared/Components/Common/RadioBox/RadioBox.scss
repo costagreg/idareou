@@ -1,12 +1,12 @@
-.CheckBox {
+.RadioBox {
   display: flex;
   padding: 10px 0;
   &__Input {
     display: none;
-    & + .CheckBox__Label::after{
+    & + .RadioBox__Label::after{
       content: none;
     }
-    &:checked + .CheckBox__Label::after{
+    &:checked + .RadioBox__Label::after{
       content: "";
     }
   }

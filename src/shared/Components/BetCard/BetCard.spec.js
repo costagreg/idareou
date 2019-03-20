@@ -10,7 +10,7 @@ describe('given BetCard component', () => {
     ...bets()[0]
   }
   describe('when trying to render the BetCard component', () => {
-    const component = shallow(<BetCard {...props}/>)
+    const component = shallow(<BetCard {...props} />)
     it('should render the BetCard component', () => {
       expect(component.length).toBe(1)
     })
@@ -38,11 +38,11 @@ describe('given BetCard component', () => {
             ...props,
             state: 'success'
           }
-          const newComponent = shallow(<BetCard {...newProps}/>)
+          const newComponent = shallow(<BetCard {...newProps} />)
           const options = newComponent.find('.betcard__options')
 
           options.forEach((opt, index) => {
-            if(newProps.options[index].choosen) {
+            if (newProps.options[index].choosen) {
               expect(opt.hasClass('betcard__options--success')).toBe(true)
             } else {
               expect(opt.hasClass('betcard__options--success')).toBe(false)
@@ -55,11 +55,11 @@ describe('given BetCard component', () => {
             ...props,
             state: 'fail'
           }
-          const newComponent = shallow(<BetCard {...newProps}/>)
+          const newComponent = shallow(<BetCard {...newProps} />)
           const options = newComponent.find('.betcard__options')
 
           options.forEach((opt, index) => {
-            if(newProps.options[index].choosen) {
+            if (newProps.options[index].choosen) {
               expect(opt.hasClass('betcard__options--fail')).toBe(true)
             } else {
               expect(opt.hasClass('betcard__options--fail')).toBe(false)
@@ -74,7 +74,7 @@ describe('given BetCard component', () => {
     describe('when trying to render participants', () => {
       const newProps = {
         ...props,
-        participants: ['first', 'second', 'third']
+        participants: [{ user: { _id: '', username: 'first' } }]
       }
       const component = shallow(<BetCard {...newProps} />)
       it('should render all the participants', () => {
@@ -83,7 +83,7 @@ describe('given BetCard component', () => {
         expect(participants.length).toBe(newProps.participants.length)
 
         participants.forEach((participant, index) => {
-          expect(participant.text()).toBe(newProps.participants[index])
+          expect(participant.text()).toBe(newProps.participants[index].user.username)
         })
       })
     })

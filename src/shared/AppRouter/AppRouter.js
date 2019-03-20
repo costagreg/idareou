@@ -46,12 +46,12 @@ class AppRouter extends Component {
         <div className='approuter'>
           <HeaderContainer currentUser={currentUser} />
           <Switch>
-            { this.renderRoutes(!!currentUser) }
-            { <Redirect to={{
-                pathname: '/login',
-                state: { from: this.redirectIfExist() && location.pathname }
-                }}
-              />
+            {this.renderRoutes(!!currentUser)}
+            {<Redirect to={{
+              pathname: '/login',
+              state: { from: this.redirectIfExist() && location.pathname }
+            }}
+            />
             }
           </Switch>
         </div>

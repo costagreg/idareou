@@ -1,23 +1,13 @@
 import { graphql } from 'graphql'
 import { schema } from '../../schema'
 
-import { Bet, User } from '../../../database/models'
+import createBetHelper from '../../../helpers/tests/createBet'
 
 describe('Bet queries', () => {
   describe('currentBets', () => {
     it('returns all bets involved with the current user', async () => {
-      const user1 = await User.create({ username: 'userMaster' })
-      const user2 = await User.create({ username: 'participant1' })
-      const user3 = await User.create({ username: 'partecipant2' })
-      const bet = await Bet.create({
-        title: 'title',
-        description: 'description',
-        amount: 10.00,
-        currency: '$',
-        master: user1._id,
-        participants: [{ user: user2._id }, { user: user3._id }]
-      })
-      const context = { req: { user: { _id: user3._id.toString() } } }
+      const betHelper = await createBetHelper(3)
+      const context = { req: { user: { _id: betHelper.users[2]._id.toString() } } }
 
       const query = `
       {
@@ -28,9 +18,24 @@ describe('Bet queries', () => {
       const result = await graphql(schema, query, {}, context)
       const { data: { currentBets } } = result
 
-      expect(currentBets[0]._id).toEqual(bet._id.toString())
+      expect(currentBets[0]._id).toEqual(betHelper.bet._id.toString())
+    })
+  })
+  describe('findBet', () => {
+    it('returns the bet searched', async () => {
+      const betHelper = await createBetHelper(3)
+      const context = { req: { user: {} } }
+      const paramas = { id: betHelper.bet._id.toString() }
+      const query = `
+        query FindBet($id: String!){
+          findBet(id: $id){
+            _id
+          }
+        }`
+      const result = await graphql(schema, query, {}, context, paramas)
 
-
+      const { data: { findBet } } = result
+      expect(findBet._id.toString()).toEqual(betHelper.bet._id.toString())
     })
   })
 })

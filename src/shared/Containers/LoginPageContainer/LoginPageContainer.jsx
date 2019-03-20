@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import { withRouter, Link } from 'react-router-dom'
 import Proptypes from 'prop-types'
