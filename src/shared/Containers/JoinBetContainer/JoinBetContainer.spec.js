@@ -14,8 +14,8 @@ const mockBet = {
 }
 const initProps = {
   client: {
-    mutate: jest.fn(() => ({ updateBetPartecipants: mockBet })),
-    query: jest.fn(() => ({ findBet: mockBet }))
+    mutate: jest.fn(() => ({ data: { updateBetPartecipants: mockBet } })),
+    query: jest.fn(() => ({ data: { findBet: mockBet } }))
   },
   history: {
     push: jest.fn(() => { })
@@ -73,7 +73,7 @@ describe('JoinBetContainer', () => {
     })
     describe('@submitData', () => {
       it('fires mutation to update bet partecipants', () => {
-        const mockFormData = { value: 'mockValue' }
+        const mockFormData = { optionId: 'mockValue' }
         const component = shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
 
         component.instance().submitData(mockFormData)
@@ -81,7 +81,10 @@ describe('JoinBetContainer', () => {
         expect(initProps.client.mutate).toHaveBeenCalledTimes(1)
         expect(initProps.client.mutate).toHaveBeenCalledWith({
           mutation: updateBetParticipant,
-          variables: mockFormData
+          variables: {
+            betId: mockBetId,
+            optionId: mockFormData.optionId
+          }
         })
       })
     })

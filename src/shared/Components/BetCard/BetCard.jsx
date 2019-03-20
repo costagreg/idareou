@@ -13,7 +13,6 @@ const BetCard = ({
   options,
   participants
 }) => {
-  console.log(participants)
   return <div className="betcard">
     <div className="betcard__section betcard__description">{description}</div>
     <hr />
@@ -37,7 +36,7 @@ const BetCard = ({
       <div className="betcard__section">
         <ul>
           {
-            participants.map(person => <li key={person} className="betcard__participants">{person}</li>)
+            participants.map(({ user }) => <li key={user._id} className="betcard__participants">{user.username}</li>)
           }
         </ul>
       </div>

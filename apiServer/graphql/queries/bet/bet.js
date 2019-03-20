@@ -18,7 +18,6 @@ export const betQueries = {
     },
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {
-        console.log(findBet(args.id))
         return findBet(args.id)
       }
     }

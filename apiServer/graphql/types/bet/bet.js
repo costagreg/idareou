@@ -2,11 +2,17 @@ import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat } from 'gra
 import { UserType } from '../user'
 import { BetOptionType } from '../betOption'
 import { findBetOptions } from '../../../database/queries/betOption'
+import { findUserById } from '../../../database/queries/user'
 
 const participantType = new GraphQLObjectType({
   name: 'participant',
   fields: {
-    user: { type: UserType },
+    user: {
+      type: UserType,
+      resolve: async ({ user }) => (
+        findUserById(user)
+      )
+    },
     option: { type: BetOptionType }
   }
 })
