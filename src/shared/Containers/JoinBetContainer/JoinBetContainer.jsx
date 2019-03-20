@@ -14,32 +14,36 @@ export class JoinBetContainer extends Component {
 
   state = {}
 
-  fetchBet = async (betId) => {
-    const { client, history } = this.props
+  redirectToHomePage = () => {
+    const { history } = this.props
 
-    const findBetQuery = await client.query({
+    history.push('/')
+  }
+
+  fetchBet = async (betId) => {
+    const { client } = this.props
+
+    const { data } = await client.query({
       query: findBet,
       variables: {
         id: betId
       }
     })
 
-    const { data } = findBetQuery
-
     if (data && data.findBet) {
       this.setState({ bet: data.findBet })
     } else {
-      history.push('/')
+      this.redirectToHomePage()
     }
   }
 
   async componentDidMount() {
-    const { betId, history } = this.props
+    const { betId } = this.props
 
     try {
       await this.fetchBet(betId)
     } catch {
-      history.push('/')
+      this.redirectToHomePage()
     }
   }
 
@@ -58,7 +62,7 @@ export class JoinBetContainer extends Component {
   render() {
     const { bet } = this.state
 
-    if(!bet) {
+    if (!bet) {
       return null
     }
 
@@ -74,7 +78,9 @@ export class JoinBetContainer extends Component {
 }
 
 JoinBetContainer.propTypes = {
-  betId: Proptypes.string
+  betId: Proptypes.string,
+  client: Proptypes.object.isRequired,
+  history: Proptypes.object.isRequired
 }
 
 export default withRouter(withApollo(JoinBetContainer))
