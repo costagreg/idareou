@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { withApollo, graphql } from 'react-apollo'
+import { withApollo } from 'react-apollo'
 
 import { betAdded } from '~src/shared/graphql/queries'
 
@@ -11,16 +11,13 @@ class BetLinkPageContainer extends Component {
 
   getBetId = async () => {
     const { client } = this.props
-    try {
-      const { data } = await client.query({
-        query: betAdded
-      })
-      this.setState({
-        betId: data.betAdded
-      })
-    } catch(e) {
-      console.log(e)
-    }
+    const { data } = await client.query({
+      query: betAdded
+    })
+
+    this.setState({
+      betId: data.betAdded
+    })
   }
 
   componentDidMount() {
