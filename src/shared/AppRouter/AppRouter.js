@@ -12,7 +12,7 @@ if (process.browser) {
 
 class AppRouter extends Component {
   filterPrivateRoutes = (userIsLogged, needAuthentication, hideRoute, route) =>
-   // !hideRoute && // TODO ADD IT
+   !hideRoute &&
    (userIsLogged || (!userIsLogged && !needAuthentication) ||
    (typeof needAuthentication === 'undefined')) && route
 
