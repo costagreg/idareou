@@ -1,0 +1,24 @@
+.BetLinkPage {
+  text-align: center;
+  &__link {
+    padding: 0 0 30px 0;
+    font-size: 0.6rem;
+    color: $darkgreen;
+  }
+  &__secondTitle {
+    font-size: 1.1rem;
+    color: $blueDark;
+  }
+  &__button {
+    padding: 10px 20px;
+    background: $blue;
+    color: $white;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover{
+      background: $blueLight;
+    }
+  }
+}

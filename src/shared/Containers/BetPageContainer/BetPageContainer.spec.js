@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
-import { currentBets } from '~src/shared/graphql/queries'
+import { currentBets, betAdded } from '~src/shared/graphql/queries'
 import { BetPageContainer } from './BetPageContainer'
 
 jest.mock('~src/shared/graphql/mutations/betMutation', () => ({
@@ -12,10 +12,11 @@ jest.mock('~src/shared/graphql/mutations/betMutation', () => ({
 
 describe('BetPageContainer', () => {
   const mockApolloClient = {
-    mutate: jest.fn(data => new Promise((resolve) => resolve(data)))
+    mutate: jest.fn(data => new Promise((resolve) => resolve({ data: { addBet: { _id: 'id' } } }))),
+    writeData: jest.fn(data => new Promise(resolve => resolve(data)))
   }
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.clearAllMocks()
   })
   describe('renders', () => {
     it('renders a form', () => {
@@ -57,7 +58,7 @@ describe('BetPageContainer', () => {
           description: 'mockDescription',
           amount: '4.00'
         }
-        it('apollo client should be called with addBet mutation and right variables', async () => {
+        it('mutation should be called with addBet mutation and right variables and saveAndRedirect should be called with the newBet id', async () => {
           const variableExpected = {
             ...formData,
             options: [],
@@ -65,21 +66,38 @@ describe('BetPageContainer', () => {
           }
           const component = shallow(<BetPageContainer client={mockApolloClient}/>)
 
-          const newIsntance = component.instance()
+          const newInstance = component.instance()
 
-          newIsntance.optionTransformer = jest.fn(() => variableExpected.options)
+          newInstance.optionTransformer = jest.fn(() => variableExpected.options)
+          newInstance.saveAndRedirect = jest.fn(() => new Promise(resolve => resolve()))
 
-          expect(newIsntance.optionTransformer).not.toHaveBeenCalled()
+          expect(newInstance.optionTransformer).not.toHaveBeenCalled()
+          expect(newInstance.saveAndRedirect).not.toHaveBeenCalled()
 
-          await newIsntance.createBet(formData)
+          await newInstance.createBet(formData)
 
-          expect(newIsntance.optionTransformer).toHaveBeenCalled()
+          expect(newInstance.optionTransformer).toHaveBeenCalled()
           expect(mockApolloClient.mutate).toHaveBeenCalledWith({
             mutation: addBet,
             variables: { ...formData, options: [], amount: parseFloat(formData.amount) },
             refetchQueries: [{ query: currentBets }]
           })
+          expect(newInstance.saveAndRedirect).toHaveBeenCalled()
         })
+      })
+    })
+    describe('saveAndRedirect', () => {
+      it('should save id to the local store and redirect the user to dinamyc url', async () => {
+        const mockId = '123456'
+        const mockHistory = { push: jest.fn() }
+
+        const component = shallow(<BetPageContainer client={mockApolloClient} history={mockHistory} />)
+        const newInstance = component.instance()
+
+        await newInstance.saveAndRedirect(mockId)
+
+        expect(mockApolloClient.writeData).toHaveBeenCalledWith({ data: { betAdded: mockId }})
+        expect(mockHistory.push).toHaveBeenCalledWith(`/sharelink/${mockId}`)
       })
     })
     describe('optionTransformer', () => {
@@ -94,9 +112,9 @@ describe('BetPageContainer', () => {
 
             const component = shallow(<BetPageContainer />)
 
-            const newIsntance = component.instance()
+            const newInstance = component.instance()
 
-            expect(newIsntance.optionTransformer(formData)).toEqual(['first', 'second'])
+            expect(newInstance.optionTransformer(formData)).toEqual(['first', 'second'])
           })
         })
       })

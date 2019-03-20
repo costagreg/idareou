@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
+import Proptypes from 'prop-types'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
 import { currentBets } from '~src/shared/graphql/queries'
@@ -30,20 +32,35 @@ export class BetPageContainer extends Component {
     return currentOptions
   }
 
-  createBet = async (data) => {
+  saveAndRedirect = async (newBetId) => {
+    const { history, client } = this.props
+
+    await client.writeData({ data: { betAdded: newBetId }})
+
+    history.push(`/sharelink/${newBetId}`)
+  }
+
+  createBet = async (formData) => {
     const { client } = this.props
 
-    const currentOptions = this.optionTransformer(data)
+    const currentOptions = this.optionTransformer(formData)
 
-    await client.mutate({
-      mutation: addBet,
-      variables: {
-        ...data,
-        options: currentOptions,
-        amount: parseFloat(data.amount)
-      },
-      refetchQueries: [{ query: currentBets }]
-    })
+    try {
+      const { data } = await client.mutate({
+        mutation: addBet,
+        variables: {
+          ...formData,
+          options: currentOptions,
+          amount: parseFloat(formData.amount)
+        },
+        refetchQueries: [{ query: currentBets }] // TODO: Change when https://github.com/apollographql/apollo-feature-requests/issues/1 is fixed
+      })
+
+     await this.saveAndRedirect(data.addBet._id)
+    }
+    catch(error) {
+      console.log(error)
+    }
   }
 
   render() {
@@ -62,4 +79,9 @@ export class BetPageContainer extends Component {
   }
 }
 
-export default withApollo(BetPageContainer)
+BetPageContainer.propTypes = {
+  client: Proptypes.object.isRequired,
+  history: Proptypes.object.isRequired
+}
+
+export default withRouter(withApollo(BetPageContainer))

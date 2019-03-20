@@ -5,6 +5,7 @@ import LoginPage from '~src/shared/Pages/LoginPage'
 import SignUpPage from '~src/shared/Pages/SignUpPage'
 import LogoutPage from '~src/shared/Pages/LogoutPage'
 import DashboardPage from '~src/shared/Pages/Dashboard'
+import BetLinkPageContainer from '~src/shared/Containers/BetLinkPageContainer'
 
 const routes = [
   {
@@ -47,6 +48,12 @@ const routes = [
     exact: true,
     name: 'Logout',
     needAuthentication: true
+  }, {
+    Component: BetLinkPageContainer,
+    path:'/sharelink/:id',
+    name: 'BetLinkPageContainer',
+    needAuthentication: true,
+    hideRoute: true
   }
 ]
 
