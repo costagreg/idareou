@@ -67,7 +67,7 @@ describe('BetMutations', () => {
   describe('updateBetParticipant', () => {
     describe('when adding participant to the bet created', () => {
       describe('when user is already created', () => {
-        fit('should update the participants in bet', async () => {
+        it('should update the participants in bet', async () => {
           const newUser = await User.create(userData)
           const context = { req: { user: { _id: newUser._id.toString() } } }
 

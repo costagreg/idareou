@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Proptypes from 'prop-types'
 import { withApollo } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
 import JoinBetCard from '~src/shared/Components/JoinBetCard'
 import { findBet } from '~src/shared/graphql/queries'
@@ -15,20 +16,31 @@ export class JoinBetContainer extends Component {
   }
 
   async componentDidMount() {
-    const findBetQuery = await this.props.client.query({
-      query: findBet,
-      variables: {
-        id: this.props.betId
+    const { betId, client, history } = this.props
+    try {
+      const findBetQuery = await client.query({
+        query: findBet,
+        variables: {
+          id: betId
+        }
+      })
+
+      const { data } = findBetQuery
+
+      if (data && data.findBet) {
+        this.setState({ bet: data.findBet })
+      } else {
+        history.push('/')
       }
-    })
-    const { data } = findBetQuery
-    if (data && data.findBet) {
-      this.setState({ bet: data.findBet })
+    } catch {
+      history.push('/')
     }
   }
 
   submitData = (formData) => {
-    this.props.client.mutate({
+    const { client } = this.props
+
+    client.mutate({
       mutation: updateBetParticipant,
       variables: {
         betId: this.props.betId,
@@ -55,4 +67,4 @@ JoinBetContainer.propTypes = {
   betId: Proptypes.string
 }
 
-export default withApollo(JoinBetContainer)
+export default withRouter(withApollo(JoinBetContainer))
