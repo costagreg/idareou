@@ -31,8 +31,16 @@ export class BetPageContainer extends Component {
     return currentOptions
   }
 
+  saveAndRedirect = async (newBetId) => {
+    const { history, client } = this.props
+
+    await client.writeData({ data: { betAdded: newBetId }})
+
+    history.push(`/sharelink/${newBetId}`)
+  }
+
   createBet = async (formData) => {
-    const { client, history } = this.props
+    const { client } = this.props
 
     const currentOptions = this.optionTransformer(formData)
 
@@ -47,9 +55,7 @@ export class BetPageContainer extends Component {
         refetchQueries: [{ query: currentBets }] // TODO: Change when https://github.com/apollographql/apollo-feature-requests/issues/1 is fixed
       })
 
-      await client.writeData({ data: { betAdded: data.addBet._id }})
-
-      history.push(`/sharelink/${data.addBet._id}`)
+     await this.saveAndRedirect(data.addBet._id)
     }
     catch(error) {
       console.log(error)
