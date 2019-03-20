@@ -4,10 +4,10 @@ const createUser = (username) => (
   User.create({ username })
 )
 
-const createBetHelper = async (numUsers = 2) => {
-  if (numUsers < 2) throw new Error('You need at least 2 users')
+const createBetHelper = async (usersNum = 2) => {
+  if (usersNum < 2) throw new Error('You need at least 2 users')
 
-  const usersArray = Array(numUsers).fill('')
+  const usersArray = Array(usersNum).fill('')
   const users = await Promise.all(usersArray.map((x, index) => createUser('nickname' + index)))
 
   const participants = users.map((value) => ({ user: value._id }))

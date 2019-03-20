@@ -16,15 +16,6 @@ const JoinBetCard = ({
     <div className="joinbetcard__section joinbetcard__title">{title}</div>
     <div className="joinbetcard__section joinbetcard__description">{description}</div>
     <div className="joinbetcard__section joinbetcard__amount">{currency + amount}</div>
-    {participants &&
-      <div className="joinbetcard__section">
-        <ul>
-          {
-            participants.map(person => <li key={person} className="joinbetcard__participants">{person}</li>)
-          }
-        </ul>
-      </div>
-    }
   </div>
 }
 

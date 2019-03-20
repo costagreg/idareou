@@ -67,7 +67,7 @@ describe('BetMutations', () => {
   describe('updateBetParticipant', () => {
     describe('when adding participant to the bet created', () => {
       describe('when user is already created', () => {
-        it('should update the participants in bet', async () => {
+        fit('should update the participants in bet', async () => {
           const newUser = await User.create(userData)
           const context = { req: { user: { _id: newUser._id.toString() } } }
 
@@ -96,6 +96,8 @@ describe('BetMutations', () => {
           const result = await graphql(schema, updateBetParticipantMutation, {}, context, variables)
 
           const { data: { updateBetParticipant } } = result
+
+          console.log(result)
 
           const currentParticipant = updateBetParticipant.participants[0]
 

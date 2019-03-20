@@ -1,4 +1,5 @@
 import React from 'react'
+import Proptypes from 'prop-types'
 
 import { PageTitle } from '~src/shared/Components/Common/PageTitle'
 import JoinBetContainer from '~src/shared/Containers/JoinBetContainer'
@@ -13,5 +14,9 @@ const JoinBetPage = (props) => (
     <JoinBetContainer betId={props.match.params.id} />
   </div>
 )
+
+JoinBetPage.propTypes = {
+  match: Proptypes.object
+}
 
 export default JoinBetPage
