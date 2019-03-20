@@ -16,13 +16,11 @@ const getDevice = userAgent => {
   return !rgxMobile.test(userAgent)
 }
 
-const initialCache = new InMemoryCache()
-
 export default async req => {
   const isDesktop = req.headers['user-agent'] && getDevice(req.headers['user-agent'])
   const client = new ApolloClient({
     ssrMode: true,
-    cache: initialCache,
+    cache: new InMemoryCache(),
     link: createHttpLink({
       credentials: 'include',
       fetch,
