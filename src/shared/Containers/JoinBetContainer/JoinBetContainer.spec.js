@@ -12,15 +12,16 @@ const mockBet = {
   partecipants: ['mockPartecipant'],
   options: [{ _id: 'mockId', title: 'mockTitle' }, { _id: 'mockId', title: 'mockTitle' }]
 }
+
 const initProps = {
   client: {
-    mutate: jest.fn(() => ({ data: { updateBetPartecipants: mockBet } })),
-    query: jest.fn(() => ({ data: { findBet: mockBet } }))
+    mutate: jest.fn(() => ({ data: { updateBetPartecipants: mockBet } }))
   },
   history: {
     push: jest.fn(() => { })
   },
-  location: {}
+  location: {},
+  data: { findBet: mockBet }
 }
 const mockBetId = 'mockBetId'
 
@@ -39,7 +40,7 @@ describe('JoinBetContainer', () => {
       it('should show the JoinBetCard', () => {
         const component = shallow(<JoinBetContainer {...initProps} />)
 
-        component.setState({ bet: mockBet })
+
         expect(component.find('JoinBetCard').props()).toEqual(mockBet)
       })
       it('should render all options as RadioBox', () => {
@@ -56,50 +57,15 @@ describe('JoinBetContainer', () => {
       })
     })
     describe('when mounted', () => {
-      it('triggers fetchBet', () => {
-        const fetchBetMock = jest.fn()
-        const component = shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
-
-        component.instance().fetchBet = fetchBetMock
-
-        component.instance().componentDidMount()
-
-        expect(fetchBetMock).toBeCalledTimes(1)
-      })
-      describe('when we get an error form the server', () => {
+      describe('and the bet hasn t been found', () => {
         it('we redirect to homepage', async () => {
-          const fetchBetMock = jest.fn(() => {throw new Error('sdsd')})
-          const component = shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
+          const mockRedirectHomepage = jest.fn()
+          const component = shallow(<JoinBetContainer {...initProps} data={{ findBet: null }} betId={mockBetId} />)
 
-          component.instance().fetchBet = fetchBetMock
-
+          component.instance().redirectToHomePage = mockRedirectHomepage
           component.instance().componentDidMount()
 
-          expect(initProps.history.push).toHaveBeenCalledWith('/')
-        })
-      })
-    })
-    describe('@fetchBet', () => {
-      it('pings the server to check the bet exits', () => {
-        shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
-
-        expect(initProps.client.query).toHaveBeenCalledTimes(1)
-        expect(initProps.client.query).toHaveBeenCalledWith({ query: findBet, variables: { id: mockBetId } })
-      })
-
-      describe('if the bet has been founded', async () => {
-        it('updates the state', async () => {
-          const component = await shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
-
-          expect(component.state()).toEqual({ bet: mockBet })
-        })
-      })
-
-      describe('if the bet hasnt been founded', async () => {
-        it('redirects to the homepage as the link is invalid', async () => {
-          const component = await shallow(<JoinBetContainer {...initProps} betId={mockBetId} />)
-
-          expect(component.state()).toEqual({ bet: mockBet })
+          expect(mockRedirectHomepage).toHaveBeenCalledTimes(1)
         })
       })
     })
