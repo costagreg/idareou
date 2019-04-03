@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import Proptypes from 'prop-types'
-import { withApollo } from 'react-apollo'
+import { withApollo, graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
 import JoinBetCard from '~src/shared/Components/JoinBetCard'
@@ -9,42 +9,21 @@ import { updateBetParticipant } from '~src/shared/graphql/mutations/betMutation'
 import { FormContainer } from '~src/shared/Containers/FormContainer'
 import { RadioBox } from '~src/shared/Components/Common/RadioBox'
 import { Button } from '~src/shared/Components/Common/Button'
+import compose from '~src/shared/helpers/compose'
 
 export class JoinBetContainer extends Component {
+  componentDidMount() {
+    const { data: { findBet: bet } } = this.props
 
-  state = {}
+    if (!bet) {
+      this.redirectToHomePage()
+    }
+  }
 
   redirectToHomePage = () => {
     const { history } = this.props
 
     history.push('/')
-  }
-
-  fetchBet = async (betId) => {
-    const { client } = this.props
-
-    const { data } = await client.query({
-      query: findBet,
-      variables: {
-        id: betId
-      }
-    })
-
-    if (data && data.findBet) {
-      this.setState({ bet: data.findBet })
-    } else {
-      this.redirectToHomePage()
-    }
-  }
-
-  async componentDidMount() {
-    const { betId } = this.props
-
-    try {
-      await this.fetchBet(betId)
-    } catch {
-      this.redirectToHomePage()
-    }
   }
 
   submitData = (formData) => {
@@ -60,7 +39,7 @@ export class JoinBetContainer extends Component {
   }
 
   render() {
-    const { bet } = this.state
+    const { data: { findBet: bet } } = this.props
 
     if (!bet) {
       return null
@@ -83,4 +62,8 @@ JoinBetContainer.propTypes = {
   history: Proptypes.object.isRequired
 }
 
-export default withRouter(withApollo(JoinBetContainer))
+export default compose(
+  withRouter,
+  withApollo,
+  graphql(findBet, { options: ({ betId }) => ({ variables: { id: betId } }) }),
+)(JoinBetContainer)
