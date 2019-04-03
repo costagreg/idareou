@@ -1,1 +1,1 @@
-export default (...fns) => x => fns.reduceRight((v, f) => f(v), x)
+export default (...fns) => acc => fns.reduceRight((val, fn) => fn(val), acc)
