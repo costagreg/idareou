@@ -48,7 +48,7 @@ export class BetPageContainer extends Component {
     })
   }
 
-  removeIcon = (removeIndex) => {
+  removeInput = (removeIndex) => {
     this.setState({
       options: this.state.options.filter(opt => opt !== removeIndex)
     })
@@ -90,8 +90,8 @@ export class BetPageContainer extends Component {
               name={opt}
               placeholder= 'Write your option'
               required
-              subIcon={(index !== 0 || this.state.options.length > 1) ? 'minus' : ''}
-              subIconClick={() => this.removeIcon(opt)}
+              removeInput={(index !== 0 || this.state.options.length > 1) ? 'minus' : ''}
+              onRemoveInput={() => this.removeInput(opt)}
             />)
         }
         <Button type='button' onClick={this.addOption}>Add Option</Button>
