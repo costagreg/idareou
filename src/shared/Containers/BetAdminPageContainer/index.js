@@ -1,2 +1,2 @@
 
-export { default as BetAdminPageContainer } from './BetAdminPageContainer'
+export { default } from './BetAdminPageContainer'

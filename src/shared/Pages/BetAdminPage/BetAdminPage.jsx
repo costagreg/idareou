@@ -11,11 +11,11 @@ if (process.browser) {
 const BetAdminPage = (props) =>
   <Fragment>
     <PageTitle className="BetAdminPage__title">Manage bet</PageTitle>
-    <BetAdminPageContainer betId={props.betId} />
+    <BetAdminPageContainer betId={props.match.params.id} />
   </Fragment>
 
 BetAdminPage.propTypes = {
-  betId: Proptypes.string.isRequired
+  match: Proptypes.object
 }
 
 export default BetAdminPage
