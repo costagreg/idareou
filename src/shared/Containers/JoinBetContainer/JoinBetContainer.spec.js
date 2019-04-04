@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { JoinBetContainer } from './JoinBetContainer'
-import { findBet } from '../../graphql/queries'
 import { updateBetParticipant } from '../../graphql/mutations/betMutation'
 
 const mockBet = {
@@ -37,11 +36,11 @@ describe('JoinBetContainer', () => {
       expect(component.exists()).toBe(true)
     })
     describe('when bet id has been found', () => {
-      it('should show the JoinBetCard', () => {
+      it('should show the BetCard', () => {
         const component = shallow(<JoinBetContainer {...initProps} />)
 
 
-        expect(component.find('JoinBetCard').props()).toEqual(mockBet)
+        expect(component.find('BetCard').props()).toEqual(mockBet)
       })
       it('should render all options as RadioBox', () => {
         const component = shallow(<JoinBetContainer {...initProps} />)

@@ -24,6 +24,6 @@ describe('BetAdminPageContainer', () => {
   it('renders BetAdminCard', () => {
     const component = shallow(<BetAdminPageContainer {...initProps } />)
 
-    expect(component.find('BetAdminCard').props()).toEqual(mockBet)
+    expect(component.find('BetCard').props()).toEqual(mockBet)
   })
 })

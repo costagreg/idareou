@@ -40,7 +40,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": <BetAdminCard
+      "children": <BetCard
         amount="mockAmount"
         description="mockDescription"
         options={
@@ -98,7 +98,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "children": <BetAdminCard
+        "children": <BetCard
           amount="mockAmount"
           description="mockDescription"
           options={

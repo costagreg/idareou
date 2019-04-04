@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import HistoryBetCard from './HistoryHistoryBetCard'
+import HistoryBetCard from './HistoryBetCard'
 
 import bets from '~test/globalMocks/bets'
 

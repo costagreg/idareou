@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Proptypes from 'prop-types'
 
 import { PageTitle } from '~src/shared/Components/Common/PageTitle'
@@ -9,10 +9,10 @@ if (process.browser) {
 }
 
 const BetAdminPage = (props) =>
-  <Fragment>
-    <PageTitle className="BetAdminPage__title">Manage bet</PageTitle>
+  <div className="betadminpage">
+    <PageTitle className="betadminpage__title">Manage bet</PageTitle>
     <BetAdminPageContainer betId={props.match.params.id} />
-  </Fragment>
+  </div>
 
 BetAdminPage.propTypes = {
   match: Proptypes.object
