@@ -3,7 +3,7 @@ import Proptypes from 'prop-types'
 import { withApollo, graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
-import JoinBetCard from '~src/shared/Components/JoinBetCard'
+import BetCard from '~src/shared/Components/BetCard'
 import { findBet } from '~src/shared/graphql/queries'
 import { updateBetParticipant } from '~src/shared/graphql/mutations/betMutation'
 import { FormContainer } from '~src/shared/Containers/FormContainer'
@@ -46,7 +46,7 @@ export class JoinBetContainer extends Component {
     }
 
     return <Fragment>
-      <JoinBetCard {...bet}></JoinBetCard>
+      <BetCard {...bet} />
       <FormContainer onSubmit={this.submitData}>
         <h4>Choose your option</h4>
         {bet.options && bet.options.map(({ _id, title }) => <RadioBox key={_id} name={`optionId`} text={title} optionValue={_id} />)}

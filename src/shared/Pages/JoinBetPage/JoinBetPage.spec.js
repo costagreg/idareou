@@ -11,6 +11,8 @@ const initProps = {
   }
 }
 
+jest.mock('../../Containers/JoinBetContainer', () => function JoinBetContainer() { return <div></div>})
+
 describe('JoinBet page', () => {
   describe('render', () => {
     it('should render without errors', () => {
@@ -21,8 +23,8 @@ describe('JoinBet page', () => {
     it('should render JoinBetContainer passing the id bet', () => {
       const component = shallow(<JoinBetPage {...initProps} />)
 
-      expect(component.find('withApollo(JoinBetContainer)').exists()).toEqual(true)
-      expect(component.find('withApollo(JoinBetContainer)').props().betId).toEqual(initProps.match.params.id)
+      expect(component.find('JoinBetContainer').exists()).toEqual(true)
+      expect(component.find('JoinBetContainer').props().betId).toEqual(initProps.match.params.id)
     })
   })
 })

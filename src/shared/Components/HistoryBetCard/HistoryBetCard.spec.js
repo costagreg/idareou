@@ -1,34 +1,34 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import BetCard from './BetCard'
+import HistoryBetCard from './HistoryBetCard'
 
 import bets from '~test/globalMocks/bets'
 
-describe('given BetCard component', () => {
+describe('given HistoryHistoryBetCard component', () => {
   const props = {
     ...bets()[0]
   }
-  describe('when trying to render the BetCard component', () => {
-    const component = shallow(<BetCard {...props} />)
-    it('should render the BetCard component', () => {
+  describe('when trying to render the HistoryBetCard component', () => {
+    const component = shallow(<HistoryBetCard {...props} />)
+    it('should render the HistoryBetCard component', () => {
       expect(component.length).toBe(1)
     })
     it('should render the description', () => {
-      const description = component.find('.betcard__description')
+      const description = component.find('.historybetcard__description')
 
       expect(description.length).toBe(1)
       expect(description.text()).toBe(props.description)
     })
     it('should render the amount', () => {
-      const amount = component.find('.betcard__amount')
+      const amount = component.find('.historybetcard__amount')
 
       expect(amount.length).toBe(1)
       expect(amount.text()).toBe(props.currency + props.amount)
     })
     describe('when trying to render the options', () => {
       it('should render all the options provided', () => {
-        const options = component.find('.betcard__options')
+        const options = component.find('.historybetcard__options')
 
         expect(options.length).toBe(props.options.length)
       })
@@ -38,14 +38,14 @@ describe('given BetCard component', () => {
             ...props,
             state: 'success'
           }
-          const newComponent = shallow(<BetCard {...newProps} />)
-          const options = newComponent.find('.betcard__options')
+          const newComponent = shallow(<HistoryBetCard {...newProps} />)
+          const options = newComponent.find('.historybetcard__options')
 
           options.forEach((opt, index) => {
             if (newProps.options[index].choosen) {
-              expect(opt.hasClass('betcard__options--success')).toBe(true)
+              expect(opt.hasClass('historybetcard__options--success')).toBe(true)
             } else {
-              expect(opt.hasClass('betcard__options--success')).toBe(false)
+              expect(opt.hasClass('historybetcard__options--success')).toBe(false)
             }
             expect(opt.text()).toBe(newProps.options[index].opt)
           })
@@ -55,14 +55,14 @@ describe('given BetCard component', () => {
             ...props,
             state: 'fail'
           }
-          const newComponent = shallow(<BetCard {...newProps} />)
-          const options = newComponent.find('.betcard__options')
+          const newComponent = shallow(<HistoryBetCard {...newProps} />)
+          const options = newComponent.find('.historybetcard__options')
 
           options.forEach((opt, index) => {
             if (newProps.options[index].choosen) {
-              expect(opt.hasClass('betcard__options--fail')).toBe(true)
+              expect(opt.hasClass('historybetcard__options--fail')).toBe(true)
             } else {
-              expect(opt.hasClass('betcard__options--fail')).toBe(false)
+              expect(opt.hasClass('historybetcard__options--fail')).toBe(false)
             }
             expect(opt.text()).toBe(newProps.options[index].opt)
           })
@@ -76,9 +76,9 @@ describe('given BetCard component', () => {
         ...props,
         participants: [{ user: { _id: '', username: 'first' } }]
       }
-      const component = shallow(<BetCard {...newProps} />)
+      const component = shallow(<HistoryBetCard {...newProps} />)
       it('should render all the participants', () => {
-        const participants = component.find('.betcard__participants')
+        const participants = component.find('.historybetcard__participants')
 
         expect(participants.length).toBe(newProps.participants.length)
 
