@@ -1,5 +1,6 @@
 .TextInput {
   padding: 10px 0;
+  position: relative;
   &--error {
     .TextInput__Container{
       border-bottom: transparent;
@@ -19,6 +20,11 @@
     &--success {
       color: $darkgreen;
     }
+  }
+  &__subIcon {
+    position: absolute;
+    right: 0;
+    top: 50%;
   }
   &__Container{
     position: relative;

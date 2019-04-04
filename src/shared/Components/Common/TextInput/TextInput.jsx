@@ -14,6 +14,8 @@ const TextInput = ({
   name,
   type,
   icon,
+  subIcon,
+  subIconClick,
   error,
   placeholder,
   value,
@@ -35,6 +37,9 @@ const TextInput = ({
           pattern={pattern}
           onChange={e => { updateValue(name, e.target.value, '') }}
         />
+        { subIcon &&
+          <i onClick={subIconClick} className={classNames('TextInput__SubIcon', 'fa', `fa-${subIcon}`)}></i>
+        }
       </div>
       <div className='TextInput__ErrorMsg'>{showErrorMsg(error)}</div>
     </div>
@@ -43,6 +48,8 @@ const TextInput = ({
 TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(['email', 'password', 'text']),
+  subIcon: PropTypes.string,
+  subIconClick: PropTypes.func,
   icon: PropTypes.string,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
   placeholder: PropTypes.string,
