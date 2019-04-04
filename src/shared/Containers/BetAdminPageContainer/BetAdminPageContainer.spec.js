@@ -19,7 +19,7 @@ describe('BetAdminPageContainer', () => {
   it('renders without errors', () => {
     const component = shallow(<BetAdminPageContainer {...initProps } />)
 
-    expect(component).toMatchSnapshot()
+    expect(component.length).toBe(1)
   })
   it('renders BetAdminCard', () => {
     const component = shallow(<BetAdminPageContainer {...initProps } />)

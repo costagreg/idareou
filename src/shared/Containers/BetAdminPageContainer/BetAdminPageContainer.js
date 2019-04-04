@@ -13,9 +13,7 @@ export class BetAdminPageContainer extends Component {
       return null
     }
 
-    return <Fragment>
-      <BetCard { ...bet } />
-    </Fragment>
+    return <BetCard { ...bet } />
   }
 }
 
