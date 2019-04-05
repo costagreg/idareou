@@ -4,12 +4,12 @@ import { withApollo, graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
 import BetCard from '~src/shared/Components/BetCard'
+import compose from '~src/shared/helpers/compose'
 import { findBet } from '~src/shared/graphql/queries'
 import { updateBetParticipant } from '~src/shared/graphql/mutations/betMutation'
 import { FormContainer } from '~src/shared/Containers/FormContainer'
 import { RadioBox } from '~src/shared/Components/Common/RadioBox'
 import { Button } from '~src/shared/Components/Common/Button'
-import compose from '~src/shared/helpers/compose'
 
 export class JoinBetContainer extends Component {
   componentDidMount() {
