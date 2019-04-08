@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import shortid from 'shortid'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
 import { currentBets } from '~src/shared/graphql/queries'
@@ -7,6 +8,10 @@ import { BetPageContainer } from './BetPageContainer'
 
 jest.mock('~src/shared/graphql/mutations/betMutation', () => ({
   addBet: jest.fn()
+}))
+
+jest.mock('shortid', () => ({
+  generate: jest.fn(() => 0)
 }))
 
 
@@ -47,7 +52,7 @@ describe('BetPageContainer', () => {
     it('renders a button for submit', () => {
       const component = shallow(<BetPageContainer />)
 
-      expect(component.find('Button').length).toBe(1)
+      expect(component.find('Button').length).toBe(2)
     })
   })
   describe('@Methods', () => {
@@ -106,16 +111,43 @@ describe('BetPageContainer', () => {
           it('should return an array with all the options provided', () => {
             const formData = {
               title: 'mockTitle',
-              option1: 'first',
-              option2: 'second'
+              'option-0': 'first'
             }
 
             const component = shallow(<BetPageContainer />)
-
             const newInstance = component.instance()
 
-            expect(newInstance.optionTransformer(formData)).toEqual(['first', 'second'])
+            expect(newInstance.optionTransformer(formData)).toEqual(['first'])
           })
+        })
+      })
+    })
+    describe('addOption', () => {
+      describe('when trying to add a new option', () => {
+        it('should add a new option into the state and render it', () => {
+          const component = shallow(<BetPageContainer />)
+
+          expect(component.state().options.length).toBe(1)
+
+          component.instance().addOption()
+
+          expect(component.state().options.length).toBe(2)
+          expect(component.find('TextInput').length).toBe(component.state().options.length + 1)
+        })
+      })
+    })
+    describe('removeInput', () => {
+      describe('when trying to remove an option from the state', () => {
+        it('should remove the option with macth the index passed', () => {
+          const component = shallow(<BetPageContainer />)
+
+          component.setState({ options: component.state().options.concat({ 'option-1': 'opt' }) })
+
+          expect(component.state().options.length).toBe(2)
+
+          component.instance().removeInput('option-0')
+
+          expect(component.state().options.length).toBe(1)
         })
       })
     })
