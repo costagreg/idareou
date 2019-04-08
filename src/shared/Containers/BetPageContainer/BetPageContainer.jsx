@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import Proptypes from 'prop-types'
+import shortid from 'shortid'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
 import { currentBets } from '~src/shared/graphql/queries'
@@ -15,16 +16,15 @@ import { FormContainer } from '../FormContainer'
 export class BetPageContainer extends Component {
   constructor(props) {
     super(props)
-    this.optionTemplate = { name: 'option', placeholder: 'Write your option' }
     this.state = {
-      options: [this.optionTemplate]
+      options: [`option-${shortid.generate()}`]
     }
   }
 
   optionTransformer(data) {
     const currentOptions = []
     Object.entries(data).filter(([key, value]) => {
-      if(key.startsWith('option')) {
+      if(this.state.options.find(opt => opt === key)) {
         currentOptions.push(value)
       }
     })
@@ -35,9 +35,23 @@ export class BetPageContainer extends Component {
   saveAndRedirect = async (newBetId) => {
     const { history, client } = this.props
 
-    await client.writeData({ data: { betAdded: newBetId }})
+    await client.writeData({ data: { betAdded: newBetId } })
 
     history.push(`/sharelink/${newBetId}`)
+  }
+
+  addOption = () => {
+    const { options } = this.state
+
+    this.setState({
+      options: options.concat(`option-${shortid.generate()}`)
+    })
+  }
+
+  removeInput = (removeIndex) => {
+    this.setState({
+      options: this.state.options.filter(opt => opt !== removeIndex)
+    })
   }
 
   createBet = async (formData) => {
@@ -56,7 +70,7 @@ export class BetPageContainer extends Component {
         refetchQueries: [{ query: currentBets }] // TODO: Change when https://github.com/apollographql/apollo-feature-requests/issues/1 is fixed
       })
 
-     await this.saveAndRedirect(data.addBet._id)
+      await this.saveAndRedirect(data.addBet._id)
     }
     catch(error) {
       console.log(error)
@@ -71,9 +85,17 @@ export class BetPageContainer extends Component {
         <AmountInput name='amount' value='0.00' />
         {
           this.state.options.map((opt, index) =>
-            <TextInput key={`${opt.name}-${index}`} name={opt.name} placeholder={opt.placeholder} required />)
+            <TextInput
+              key={opt}
+              name={opt}
+              placeholder= 'Write your option'
+              required
+              removeInput={index !== 0 || this.state.options.length > 1}
+              onRemoveInput={() => this.removeInput(opt)}
+            />)
         }
-        <Button>Create Bet</Button>
+        <Button type='button' onClick={this.addOption}>Add Option</Button>
+        <Button type='submit'>Create Bet</Button>
       </FormContainer>
     )
   }

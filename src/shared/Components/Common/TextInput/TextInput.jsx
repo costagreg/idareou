@@ -14,6 +14,9 @@ const TextInput = ({
   name,
   type,
   icon,
+  removeInput,
+  removeFromState = () => {},
+  onRemoveInput = () => {},
   error,
   placeholder,
   value,
@@ -35,6 +38,14 @@ const TextInput = ({
           pattern={pattern}
           onChange={e => { updateValue(name, e.target.value, '') }}
         />
+        { removeInput &&
+          <i onClick={() => {
+            removeFromState(name)
+            onRemoveInput()
+          }}
+            className='TextInput__removeInput fa fa-minus'>
+          </i>
+        }
       </div>
       <div className='TextInput__ErrorMsg'>{showErrorMsg(error)}</div>
     </div>
@@ -43,6 +54,9 @@ const TextInput = ({
 TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(['email', 'password', 'text']),
+  removeInput: PropTypes.bool,
+  removeFromState: PropTypes.func,
+  onRemoveInput: PropTypes.func,
   icon: PropTypes.string,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
   placeholder: PropTypes.string,

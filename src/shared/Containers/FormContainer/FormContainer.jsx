@@ -53,6 +53,12 @@ class FormContainer extends Component {
     }
   }
 
+  removeFromState = (inputName) => {
+    this.setState({
+      [inputName]: undefined
+    })
+  }
+
   render() {
     const { children } = this.props
 
@@ -65,7 +71,8 @@ class FormContainer extends Component {
           const newProps = {
             updateValue: this.updateValue,
             value: (inputName && (this.state[inputName] || {}).value) || inputValue,
-            error: inputError || (inputName && (this.state[inputName] || {}).error)
+            error: inputError || (inputName && (this.state[inputName] || {}).error),
+            removeFromState: this.removeFromState
           }
 
           return isReactComponent ? React.cloneElement(child, newProps) : child

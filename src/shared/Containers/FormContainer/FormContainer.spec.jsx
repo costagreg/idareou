@@ -27,14 +27,17 @@ describe('FormContainer', () => {
     })
     it('injectes new props if childrean are Components', () => {
       const mockState = { [`element1`]: { value: 'mockValue', error: 'mockError' } }
-      const mockUpdateValue = jest.fn(() => {})
+      const mockUpdateValue = jest.fn()
+      const mockRemoveFromState = jest.fn()
       const MockComponent = () => <div></div>
 
       const component = shallow(<FormContainer><MockComponent name='element1'></MockComponent></FormContainer>)
       component.instance().updateValue = mockUpdateValue
+      component.instance().removeFromState = mockRemoveFromState
       component.instance().setState(mockState)
 
-      expect(component.find('MockComponent').props()).toEqual({ error: 'mockError', name: 'element1', value: 'mockValue', updateValue: mockUpdateValue })
+      expect(component.find('MockComponent').props())
+        .toEqual({ error: 'mockError', name: 'element1', value: 'mockValue', updateValue: mockUpdateValue, removeFromState: mockRemoveFromState })
     })
   })
   describe('@ithasErrors', () => {
@@ -267,6 +270,21 @@ describe('FormContainer', () => {
 
         expect(component.state()).toEqual({ [element.name]: { value: element.value, error: 'mockError' } })
       })
+    })
+  })
+  describe('@removeFromState', () => {
+    it('should remove property passed from the state', () => {
+      const mockState = { mockName: 'mockName', mockInput: 'mockInput' }
+
+      const component = shallow(<FormContainer><div/></FormContainer>)
+
+      component.setState(mockState)
+
+      expect(component.state()).toEqual(mockState)
+
+      component.instance().removeFromState(Object.keys(mockState)[0])
+
+      expect(component.state()).toEqual({ mockInput: 'mockInput' })
     })
   })
   describe('on submit', () => {
