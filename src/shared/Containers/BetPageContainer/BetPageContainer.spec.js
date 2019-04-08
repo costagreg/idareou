@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { addBet } from '~src/shared/graphql/mutations/betMutation'
-import { currentBets, betAdded } from '~src/shared/graphql/queries'
+import { currentBets } from '~src/shared/graphql/queries'
 import { BetPageContainer } from './BetPageContainer'
 
 jest.mock('~src/shared/graphql/mutations/betMutation', () => ({
@@ -12,7 +12,7 @@ jest.mock('~src/shared/graphql/mutations/betMutation', () => ({
 
 describe('BetPageContainer', () => {
   const mockApolloClient = {
-    mutate: jest.fn(data => new Promise((resolve) => resolve({ data: { addBet: { _id: 'id' } } }))),
+    mutate: jest.fn(() => new Promise((resolve) => resolve({ data: { addBet: { _id: 'id' } } }))),
     writeData: jest.fn(data => new Promise(resolve => resolve(data)))
   }
   afterEach(() => {
@@ -96,7 +96,7 @@ describe('BetPageContainer', () => {
 
         await newInstance.saveAndRedirect(mockId)
 
-        expect(mockApolloClient.writeData).toHaveBeenCalledWith({ data: { betAdded: mockId }})
+        expect(mockApolloClient.writeData).toHaveBeenCalledWith({ data: { betAdded: mockId } })
         expect(mockHistory.push).toHaveBeenCalledWith(`/sharelink/${mockId}`)
       })
     })
