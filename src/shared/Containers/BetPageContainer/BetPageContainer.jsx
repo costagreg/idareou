@@ -90,7 +90,7 @@ export class BetPageContainer extends Component {
               name={opt}
               placeholder= 'Write your option'
               required
-              removeInput={(index !== 0 || this.state.options.length > 1) ? 'minus' : ''}
+              removeInput={index !== 0 || this.state.options.length > 1}
               onRemoveInput={() => this.removeInput(opt)}
             />)
         }

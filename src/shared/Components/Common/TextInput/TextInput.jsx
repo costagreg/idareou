@@ -43,7 +43,7 @@ const TextInput = ({
             removeFromState(name)
             onRemoveInput()
           }}
-            className={classNames('TextInput__SubIcon', 'fa', `fa-${removeInput}`)}>
+            className='TextInput__removeInput fa fa-minus'>
           </i>
         }
       </div>
@@ -54,7 +54,7 @@ const TextInput = ({
 TextInput.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(['email', 'password', 'text']),
-  removeInput: PropTypes.string,
+  removeInput: PropTypes.bool,
   removeFromState: PropTypes.func,
   onRemoveInput: PropTypes.func,
   icon: PropTypes.string,

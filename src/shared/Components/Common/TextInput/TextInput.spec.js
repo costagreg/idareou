@@ -92,7 +92,7 @@ describe('@TextInput', () => {
       expect(component.find('input').prop('required')).toBe(true)
     })
   })
-  describe('passing required as parameter', () => {
+  describe('passing pattern as parameter', () => {
     it('adds the value parameter to the element', () => {
       const pattern = '[A-Z]'
       const component = shallow(<TextInput pattern={pattern} />)
@@ -115,6 +115,45 @@ describe('@TextInput', () => {
       it('should render the class TextInput__ErrorMsg', () => {
         expect(component.find('.TextInput__ErrorMsg').length).toBe(1)
         expect(component.find('.TextInput__ErrorMsg').text()).toBe('MOCK_ERROR')
+      })
+    })
+  })
+  describe('given removeInput parameter', () => {
+    describe('when passing as true', () => {
+      it('should add removeInput icon', () => {
+        const component = shallow(<TextInput removeInput={true} />)
+
+        expect(component.find('.TextInput__removeInput').exists()).toBe(true)
+        expect(component.find('.fa-minus').exists()).toBe(true)
+      })
+      describe('and user click on the removeInputIcon', () => {
+        it('should call removeFromState and onRemoveInput functions', () => {
+          const currentProps = {
+            removeFromState: jest.fn(),
+            onRemoveInput: jest.fn(),
+            removeInput: true,
+            name: 'mockName'
+          }
+
+          const component = shallow(<TextInput {...currentProps} />)
+
+          expect(currentProps.removeFromState).not.toHaveBeenCalled()
+          expect(currentProps.onRemoveInput).not.toHaveBeenCalled()
+
+          component.find('.TextInput__removeInput').simulate('click')
+
+          expect(currentProps.removeFromState).toHaveBeenCalledTimes(1)
+          expect(currentProps.removeFromState).toHaveBeenCalledWith(currentProps.name)
+          expect(currentProps.onRemoveInput).toHaveBeenCalledTimes(1)
+        })
+      })
+    })
+    describe('when passing as a false', () => {
+      it('should not render removeInput icon', () => {
+        const component = shallow(<TextInput removeInput={false} />)
+
+        expect(component.find('.TextInput__removeInput').exists()).toBe(false)
+        expect(component.find('.fa-minus').exists()).toBe(false)
       })
     })
   })
