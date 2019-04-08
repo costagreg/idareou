@@ -32,6 +32,7 @@ export default new GraphQLObjectType({
       )
     },
     master: { type: GraphQLString },
+    winner: { type: GraphQLString },
     participants: { type: new GraphQLList(participantType) }
   }
 })
