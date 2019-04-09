@@ -30,13 +30,12 @@ export const updateBetWinners = async (betId) => {
   const bet = await Bet
     .findById(betId)
     .populate([
-      { path: 'options' },
       { path: 'participants.user' },
       { path: 'participants.option' }
     ])
 
-  const winnerUsers = bet.participants.reduce((winners, partecipant) => {
-    const { option, user: { _id: userId } } = partecipant
+  const winnerUsers = bet.participants.reduce((winners, participant) => {
+    const { option, user: { _id: userId } } = participant
 
     if (option.isWinner) {
       winners.push(userId)
