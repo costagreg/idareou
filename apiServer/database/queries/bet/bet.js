@@ -45,7 +45,5 @@ export const updateBetWinner = async (betId) => {
     return winners
   }, [])
 
-  const updatedBet = await Bet.findByIdAndUpdate(betId, { winner: winnerUsers }, { new: true })
-
-  return updatedBet
+  return Bet.findByIdAndUpdate(betId, { winner: winnerUsers }, { new: true })
 }

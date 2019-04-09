@@ -17,7 +17,7 @@ export class BetAdminPageContainer extends Component {
     }
 
     return <Fragment>
-    <BetCard { ...bet } />
+      <BetCard { ...bet } />
       <FormContainer onSubmit={this.submitData}>
         <h4>Choose the winning option</h4>
         {bet.options && bet.options.map(({ _id, title }) => <RadioBox key={_id} name={`optionId`} text={title} optionValue={_id} />)}

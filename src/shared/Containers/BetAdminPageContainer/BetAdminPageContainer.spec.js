@@ -17,13 +17,25 @@ const initProps = {
 
 describe('BetAdminPageContainer', () => {
   it('renders without errors', () => {
-    const component = shallow(<BetAdminPageContainer {...initProps } />)
+    const component = shallow(<BetAdminPageContainer {...initProps} />)
 
     expect(component.length).toBe(1)
   })
   it('renders BetAdminCard', () => {
-    const component = shallow(<BetAdminPageContainer {...initProps } />)
+    const component = shallow(<BetAdminPageContainer {...initProps} />)
 
     expect(component.find('BetCard').props()).toEqual(mockBet)
+  })
+  it('renders a FormContainer', () => {
+    const component = shallow(<BetAdminPageContainer {...initProps} />)
+
+    expect(component.find('FormContainer').exists()).toEqual(true)
+  })
+  it('renders all options for that bet', () => {
+    const component = shallow(<BetAdminPageContainer {...initProps} />)
+
+    expect(component.find('RadioBox').length).toEqual(2)
+    expect(component.find('RadioBox').at(0).prop('text')).toEqual(mockBet.options[0].title)
+    expect(component.find('RadioBox').at(1).prop('text')).toEqual(mockBet.options[1].title)
   })
 })
