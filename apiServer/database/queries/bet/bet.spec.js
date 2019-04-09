@@ -1,5 +1,8 @@
 import { Bet, BetOption, User } from '../../models'
-import { findBet, addBet, updateBetParticipant, findBetByUser } from './bet'
+import { findBet, addBet, updateBetParticipant, findBetByUser, updateBetWinner } from './bet'
+import createBetHelper from '../../../helpers/tests/createBet'
+
+// TO-DO: Use createBetHelper when possible for all tests
 
 describe('Bet queries', () => {
   const bet = {
@@ -107,6 +110,32 @@ describe('Bet queries', () => {
       const betFound = await findBetByUser(user3._id)
 
       expect(betFound[0]._id).toEqual(newBet._id)
+    })
+  })
+
+  describe('updateBetWinner', () => {
+    it('should update the field winner with the winners', async () => {
+      const betHelper = await createBetHelper(3)
+      const { users, bet } = betHelper
+
+      const betOptions = await BetOption.create([{ title: 'option1', isWinner: true }, { title: 'option2' }])
+      const betParticipant = [{
+        user: users[0]._id,
+        option: betOptions[0]
+      }, {
+        user: users[1]._id,
+        option: betOptions[1]
+      }, {
+        user: users[2]._id,
+        option: betOptions[0]
+      }]
+
+      await Bet.findByIdAndUpdate(bet._id, { options: betOptions, participants: betParticipant })
+
+      const updatedBet = await updateBetWinner(bet._id)
+
+      expect(updatedBet.winner).toContain(users[0]._id)
+      expect(updatedBet.winner).toContain(users[2]._id)
     })
   })
 })

@@ -25,3 +25,27 @@ export const updateBetParticipant = async (betId, userId, optionId) => {
 export const findBetByUser = (id) => (
   Bet.find({ $or: [{ 'participants.user': id }, { master: id }] })
 )
+
+export const updateBetWinner = async (betId) => {
+  const bet = await Bet
+    .findById(betId)
+    .populate([
+      { path: 'options' },
+      { path: 'participants.user' },
+      { path: 'participants.option' }
+    ])
+
+  const winnerUsers = bet.participants.reduce((winners, partecipant) => {
+    const { option, user: { _id: userId } } = partecipant
+
+    if (option.isWinner) {
+      winners.push(userId)
+    }
+
+    return winners
+  }, [])
+
+  const updatedBet = await Bet.findByIdAndUpdate(betId, { winner: winnerUsers }, { new: true })
+
+  return updatedBet
+}
