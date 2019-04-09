@@ -37,7 +37,7 @@ describe('Betptions', () => {
       })
     })
   })
-  describe('when trying to uodate a bet', () => {
+  describe('when trying to update a bet', () => {
     it('should update the bet', async () => {
       const option = await BetOption.create({ title: 'titleMock' })
 

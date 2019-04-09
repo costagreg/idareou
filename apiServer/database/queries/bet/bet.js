@@ -26,7 +26,7 @@ export const findBetByUser = (id) => (
   Bet.find({ $or: [{ 'participants.user': id }, { master: id }] })
 )
 
-export const updateBetWinner = async (betId) => {
+export const updateBetWinners = async (betId) => {
   const bet = await Bet
     .findById(betId)
     .populate([
@@ -45,5 +45,5 @@ export const updateBetWinner = async (betId) => {
     return winners
   }, [])
 
-  return Bet.findByIdAndUpdate(betId, { winner: winnerUsers }, { new: true })
+  return Bet.findByIdAndUpdate(betId, { winners: winnerUsers }, { new: true })
 }

@@ -30,7 +30,7 @@ const betSchema = new Schema({
     ref: 'betoption'
   }],
   participants: [participantSchema],
-  winner: [{
+  winners: [{
     type: Schema.Types.ObjectId,
     ref: 'user'
   }]
