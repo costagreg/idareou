@@ -16,7 +16,7 @@ describe('given BetAdminPage component', () => {
   describe('when trying to render the BetAdminPage component', () => {
     const component = shallow(<BetAdminPage betId={mockBetId} {...initProps} />)
     it('should render BetAdminPageContainer', () => {
-      console.log(component.debug())
+
       expect(component.find('Apollo(BetAdminPageContainer)').length).toBe(1)
     })
     it('should render the BetAdminPage title', () => {
