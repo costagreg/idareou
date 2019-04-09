@@ -1,6 +1,6 @@
 import { BetOption } from '../../models'
 
-import { addBetOption, findBetOptions } from './betOption'
+import { addBetOption, findBetOptions, updateOption } from './betOption'
 
 describe('Betptions', () => {
   describe('when calling addBetOptiopns', async () => {
@@ -35,6 +35,17 @@ describe('Betptions', () => {
 
         expect(betFound).toEqual([])
       })
+    })
+  })
+  describe('when trying to uodate a bet', () => {
+    it('should update the bet', async () => {
+      const option = await BetOption.create({ title: 'titleMock' })
+
+      const newProps = { title: 'newTitleMock', isWinner: true }
+      const optionUpdated = await updateOption(option.id, newProps)
+
+      expect(optionUpdated.title).toEqual(newProps.title)
+      expect(optionUpdated.isWinner).toEqual(newProps.isWinner)
     })
   })
 })
