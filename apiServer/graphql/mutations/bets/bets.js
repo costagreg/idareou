@@ -33,7 +33,7 @@ export const betMutations = {
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {
         await updateBetParticipant(args.betId, user._id, args.optionId)
-
+        // TO-DO: Investigate if we can delete populate
         const betUpdated = await findBet(args.betId)
           .populate([
             { path: 'participants.user' },
