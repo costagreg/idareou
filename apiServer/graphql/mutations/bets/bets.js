@@ -1,6 +1,6 @@
 import { GraphQLString, GraphQLNonNull, GraphQLFloat, GraphQLList } from 'graphql'
 import { BetType } from '../../types'
-import { addBet, updateBetParticipant, findBet } from '../../../database/queries/bet'
+import { addBet, updateBetParticipant, updateBetWinners, findBet } from '../../../database/queries/bet'
 import { addBetOption } from '../../../database/queries/betOption'
 
 
@@ -41,6 +41,17 @@ export const betMutations = {
           ])
 
         return betUpdated
+      }
+    }
+  },
+  updateBetWinners: {
+    type: BetType,
+    args: {
+      betId: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    async resolve(parentValue, { betId }, { req: { user } }) {
+      if (user) {
+        return updateBetWinners(betId)
       }
     }
   }

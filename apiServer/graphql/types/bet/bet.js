@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLFloat } from 'gra
 import { UserType } from '../user'
 import { BetOptionType } from '../betOption'
 import { findBetOptions } from '../../../database/queries/betOption'
-import { findUserById } from '../../../database/queries/user'
+import { findUserById, findUsers} from '../../../database/queries/user'
 
 const participantType = new GraphQLObjectType({
   name: 'participant',
@@ -32,7 +32,12 @@ export default new GraphQLObjectType({
       )
     },
     master: { type: GraphQLString },
-    winners: { type: new GraphQLList(UserType) },
+    winners: {
+      type: new GraphQLList(UserType),
+      resolve: async (parentValue) => {
+        return findUsers(parentValue.winners)
+      }
+    },
     participants: { type: new GraphQLList(participantType) }
   }
 })
