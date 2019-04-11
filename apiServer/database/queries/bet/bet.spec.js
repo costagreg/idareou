@@ -134,8 +134,8 @@ describe('Bet queries', () => {
 
       const updatedBet = await updateBetWinners(bet._id)
 
-      expect(updatedBet.winner).toContain(users[0]._id)
-      expect(updatedBet.winner).toContain(users[2]._id)
+      expect(updatedBet.winners).toContain(users[0]._id)
+      expect(updatedBet.winners).toContain(users[2]._id)
     })
   })
 })

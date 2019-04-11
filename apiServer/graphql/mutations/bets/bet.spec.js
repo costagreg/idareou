@@ -134,12 +134,12 @@ describe('BetMutations', () => {
   describe('updateWinners', () => {
     it('should update the bet passed with new winners', async () => {
       const betHelper = await createBetHelper()
-      const { bet, users } = betHelper
-      const context = { req: { user: { } } }
+      const { bet, users, options } = betHelper
+      const context = { req: { user: {} } }
 
       const updateWinnersMutation = `
-        mutation UpdateBetWinners($betId: String!) {
-          updateBetWinners(betId: $betId) {
+        mutation UpdateBetWinners($betId: String!, $optionId: String!) {
+          updateBetWinners(betId: $betId, optionId: $optionId) {
             title,
             description,
             winners{
@@ -148,25 +148,16 @@ describe('BetMutations', () => {
           }
         }`
 
-      const betOptions = await BetOption.create([{ title: 'option1', isWinner: true }, { title: 'option2' }])
-      const betParticipant = [{
-        user: users[0]._id,
-        option: betOptions[0]
-      }, {
-        user: users[1]._id,
-        option: betOptions[1]
-      }]
-
-      const variables = { betId: bet._id.toString() }
-
-      await Bet.findByIdAndUpdate(bet._id, { options: betOptions, participants: betParticipant })
+      const winnerOption = options[0]._id.toString()
+      const winnerUser = users[0]._id.toString()
+      const variables = { betId: bet._id.toString(), optionId: winnerOption }
 
       const result = await graphql(schema, updateWinnersMutation, {}, context, variables)
 
       const { data: { updateBetWinners } } = result
 
       expect(updateBetWinners.winners.length).toEqual(1)
-      expect(updateBetWinners.winners[0]._id).toEqual(users[0]._id.toString())
+      expect(updateBetWinners.winners[0]._id).toEqual(winnerUser)
     })
   })
 })
