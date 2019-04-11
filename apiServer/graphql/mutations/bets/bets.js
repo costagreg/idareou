@@ -1,7 +1,7 @@
 import { GraphQLString, GraphQLNonNull, GraphQLFloat, GraphQLList } from 'graphql'
 import { BetType } from '../../types'
-import { addBet, updateBetParticipant, findBet } from '../../../database/queries/bet'
-import { addBetOption } from '../../../database/queries/betOption'
+import { addBet, updateBetParticipant, updateBetWinners, findBet } from '../../../database/queries/bet'
+import { addBetOption, updateOption } from '../../../database/queries/betOption'
 
 
 export const betMutations = {
@@ -33,7 +33,7 @@ export const betMutations = {
     async resolve(parentValue, args, { req: { user } }) {
       if (user) {
         await updateBetParticipant(args.betId, user._id, args.optionId)
-
+        // TO-DO: Investigate if we can delete populate
         const betUpdated = await findBet(args.betId)
           .populate([
             { path: 'participants.user' },
@@ -41,6 +41,19 @@ export const betMutations = {
           ])
 
         return betUpdated
+      }
+    }
+  },
+  updateBetWinners: {
+    type: BetType,
+    args: {
+      betId: { type: new GraphQLNonNull(GraphQLString) },
+      optionId: { type: new GraphQLNonNull(GraphQLString) }
+    },
+    async resolve(parentValue, { betId, optionId }, { req: { user } }) {
+      if (user) {
+        await updateOption(optionId, { isWinner: true })
+        return updateBetWinners(betId)
       }
     }
   }
