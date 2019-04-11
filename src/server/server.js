@@ -14,8 +14,11 @@ if(process.env.ENV !== 'prod') {
 routes(app)
 
 // Catch any error
-app.use((err, req, res) => {
-  res.status(500).send('Something broke!')
+app.use((err, req, res, next) => {
+  if(err.networkError.statusCode === 401) {
+    res.cookie('token', '0', { maxAge: 0 }).redirect('/login')
+  }
+  res.status(500).send(err)
 })
 
 app.listen(port, () => {
