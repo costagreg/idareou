@@ -45,7 +45,9 @@ app.use('/graphql', expressGraphQL((req, res) => ({
 
 app.use((err, req, res, next) => {
   if(err.status === 401) {
-    res.status(401).send({ msg: 'Authentication error' })
+    res.status(401)
+    res.cookie('token', 0, { maxAge: 0 }) // Only for Client side calls
+    res.send(err)
   }
 })
 

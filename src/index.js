@@ -6,17 +6,24 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 import { HttpLink } from 'apollo-link-http'
+import { onError } from 'apollo-link-error'
 import AppRouter from './shared/AppRouter'
 import { ContextContainer } from './shared/Containers/ContextContainer'
 
 const { store, isDesktop } = window.__APOLLO_STATE__
 
+const linkError = onError(({ networkError }) => {
+  if(window && networkError && networkError.statusCode === 401) {
+    window.location.href = '/login'
+  }
+})
+
 const client = new ApolloClient({
   cache: new InMemoryCache().restore(store),
-  link: new HttpLink({
+  link: linkError.concat(new HttpLink({
     credentials: 'include',
     uri: process.env.GRAPHQL_URL
-  })
+  }))
 })
 
 const render = (Component) => {
