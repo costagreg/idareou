@@ -13,12 +13,15 @@ import { Button } from '~src/shared/Components/Common/Button'
 
 export class BetAdminPageContainer extends Component {
   submitData = async (formData) => {
-    const { client, betId } = this.props
+    const { client, betId, history } = this.props
     const { optionId } = formData
     const { data } = await client.mutate({
       mutation: updateBetWinners,
       variables: { optionId, betId }
     })
+    if (data && data.updateBetWinners) {
+      history.push('/dashboard')
+    }
   }
 
   render() {
