@@ -50,24 +50,22 @@ describe('BetAdminPageContainer', () => {
     expect(component.find('RadioBox').at(1).prop('text')).toEqual(mockBet.options[1].title)
   })
   describe('submitData', () => {
-    describe('we should update the bet winners property', () => {
-      it('it should fire updateBetWinners query', () => {
+    it('it should fire updateBetWinners query', () => {
+      const component = shallow(<BetAdminPageContainer {...initProps} />)
+      const mockOptionId = 'mockOptionId'
+
+      component.instance().submitData({ optionId: mockOptionId })
+
+      expect(initProps.client.mutate).toBeCalledWith({ mutation: updateBetWinners, variables: { optionId: mockOptionId, betId: initProps.betId } })
+    })
+    describe('if updateBetWinners mutation is successful', () => {
+      it('should redirect to dashboard', async () => {
         const component = shallow(<BetAdminPageContainer {...initProps} />)
         const mockOptionId = 'mockOptionId'
 
-        component.instance().submitData({ optionId: mockOptionId })
+        await component.instance().submitData({ optionId: mockOptionId })
 
-        expect(initProps.client.mutate).toBeCalledWith({ mutation: updateBetWinners, variables: { optionId: mockOptionId, betId: initProps.betId } })
-      })
-      describe('if successful', () => {
-        it('should redirect to dashboard', async () => {
-          const component = shallow(<BetAdminPageContainer {...initProps} />)
-          const mockOptionId = 'mockOptionId'
-
-          await component.instance().submitData({ optionId: mockOptionId })
-
-          expect(initProps.history.push).toBeCalledWith('/dashboard')
-        })
+        expect(initProps.history.push).toBeCalledWith('/dashboard')
       })
     })
   })
