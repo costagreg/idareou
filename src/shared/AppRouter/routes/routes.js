@@ -1,5 +1,5 @@
 import HomePage from '~src/shared/Pages/HomePage'
-import HistoryPageContainer from '~src/shared/Containers/HistoryPageContainer'
+import HistoryPage from '~src/shared/Pages/HistoryPage'
 import BetPage from '~src/shared/Pages/BetPage'
 import LoginPage from '~src/shared/Pages/LoginPage'
 import SignUpPage from '~src/shared/Pages/SignUpPage'
@@ -22,7 +22,7 @@ const routes = [
     name: 'Dashboard',
     needAuthentication: true
   }, {
-    Component: HistoryPageContainer,
+    Component: HistoryPage,
     path: '/history',
     name: 'History',
     needAuthentication: true

@@ -1,21 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import Accodion from '~src/shared/Components/Accordion'
-import HistoryBetCard from '~src/shared/Components/HistoryBetCard'
+import { PageTitle } from '~src/shared/Components/Common/PageTitle'
+import HistoryPageContainer from '~src/shared/Containers/HistoryPageContainer'
 
-const HistoryPage = ({ bets }) => {
-  return <div>
-    { bets &&
-      <Accodion sections={bets}>
-        <HistoryBetCard />
-      </Accodion>
-    }
+const HistoryPage = () => {
+  return <div className="BetPage">
+    <PageTitle className="BetPage__title">Your bets</PageTitle>
+    <HistoryPageContainer />
   </div>
 }
 
 HistoryPage.propTypes = {
-  bets: PropTypes.array
+
 }
 
 export default HistoryPage
