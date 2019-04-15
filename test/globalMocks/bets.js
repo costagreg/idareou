@@ -5,6 +5,7 @@ export default () => [
     description: 'Description my descripntion hahahaha',
     amount: 10,
     currency: '£',
+    master: 'userId',
     options: [
       {
         opt: 'first',

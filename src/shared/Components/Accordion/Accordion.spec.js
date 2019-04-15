@@ -74,17 +74,17 @@ describe('given Accordion component', () => {
                 sectionSelected: null,
                 cardRef: null
               })
-  
+
               newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
-  
+
               expect(newInstance.state).toEqual({
                 currentHeight: mockArguments.cardRef.scrollHeight,
                 sectionSelected: mockArguments.id,
                 cardRef: mockArguments.cardRef
               })
-  
+
               newInstance.onSelectSection(mockArguments.id, mockArguments.cardRef)
-  
+
               expect(newInstance.state).toEqual({
                 currentHeight: 0,
                 sectionSelected: null,

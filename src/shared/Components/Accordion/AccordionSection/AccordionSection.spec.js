@@ -15,7 +15,7 @@ describe('given AccordionSection component', () => {
   }
 
   describe('when trying to render the AccordionSection component', () => {
-    const component = shallow(<AccordionSection {...props}/>)
+    const component = shallow(<AccordionSection {...props} />)
 
     it('should render the AccordionSection component', () => {
       expect(component.length).toBe(1)
@@ -37,6 +37,16 @@ describe('given AccordionSection component', () => {
     })
     it('should render the card', () => {
       expect(component.find('.card').length).toBe(1)
+    })
+    it('should render the card', () => {
+      expect(component.find('.card').length).toBe(1)
+    })
+    describe('when master is equal to currentUser', () => {
+      it('shows the edit icon', () => {
+        const component = shallow(<AccordionSection {...props} currentUser={props.master} />)
+
+        expect(component.find('.fa-pencil').exists()).toBe(true)
+      })
     })
   })
   describe('given the section selected and the currentHeight', () => {

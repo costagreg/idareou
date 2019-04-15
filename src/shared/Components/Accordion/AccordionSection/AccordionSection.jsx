@@ -22,7 +22,7 @@ const AccordionSection = ({
 
   return <div className="accordionsection">
     <div className="accordionsection__header" onClick={() => onSelectSection(id, cardRef)}>
-      {master === currentUser && <Link to={`/bet/${id}`}><i className={classNames('fa fa-pencil', 'arrow')} onClick={() => { }}></i></Link>}
+      { master === currentUser && <Link to={`/bet/${id}`}><i className={classNames('fa fa-pencil', 'arrow')} onClick={() => { }}></i></Link> }
       <span className={`accordionsection__state accordionsection__state--${state}`}></span>
       <span className="accordionsection__title">{title}</span>
       <i className={classNames('fa fa-angle-left', 'arrow', { 'arrow--selected': sectionSelected === id })}></i>

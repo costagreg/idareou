@@ -9,8 +9,7 @@ import { currentBets, currentUser } from '~src/shared/graphql/queries'
 
 export class HistoryPageContainer extends Component {
   render() {
-    const { currentBets } = this.props.queryCurrentBets
-    const { currentUser } = this.props.queryCurrentUser
+    const { queryCurrentBets: { currentBets }, queryCurrentUser: { currentUser } } = this.props
 
     return (
       <Accodion sections={currentBets} currentUser={currentUser._id}>
