@@ -3,7 +3,6 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import expressGraphQL from 'express-graphql'
-import jwt from 'express-jwt'
 
 import dbConnection from './database/connection'
 import { schema } from './graphql/schema'
