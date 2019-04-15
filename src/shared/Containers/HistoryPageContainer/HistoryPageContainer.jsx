@@ -4,14 +4,16 @@ import { graphql } from 'react-apollo'
 
 import Accodion from '~src/shared/Components/Accordion'
 import HistoryBetCard from '~src/shared/Components/HistoryBetCard'
-import { currentBets } from '~src/shared/graphql/queries'
+import compose from '~src/shared/helpers/compose'
+import { currentBets, currentUser } from '~src/shared/graphql/queries'
 
 export class HistoryPageContainer extends Component {
   render() {
-    const { currentBets } = this.props.data
+    const { currentBets } = this.props.queryCurrentBets
+    const { currentUser } = this.props.queryCurrentUser
 
     return (
-      <Accodion sections={currentBets}>
+      <Accodion sections={currentBets} currentUser={currentUser._id}>
         <HistoryBetCard />
       </Accodion>
     )
@@ -19,7 +21,10 @@ export class HistoryPageContainer extends Component {
 }
 
 HistoryPageContainer.propTypes = {
-  currentBets: PropTypes.array
+  data: PropTypes.object
 }
 
-export default graphql(currentBets)(HistoryPageContainer)
+export default compose(
+  graphql(currentBets, { name: 'queryCurrentBets' }),
+  graphql(currentUser, { name: 'queryCurrentUser' }),
+)(HistoryPageContainer)

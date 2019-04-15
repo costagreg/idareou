@@ -1,8 +1,9 @@
 import React from 'react'
 import Proptypes from 'prop-types'
 import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 
-if(process.browser) {
+if (process.browser) {
   require('./AccordionSection.scss')
 }
 
@@ -13,12 +14,15 @@ const AccordionSection = ({
   sectionSelected,
   onSelectSection,
   currentHeight,
-  children
+  children,
+  master,
+  currentUser
 }) => {
   let cardRef = undefined
 
   return <div className="accordionsection">
     <div className="accordionsection__header" onClick={() => onSelectSection(id, cardRef)}>
+      {master === currentUser && <Link to={`/bet/${id}`}><i className={classNames('fa fa-pencil', 'arrow')} onClick={() => { }}></i></Link>}
       <span className={`accordionsection__state accordionsection__state--${state}`}></span>
       <span className="accordionsection__title">{title}</span>
       <i className={classNames('fa fa-angle-left', 'arrow', { 'arrow--selected': sectionSelected === id })}></i>
@@ -28,7 +32,7 @@ const AccordionSection = ({
       className="card"
       style={{ maxHeight: sectionSelected === id && currentHeight ? `${currentHeight}px` : 0 }}
     >
-      { children }
+      {children}
     </div>
   </div>
 }

@@ -31,19 +31,30 @@
       background: $red;
     }
   }
+  
+  &__title {
+    flex: 1;
+  }
+
   .card {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-in-out;
     background: $blue;
   }
-
+  
   .arrow {
     font-size: 20px;
     transition: transform 0.2s ease-in-out;
-
+    
     &--selected {
       transform: rotate(-90deg)
     }
+  }
+  
+  .fa {
+    flex: 1 0 0 10px;
+    color:white;
+    cursor: pointer;
   }
 }
