@@ -41,7 +41,7 @@ describe('given BetLinkPageContainer component', () => {
         }
         let component
         try {
-           component = await shallow(<BetLinkPageContainer client={newApolloClient} history={mockHistory}/>)
+          component = await shallow(<BetLinkPageContainer client={newApolloClient} history={mockHistory}/>)
         } catch(e) {
           expect(mockHistory.push).toHaveBeenCalledWith('/')
         }
