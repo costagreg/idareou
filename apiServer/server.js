@@ -28,7 +28,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/graphql', auth, expressGraphQL((req, res) => ({
+app.use(auth)
+
+app.use('/graphql', expressGraphQL((req, res) => ({
   schema,
   graphiql: true,
   context: { req, res },
@@ -39,6 +41,15 @@ app.use('/graphql', auth, expressGraphQL((req, res) => ({
     path: error.path
   })
 })))
+
+app.use((err, req, res, next) => {
+  if(err.status === 401) {
+    res
+      .status(401)
+      .cookie('token', 0, { maxAge: 0 }) // Only for Client side calls
+      .send(err)
+  }
+})
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
