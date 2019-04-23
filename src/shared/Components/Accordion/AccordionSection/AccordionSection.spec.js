@@ -41,14 +41,24 @@ describe('given AccordionSection component', () => {
     it('should render the card', () => {
       expect(component.find('.card').length).toBe(1)
     })
-    describe('when master is equal to currentUser', () => {
-      it('shows the edit icon with a link to the manage bet page', () => {
-        const betId = 'mockId'
-        const component = shallow(<AccordionSection {...props} id={betId} currentUser={props.master} />)
+    describe('manage edit icon', () => {
+      describe('when master is equal to currentUser', () => {
+        it('shows the edit icon with a link to the manage bet page', () => {
+          const betId = 'mockId'
+          const component = shallow(<AccordionSection {...props} id={betId} currentUser={props.master} />)
 
-        expect(component.find('.accordionsection__edit').exists()).toBe(true)
-        expect(component.find('.accordionsection__edit').prop('to')).toBe(`/bet/${betId}`)
-        expect(component.find('.accordionsection__edit .fa-pencil').prop('to')).toBe(`/bet/${betId}`)
+          expect(component.find('.accordionsection__edit').exists()).toBe(true)
+          expect(component.find('.accordionsection__edit').prop('to')).toBe(`/bet/${betId}`)
+          expect(component.find('.accordionsection__edit .fa-pencil').exists()).toBe(true)
+        })
+      })
+      describe('when master is not equal to currentUser', () => {
+        it('shuldnt show the edit icon', () => {
+          const betId = 'mockId'
+          const component = shallow(<AccordionSection {...props} id={betId} />)
+
+          expect(component.find('.accordionsection__edit').exists()).toBe(false)
+        })
       })
     })
   })
