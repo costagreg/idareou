@@ -42,10 +42,13 @@ describe('given AccordionSection component', () => {
       expect(component.find('.card').length).toBe(1)
     })
     describe('when master is equal to currentUser', () => {
-      it('shows the edit icon', () => {
-        const component = shallow(<AccordionSection {...props} currentUser={props.master} />)
+      it('shows the edit icon with a link to the manage bet page', () => {
+        const betId = 'mockId'
+        const component = shallow(<AccordionSection {...props} id={betId} currentUser={props.master} />)
 
-        expect(component.find('.fa-pencil').exists()).toBe(true)
+        expect(component.find('.accordionsection__edit').exists()).toBe(true)
+        expect(component.find('.accordionsection__edit').prop('to')).toBe(`/bet/${betId}`)
+        expect(component.find('.accordionsection__edit .fa-pencil').prop('to')).toBe(`/bet/${betId}`)
       })
     })
   })
