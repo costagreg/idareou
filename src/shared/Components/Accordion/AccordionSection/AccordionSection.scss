@@ -7,20 +7,13 @@
   &__header {
     position: relative;
     padding: 10px;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     color: $white;
     background: $blueMedium;
     margin: 1px 0;
-
-    div {
-      display: inline-block;
-    }
   }
 
   &__state {
-    display: inline-block;
     width: 15px;
     height: 15px;
     border-radius: 50px;
@@ -31,19 +24,38 @@
       background: $red;
     }
   }
+  
+  &__title {
+    flex: 1;
+  }
+  
+  &__edit {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+  }
+
   .card {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-in-out;
     background: $blue;
   }
-
+  
   .arrow {
+    position: absolute;
+    right: 10px;
     font-size: 20px;
     transition: transform 0.2s ease-in-out;
-
+    
     &--selected {
       transform: rotate(-90deg)
     }
+  }
+  
+  .fa {
+    flex: 1 0 0 10px;
+    color:$white;
+    cursor: pointer;
   }
 }

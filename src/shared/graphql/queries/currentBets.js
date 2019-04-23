@@ -8,6 +8,7 @@ export default gql`
     description,
     amount,
     currency,
+    master,
     participants{
       user{
         _id,

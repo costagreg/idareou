@@ -2,22 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
-import HistoryPage from '~src/shared/Pages/HistoryPage'
-import { currentBets } from '~src/shared/graphql/queries'
+import Accodion from '~src/shared/Components/Accordion'
+import HistoryBetCard from '~src/shared/Components/HistoryBetCard'
+import compose from '~src/shared/helpers/compose'
+import { currentBets, currentUser } from '~src/shared/graphql/queries'
 
 export class HistoryPageContainer extends Component {
   render() {
-    const bets = this.props.data.currentBets
+    const { queryCurrentBets: { currentBets }, queryCurrentUser: { currentUser } } = this.props
 
     return (
-      <HistoryPage bets={bets}/>
+      <Accodion sections={currentBets} currentUser={currentUser._id}>
+        <HistoryBetCard />
+      </Accodion>
     )
   }
 }
 
 HistoryPageContainer.propTypes = {
-  bets: PropTypes.array,
-  fetchToStore: PropTypes.func
+  data: PropTypes.object
 }
 
-export default graphql(currentBets)(HistoryPageContainer)
+export default compose(
+  graphql(currentBets, { name: 'queryCurrentBets' }),
+  graphql(currentUser, { name: 'queryCurrentUser' }),
+)(HistoryPageContainer)

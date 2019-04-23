@@ -45,8 +45,7 @@ class Accordion extends Component {
   }
 
   render() {
-    const { sections = [] } = this.props
-
+    const { sections = [], currentUser } = this.props
     return <div className="accordion">
       {
         sections.map(section =>
@@ -58,6 +57,8 @@ class Accordion extends Component {
             onSelectSection={this.onSelectSection}
             sectionSelected={this.state.sectionSelected}
             currentHeight={this.state.currentHeight}
+            currentUser={currentUser}
+            master={section.master}
           >
             {
               React.Children.map(this.props.children, child =>
@@ -71,7 +72,8 @@ class Accordion extends Component {
 
 Accordion.propTypes = {
   sections: Proptypes.array,
-  children: Proptypes.node.isRequired
+  children: Proptypes.node.isRequired,
+  currentUser: Proptypes.string
 }
 
 export default Accordion
