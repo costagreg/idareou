@@ -42,7 +42,7 @@ class FormContainer extends Component {
   }
 
   getValues = (obj) => {
-    return Object.keys(obj).reduce((acc, key) => ({ ...acc, [key]: obj[key].value }), {})
+    return Object.keys(obj).reduce((acc, key) => ({ ...acc, [key]: obj[key] && obj[key].value }), {})
   }
 
   onSubmit = (event) => {

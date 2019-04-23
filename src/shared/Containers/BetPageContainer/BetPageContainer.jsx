@@ -14,11 +14,14 @@ import { Button } from '~src/shared/Components/Common/Button'
 import { FormContainer } from '../FormContainer'
 
 export class BetPageContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      options: [`option-${shortid.generate()}`]
-    }
+  state = {
+    options: []
+  }
+
+  componentDidMount() {
+    this.setState({
+      options: this.state.options.concat([`option-${shortid.generate()}`])
+    })
   }
 
   optionTransformer(data) {
